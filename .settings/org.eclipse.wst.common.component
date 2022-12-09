@@ -14,7 +14,6 @@
                         
         
         <property name="java-output-path" value="/study_MS/build/classes"/>
-                
         <property name="context-root" value="study_TK"/>
                     
     
