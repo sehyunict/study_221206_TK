@@ -8,5 +8,7 @@
 </head>
 <body>
 	TK 메인 화면
+	
+		<p> ${cartList[0].price_str} </p>
 </body>
 </html>

@@ -1,5 +1,5 @@
 package Sehyunict.Tk.Pay.Service.impl;
 
-public class payServiceimpl {
+public class PayServiceimpl {
 
 }
