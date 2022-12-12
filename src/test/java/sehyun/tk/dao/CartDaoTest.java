@@ -27,7 +27,7 @@ public class CartDaoTest {
 	@Mock
 	CartDao cartDao;
 
-	@DisplayName("»óÇ°À» Àå¹Ù±¸´Ï¿¡ ³ÖÀ¸¸é ÀúÀåÇÑ´Ù")
+	@DisplayName("ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½")
 	@Test
 	public void givenUserIdAndCartVo_when_then() throws Exception {
 		
@@ -52,10 +52,11 @@ public class CartDaoTest {
 				47
 				, new Date(2022-10-10)
 				, new Date(2022-10-10)
-				, "¾îº¥Àú½º"
+				, "ì–´ë²¤ì €ìŠ¤"
 				, 10
 				, "A10"
-				, 10000 );
+				, 10000
+				,"");
 	}
 
 }
