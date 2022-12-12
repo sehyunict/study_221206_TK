@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Qna.Dao.impl;
+package sehyunict.tk.qna.dao.impl;
 
-public class qnaDaoimpl {
+public class QnaDaoImpl {
 
 }

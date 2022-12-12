@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Review.Service.impl;
+package sehyunict.tk.review.service.impl;
 
-public class reviewServiceimpl {
+public class ReviewServiceImpl {
 
 }

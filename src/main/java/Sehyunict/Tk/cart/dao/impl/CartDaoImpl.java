@@ -1,4 +1,4 @@
-package Sehyunict.Tk.cart.dao.impl;
+package sehyunict.tk.cart.dao.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import Sehyunict.Tk.cart.dao.CartDao;
-import Sehyunict.Tk.cart.entity.CartVo;
+import sehyunict.tk.cart.dao.CartDao;
+import sehyunict.tk.cart.entity.CartVo;
 
 @Repository
 public class CartDaoImpl implements CartDao{
@@ -23,8 +23,8 @@ public class CartDaoImpl implements CartDao{
 	public int insert(int userId, CartVo cartVo) throws Exception {
 		Map map = new HashMap();
 		map.put("userId", userId);
-		map.put("timetableId", cartVo.getTimetable_id());
-		map.put("seatId", cartVo.getSeat_id());
+		map.put("timetableId", cartVo.getTimetableId());
+		map.put("seatId", cartVo.getSeatId());
 		
 		return sqlSession.insert(namespace+"insert", map);
 	}
@@ -33,8 +33,8 @@ public class CartDaoImpl implements CartDao{
 	public int delete(int userId, CartVo cartVo) throws Exception {
 		Map map = new HashMap();
 		map.put("userId", userId);
-		map.put("timetableId", cartVo.getTimetable_id());
-		map.put("seatId", cartVo.getSeat_id());
+		map.put("timetableId", cartVo.getTimetableId());
+		map.put("seatId", cartVo.getSeatId());
 		
 		return sqlSession.delete(namespace+"delete", map);
 	}

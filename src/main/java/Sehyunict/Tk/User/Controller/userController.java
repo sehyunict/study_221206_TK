@@ -1,5 +1,5 @@
-package Sehyunict.Tk.User.Controller;
+package sehyunict.tk.user.controller;
 
-public class userController {
+public class UserController {
 
 }

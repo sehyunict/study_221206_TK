@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Review.Entity;
+package sehyunict.tk.review.entity;
 
-public class reviewVO {
+public class ReviewVo {
 
 }

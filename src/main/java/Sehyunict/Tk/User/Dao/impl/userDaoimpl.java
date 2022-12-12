@@ -1,5 +1,5 @@
-package Sehyunict.Tk.User.Dao.impl;
+package sehyunict.tk.user.dao.impl;
 
-public class userDaoimpl {
+public class UserDaoImpl {
 
 }

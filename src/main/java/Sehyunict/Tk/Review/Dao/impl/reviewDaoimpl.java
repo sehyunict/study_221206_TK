@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Review.Dao.impl;
+package sehyunict.tk.review.dao.impl;
 
-public class reviewDaoimpl {
+public class ReviewDaoImpl {
 
 }

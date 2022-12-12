@@ -3,14 +3,18 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
-	<display-name>study_TK</display-name>
+	<display-name>study_tk</display-name>
 	<welcome-file-list>
-		<welcome-file>jsp/main/Main.jsp</welcome-file>
+		<welcome-file>/WEB-INF/jsp/main/CartMain.jsp</welcome-file>
 	</welcome-file-list>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>WEB-INF/spring/root-context.xml</param-value>
+		<param-value>
+		WEB-INF/spring/jdbc-context.xml
+		WEB-INF/spring/mybatis-context.xml
+		WEB-INF/spring/transaction-context.xml
+		</param-value>
 	</context-param>
 
 	<servlet>

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	TK 메인 화면
+	tk 메인 화면
 	
 	<form action="/cart" method="post">
 		<input type="text" name="userId" value="1">

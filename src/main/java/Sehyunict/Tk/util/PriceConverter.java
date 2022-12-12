@@ -1,8 +1,8 @@
-package Sehyunict.Tk.util;
+package sehyunict.tk.util;
 
 public class PriceConverter {
 	
-	public int toInt(String price_str) {
+	public static int toInt(String price_str) {
 		int result = 0;
 		try {
 			result = Integer.parseInt(price_str.replace(",", ""));
@@ -15,10 +15,10 @@ public class PriceConverter {
 		return result;
 	}
 	
-	public String toChar(int price) {
+	public static String toChar(int price) {
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append(1000000000);
+		sb.append(price);
 		
 		int len = sb.length();
 		int offset = 3;

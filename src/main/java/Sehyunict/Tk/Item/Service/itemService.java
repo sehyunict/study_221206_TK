@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Item.Service;
+package sehyunict.tk.item.service;
 
-public interface itemService {
+public interface ItemService {
 
 }

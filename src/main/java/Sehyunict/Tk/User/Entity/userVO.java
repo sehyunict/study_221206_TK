@@ -1,5 +1,5 @@
-package Sehyunict.Tk.User.Entity;
+package sehyunict.tk.user.entity;
 
-public class userVO {
+public class UserVo {
 
 }
