@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sehyun.tk.dao.CartMapper">
+
+	<insert id="insert" parameterType="map">
+		INSERT INTO TN_TK_CART
+		VALUES(#{timetableId}, #{userId}, #{seatId}, default)
+	</insert>
+
+	<delete id="delete" parameterType="map">
+	
+	DELETE
+	FROM
+	TN_TK_CART
+	WHERE
+	user_id = #{userId}
+	AND timetable_id = #{timetableId} 
+	AND seat_id = #{seatId}
+
+	</delete>
+
+
+	<select id="selectAll" parameterType="int" resultType="CartVo">
+
+		SELECT
+		A.timetable_id
+		, B.start_time
+		, B.end_time
+		, C.title
+		, D.seat_id
+		, E.seat_name
+		, B.price
+		FROM
+		TN_TK_CART A
+		, TN_TK_TIMETABLE B
+		, TN_TK_ITEM C
+		, TN_TK_RESERVED_SEATS D
+		, TN_TK_SEAT E
+		WHERE
+		A.timetable_id = B.timetable_id
+		AND
+		B.item_id = C.item_id
+		AND
+		B.timetable_id = D.timetable_id
+		AND
+    	A.SEAT_ID = D.SEAT_ID
+    	AND
+		D.seat_id = E.seat_id
+		AND
+		A.user_id = #{userId}
+		ORDER BY
+		A.created_at
+	</select>
+
+
+</mapper>

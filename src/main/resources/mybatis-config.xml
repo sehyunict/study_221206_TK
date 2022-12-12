@@ -2,11 +2,13 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="BasketVo"
-			type="Sehyun.Tk.basket.entity.BasketVo" />
 
-		<typeAlias alias="PayVo"
-			type="Sehyun.Tk.Pay.entity.PayVo" />
+		<typeAlias alias="CartVo"
+			type="Sehyunict.Tk.cart.entity.CartVo" />
+
+<!-- 		<typeAlias alias="PayVo"
+			type="Sehyunict.Tk.Pay.Entity.PayVo" /> -->
+
 	</typeAliases>
 
 
