@@ -23,8 +23,8 @@ public class CartDaoImpl implements CartDao{
 	public int insert(int userId, CartVo cartVo) throws Exception {
 		Map map = new HashMap();
 		map.put("userId", userId);
-		map.put("timetableId", cartVo.getTimetableId());
-		map.put("seatId", cartVo.getSeatId());
+		map.put("timetableId", cartVo.getTimetable_id());
+		map.put("seatId", cartVo.getSeat_id());
 		
 		return sqlSession.insert(namespace+"insert", map);
 	}
@@ -33,8 +33,8 @@ public class CartDaoImpl implements CartDao{
 	public int delete(int userId, CartVo cartVo) throws Exception {
 		Map map = new HashMap();
 		map.put("userId", userId);
-		map.put("timetableId", cartVo.getTimetableId());
-		map.put("seatId", cartVo.getSeatId());
+		map.put("timetableId", cartVo.getTimetable_id());
+		map.put("seatId", cartVo.getSeat_id());
 		
 		return sqlSession.delete(namespace+"delete", map);
 	}
