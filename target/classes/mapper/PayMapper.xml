@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sehyunict.tk.pay.service.PayDao">
-	<select id="selectReservedSeat" parameterType="map"
+	<select id="selectReservedSeat" parameterType="Map"
 		resultType="Integer">
 		SELECT
 		A.SEAT_ID seatId
@@ -19,7 +19,7 @@
 	</select>
 
 	<select id="selectAllByTicket" parameterType="int"
-		resultType="payVo">
+		resultType="PayVo">
 		SELECT
 		A.PRICE itemPrice
 		, B.START_TIME startTime
@@ -55,7 +55,7 @@
 		E.pay_DATE DESC, D.SEAT_NAME
 	</select>
 	<select id="selectAllByPayment" parameterType="int"
-		resultType="payVo">
+		resultType="PayVo">
 		SELECT
 		A.PRICE itemPrice
 		, B.START_TIME startTime
@@ -93,7 +93,7 @@
 		E.pay_DATE DESC, D.SEAT_NAME, E.pay_ID
 	</select>
 
-	<insert id="insertpay" parameterType="map"
+	<insert id="insertPayAndReturnId" parameterType="map"
 		useGeneratedKeys="true" keyProperty="payId" keyColumn="pay_id">
 		INSERT INTO
 		TN_tk_pay

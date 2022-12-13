@@ -1,6 +1,8 @@
 package sehyunict.tk.pay.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,64 +12,43 @@ import sehyunict.tk.pay.entity.PayVo;
 import sehyunict.tk.pay.service.PayDao;
 import sehyunict.tk.pay.service.PayService;
 
-@Service
+@Service("payService")
 public class PayServiceImpl implements PayService{
+	
+	@Autowired
+	private PayDao payDao;
 
 	@Override
 	public Integer hasReservedSeat(int timetableId, String seatName) throws Exception {
+		Map map = new HashMap();
+		map.put("timetableId", timetableId);
+		map.put("seatName", seatName);
 		
-		return null;
+		return payDao.selectReservedSeat(map);
 	}
 
 	@Override
+	@Transactional
 	public int save(PayVo payVo) throws Exception {
-		
+		try {
+			payDao.insertPayAndReturnId(payVo);
+			payDao.insertOrder(payVo);
+			payDao.insertReservedSeats(payVo);
+			
+		} catch (Exception e) {
+			throw new RuntimeException("pay insert fail, rollback");
+		}
 		return 0;
 	}
 
 	@Override
-	public List<PayVo> getListByTicket(int userId) throws Exception {
-		
-		return null;
+	public List<PayVo> getList(int userId, String sortType) throws Exception {
+		if(sortType.equals("ticket")) 
+			return payDao.selectAllByTicket(userId);
+		else if(sortType.equals("payment"))
+			return payDao.selectAllByPayment(userId);
+		else 
+			return null;
 	}
 
-	@Override
-	public List<PayVo> getListByPayment(int userId) throws Exception {
-		
-		return null;
-	}
-	
-//	@Autowired
-//	private PayDao payDao;
-//
-//	@Override
-//	public Integer hasReservedSeat(int timetableId, String seatName) throws Exception {
-//		
-//		return payDao.selectReservedSeat(timetableId, seatName);
-//	}
-//
-//	@Override
-//	@Transactional(rollbackFor = Exception.class)
-//	public int save(PayVo payVo) throws Exception {
-//		
-//		int payId = payDao.insertPayAndReturnId(payVo);
-//		payDao.insertOrder(payVo, payId);
-//		payDao.insertReservedSeats(payVo);
-//		
-//		return 0;
-//	}
-//
-//	@Override
-//	public List<PayVo> getListByTicket(int userId) throws Exception {
-//		
-//		return payDao.selectAllByTicket(userId);
-//	}
-//
-//	@Override
-//	public List<PayVo> getListByPayment(int userId) throws Exception {
-//		
-//		return payDao.selectAllByPayment(userId);
-//	}
-
-	
 }

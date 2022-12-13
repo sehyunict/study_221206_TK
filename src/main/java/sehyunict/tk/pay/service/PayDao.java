@@ -1,6 +1,5 @@
 package sehyunict.tk.pay.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,9 +13,17 @@ import sehyunict.tk.pay.entity.PayVo;
 @Mapper
 public interface PayDao {
 	
-	public Integer selectReservedSeat(int timetableId, String seatName) throws Exception;
+	public Integer selectReservedSeat(Map map) throws Exception;
 	
-	public int insertPayAndReturnId(PayVo payVo) throws Exception;
+	public PayVo insertPayAndReturnId(PayVo payVo) throws Exception;
+	
+	public int insertOrder(PayVo payVo) throws Exception;
+	
+	public int insertReservedSeats(PayVo payVo) throws Exception;
+	
+	public List<PayVo> selectAllByTicket(int userId) throws Exception;
+	
+	public List<PayVo> selectAllByPayment(int userId) throws Exception;
 	
 //
 //	private SqlSession sqlSession;
