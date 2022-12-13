@@ -10,14 +10,13 @@
 		">
 
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
-		id="SqlSessionFactory"
-		>
+		id="SqlSessionFactory">
 		<property name="dataSource">
-		<ref bean="dataSource" />
+			<ref bean="dataSource" />
 		</property>
 		<property value="WEB-INF/classes/mybatis-config.xml"
 			name="configLocation" />
-		<property value="classpath:mapper/**Mapper.xml"
+		<property value="classpath:mapper/*Mapper.xml"
 			name="mapperLocations" />
 	</bean>
 
@@ -25,4 +24,7 @@
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="SqlSessionFactory" />
 	</bean>
+	
+	<mybatis-spring:scan base-package="sehyunict.tk" />
+
 </beans>

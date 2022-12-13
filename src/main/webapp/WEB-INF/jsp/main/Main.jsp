@@ -10,5 +10,10 @@
 	tk 메인 화면
 	
 		<p> ${cartList[0].itemPriceStr} </p>
+		<p> ${cartList} </p>
 </body>
 </html>
+<script>
+
+	console.log(typeof(${cartList}))
+</script>
