@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Item.Dao;
+package sehyunict.tk.item.dao;
 
-public interface itemDao {
+public interface ItemDao {
 
 }

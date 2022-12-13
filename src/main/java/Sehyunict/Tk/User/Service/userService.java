@@ -1,5 +1,5 @@
-package Sehyunict.Tk.User.Service;
+package sehyunict.tk.user.service;
 
-public interface userService {
+public interface UserService {
 
 }

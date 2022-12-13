@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Review.Controller;
+package sehyunict.tk.review.controller;
 
-public class reviewController {
+public class ReviewController {
 
 }

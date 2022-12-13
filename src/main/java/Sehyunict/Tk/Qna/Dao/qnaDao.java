@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Qna.Dao;
+package sehyunict.tk.qna.dao;
 
-public interface qnaDao {
+public interface QnaDao {
 
 }

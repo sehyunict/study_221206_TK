@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Qna.Entity;
+package sehyunict.tk.qna.entity;
 
-public class qnaVO {
+public class QnaVo {
 
 }

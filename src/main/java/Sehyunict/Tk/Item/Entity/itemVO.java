@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Item.Entity;
+package sehyunict.tk.item.entity;
 
-public class itemVO {
+public class ItemVo {
 
 }

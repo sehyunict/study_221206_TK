@@ -1,4 +1,4 @@
-package Sehyunict.Tk.Item.Controller;
+package sehyunict.tk.item.controller;
 
 public class ItemController {
 
