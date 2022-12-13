@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sehyun.tk.dao.QnaMapper">
+
+	<insert id="insert" parameterType="">
+		INSERT INTO TN_tk_QNA
+		VALUES(#{qnaId}, #{title}, #{content}, #{userId}, default)
+	</insert>
+
+	<update id="update" parameterType="">
+		UPDATE TN_tk_QNA
+		SET 
+		
+	</update>
+ 	
+ 	<delete id="delete" parameterType="">
+ 		DELETE 
+ 		FROM
+ 		TN_tk_QNA
+ 		WHERE
+ 		USER_ID = #{user_id}
+ 	 	AND QNA_TITLE #{title}
+ 	 	AND QNA_CONTENT #{content}
+ 	 	AND QNA_ID #{qnaId}
+ 	 	
+ 	</delete>
+	
+	<select id="selectAll" resultType="QnaVo">
+	
+		SELECT 
+		A.QNA_ID qnaId
+		, A.QNA_TITLE qnaTitle
+		, A.QNA_CONTENT qnaContent
+		, B.USER_ID userId
+		, A.CREATED_AT date 
+		FROM
+		TN_TK_QNA A
+		, TN_TK_USER B
+		WHERE
+		A.USER_ID = B.USER_ID
+		ORDER BY 
+		QNA_ID
+	</select>
+
+</mapper>
