@@ -1,4 +1,4 @@
-package Sehyunict.Tk.cart.entity;
+package sehyunict.tk.cart.entity;
 
 import java.util.Date;
 
@@ -15,15 +15,13 @@ import lombok.ToString;
 @AllArgsConstructor
 public class CartVo {
 	
-	private int timetable_id;
-	private Date start_time;
-	private Date end_time;
-	private String title;
-	private int seat_id;
-	private String seat_name;
-	private int price;
-	private String price_str;
-	
-	
+	private int timetableId;
+	private Date startTime;
+	private Date endTime;
+	private String itemTitle;
+	private int seatId;
+	private String seatName;
+	private int itemPrice;
+	private String itemPriceStr;
 
 }

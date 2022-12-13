@@ -5,7 +5,7 @@
 <mapper namespace="sehyun.tk.dao.CartMapper">
 
 	<insert id="insert" parameterType="map">
-		INSERT INTO TN_TK_CART
+		INSERT INTO TN_tk_CART
 		VALUES(#{timetableId}, #{userId}, #{seatId}, default)
 	</insert>
 
@@ -13,7 +13,7 @@
 	
 	DELETE
 	FROM
-	TN_TK_CART
+	TN_tk_CART
 	WHERE
 	user_id = #{userId}
 	AND timetable_id = #{timetableId} 
@@ -25,19 +25,19 @@
 	<select id="selectAll" parameterType="int" resultType="CartVo">
 
 		SELECT
-		A.timetable_id
-		, B.start_time
-		, B.end_time
-		, C.title
-		, D.seat_id
-		, E.seat_name
-		, B.price
+		A.timetable_id timetableId
+		, B.start_time startTime
+		, B.end_time endTime
+		, C.title itemTitle
+		, D.seat_id seatId
+		, E.seat_name seatName
+		, B.price itemPrice
 		FROM
-		TN_TK_CART A
-		, TN_TK_TIMETABLE B
-		, TN_TK_ITEM C
-		, TN_TK_RESERVED_SEATS D
-		, TN_TK_SEAT E
+		TN_tk_CART A
+		, TN_tk_TIMETABLE B
+		, TN_tk_item C
+		, TN_tk_RESERVED_SEATS D
+		, TN_tk_SEAT E
 		WHERE
 		A.timetable_id = B.timetable_id
 		AND

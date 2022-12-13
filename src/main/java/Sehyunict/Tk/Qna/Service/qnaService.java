@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Qna.Service;
+package sehyunict.tk.qna.service;
 
-public interface qnaService {
+public interface QnaService {
 
 }

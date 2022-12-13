@@ -1,5 +1,5 @@
-package Sehyunict.Tk.User.Dao;
+package sehyunict.tk.user.dao;
 
-public interface userDao {
+public interface UserDao {
 
 }

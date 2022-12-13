@@ -1,4 +1,4 @@
-package Sehyunict.Tk.cart.controller;
+package sehyunict.tk.cart.controller;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import Sehyunict.Tk.cart.entity.CartVo;
-import Sehyunict.Tk.cart.service.CartService;
+import sehyunict.tk.cart.entity.CartVo;
+import sehyunict.tk.cart.service.CartService;
 
 @RequestMapping("/cart")
 @RestController
@@ -79,10 +79,4 @@ public class CartController {
 		return mav;
 	}
 	
-	@GetMapping
-	public ModelAndView getCartMain(ModelAndView mav) {
-		mav.setViewName("CartMain");
-		
-		return mav;
-	}
 }

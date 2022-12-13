@@ -16,18 +16,18 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import Sehyunict.Tk.User.Dao.userDao;
-import Sehyunict.Tk.cart.dao.CartDao;
-import Sehyunict.Tk.cart.entity.CartVo;
+import sehyunict.tk.user.dao.UserDao;
+import sehyunict.tk.cart.dao.CartDao;
+import sehyunict.tk.cart.entity.CartVo;
 
 @Transactional
 @ExtendWith(MockitoExtension.class)
 public class CartDaoTest {
 
 	@Mock
-	CartDao cartDao;
+	CartDao cartdao;
 
-	@DisplayName("��ǰ�� ��ٱ��Ͽ� ������ �����Ѵ�")
+	@DisplayName("테스트")
 	@Test
 	public void givenUserIdAndCartVo_when_then() throws Exception {
 		
@@ -35,15 +35,15 @@ public class CartDaoTest {
 		List<CartVo> list = List.of(input);
 		
 		//given
-		//BDDMockito.given(cartDao.selectAll(1)).willReturn(list);
-		BDDMockito.given(cartDao.insert(1, any(CartVo.class))).willReturn(1);
+		//BDDMockito.given(cartdao.selectAll(1)).willReturn(list);
+		BDDMockito.given(cartdao.insert(1, any(CartVo.class))).willReturn(1);
 		
 		//when
-		cartDao.insert(1, input);
+		cartdao.insert(1, input);
 	
 		
 		//then
-		BDDMockito.then(cartDao).should().insert(1, input);
+		BDDMockito.then(cartdao).should().insert(1, input);
 	}
 
 	private CartVo createCartVo() {
@@ -52,10 +52,11 @@ public class CartDaoTest {
 				47
 				, new Date(2022-10-10)
 				, new Date(2022-10-10)
-				, "�����"
+				, "어밴저스"
 				, 10
 				, "A10"
 				, 10000, null );
+
 	}
 
 }

@@ -1,11 +1,27 @@
-package Sehyunict.Tk.Pay.Dao;
+package sehyunict.tk.pay.dao;
+
+import java.util.List;
+
+import sehyunict.tk.pay.entity.PayVo;
 
 public interface PayDao {
-	//?ƒ?’ˆ, ?‹œê°„ë? ë°›ê³  reserved seat, seat ì¡°íšŒ?•´?„œ seat name ë°˜í™˜
-	//userid ë°›ê³  ê²°ì œ?‚´?—­ ë°˜í™˜
-	//ê²°ì œ?™„ë£Œì‹œ ê²°ì œ?ˆ˜?‹¨, ?šŒ?›ë²ˆí˜¸, ?ƒ?’ˆë²ˆí˜¸, ?˜ˆ?•½?‚ ì§?, ì¢Œì„, ê°?ê²?, ê´??Œ?¥?†Œ ë°›ì•„?„œ
-	//ê²°ì œ?…Œ?´ë¸”ì— insert ?›„ ê²°ì œê³ ìœ ë²ˆí˜¸ ë°›ì•„?„œ ?˜¤?”?…Œ?´ë¸? insert ?›„
-	//reserved seat?—?„ insert
+	//ê²°ì œì‹œ payì— insert, pay_idë°›ì•„ì˜¤ê³  order insert ì´í›„ reserced_seats ì— insert
+	//TIMETABLE_ID, SEAT_NAME ë°›ì•„ì„œ ì˜ˆì•½ì—¬ë¶€ í™•ì¸ í›„ ë°˜í™˜, seat_nameë°›ì•„ì„œ idí™•ì¸í•˜ê³  í•´ë‹¹ ì•„ì´ë””ë¡œ ì¡°íšŒ
+	//ì˜ˆë§¤ë‚´ì—­ í‹°ì¼“ë³„ì¡°íšŒ
+	//ì˜ˆë§¤ë‚´ì—­ ê²°ì œë³„ ì¡°íšŒ
+	
+	Integer selectReservedSeat(int timetableId, String seatName) throws Exception;
+	
+	int insertpayAndReturnId(PayVo payVo) throws Exception;
+	
+	int insertOrder(PayVo payVo, int payId) throws Exception;
+	
+	int insertReservedSeats(PayVo payVo) throws Exception;
+	
+	List<PayVo> selectAllByTicket(int userId) throws Exception;
+	
+	List<PayVo> selectAllBypayment(int userId) throws Exception;
+	
 	
 	
 }

@@ -1,4 +1,4 @@
-package Sehyunict.Tk.Pay.Service;
+package sehyunict.tk.pay.service;
 
 public interface PayService {
 

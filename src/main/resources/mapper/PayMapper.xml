@@ -2,8 +2,138 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="sehyun.tk.dao.PayMapper">
+<mapper namespace="sehyun.tk.dao.payMapper">
+	<select id="selectReservedSeat" parameterType="map"
+		resultType="Integer">
+		SELECT
+		A.SEAT_ID seatId
+		FROM
+		TN_tk_RESERVED_SEATS A
+		, TN_tk_SEAT B
+		WHERE
+		A.TIMETABLE_ID = #{timetableId}
+		AND
+		A.SEAT_ID = B.SEAT_ID
+		AND
+		B.SEAT_NAME = '#{seatName}'
+	</select>
+
+	<select id="selectAllByTicket" parameterType="int"
+		resultType="payVo">
+		SELECT
+		A.PRICE itemPrice
+		, B.START_TIME startTime
+		, B.END_TIME endTime
+		, C.TITLE itemTitle
+		,
+		C.IMAGE_PATH imagePath
+		, D.SEAT_NAME seatName
+		, E.pay_DATE payDate
+		, F.CODE_NAME methodName
+		FROM
+		TH_tk_ORDER A
+		,
+		TN_tk_TIMETABLE B
+		, TN_tk_item C
+		, TN_tk_SEAT D
+		, TN_tk_pay E
+		, TC_tk_CODE
+		F
+		WHERE
+		A.USER_ID = #{userId}
+		AND
+		A.TIMETABLE_ID = B.TIMETABLE_ID
+		AND
+		B.item_ID = C.item_ID
+		AND
+		A.SEAT_ID = D.SEAT_ID
+		AND
+		A.pay_ID = E.pay_ID
+		AND
+		E.METHOD_ID = F.ID
+		ORDER BY
+		E.pay_DATE DESC, D.SEAT_NAME
+	</select>
+	<select id="selectAllBypayment" parameterType="int"
+		resultType="payVo">
+		SELECT
+		A.PRICE itemPrice
+		, B.START_TIME startTime
+		, B.END_TIME endTime
+		, C.TITLE itemTitle
+		,
+		C.IMAGE_PATH imagePath
+		, D.SEAT_NAME seatName
+		, E.pay_DATE payDate
+		, F.CODE_NAME methodName
+		FROM
+		TH_tk_ORDER A
+		,
+		TN_tk_TIMETABLE B
+		, TN_tk_item C
+		, TN_tk_SEAT D
+		, TN_tk_pay E
+		, TC_tk_CODE
+		F
+		WHERE
+		A.USER_ID = 3
+		AND
+		A.TIMETABLE_ID = B.TIMETABLE_ID
+		AND
+		B.item_ID =
+		C.item_ID
+		AND
+		A.SEAT_ID = D.SEAT_ID
+		AND
+		A.pay_ID = E.pay_ID
+		AND
+		E.METHOD_ID
+		= F.ID
+		ORDER BY
+		E.pay_DATE DESC, D.SEAT_NAME, E.pay_ID
+	</select>
+
+	<insert id="insertpay" parameterType="map"
+		useGeneratedKeys="true" keyProperty="payId" keyColumn="pay_id">
+		INSERT INTO
+		TN_tk_pay
+		VALUES
+		(
+		TN_tk_pay_SEQ.NEXTVAL
+		, #{totalprice}
+		, (SELECT CODE_ID FROM TC_tk_CODE WHERE CODE_ID = #{methodName})
+		,
+		SYSDATE
+		, #{userId}
+		, SYSDATE
+		)
+	</insert>
 
 
+	<insert id="insertOrder" parameterType="map">
+		INSERT INTO
+		TH_tk_ORDER
+		VALUES
+		(
+		TH_tk_ORDER_SEQ.NEXTVAL
+		, (SELECT SEAT_ID FROM TN_tk_SEAT WHERE SEAT_ID = #{seatId})
+		, #{itemPrice}
+		, #{timetableId}
+		, #{payId}
+		, #{userId}
+		)
+
+	</insert>
+	<insert id="insertReservedSeat" parameterType="map">
+		INSERT INTO
+		TN_tk_RESERVED_SEATS.NEXTVAL
+		VALUES
+		(
+		TN_tk_RESERVED_SEATS_SEQ
+		,
+		#{timetableId}
+		, (SELECT SEAT_ID FROM TN_tk_SEAT WHERE SEAT_ID = #{seatId})
+		)
+	</insert>
 
 </mapper>

@@ -1,5 +1,5 @@
-package Sehyunict.Tk.User.Service.impl;
+package sehyunict.tk.user.service.impl;
 
-public class userServiceimpl {
+public class UserServiceImpl {
 
 }

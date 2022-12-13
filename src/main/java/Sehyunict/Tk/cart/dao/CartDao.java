@@ -1,13 +1,13 @@
-package Sehyunict.Tk.cart.dao;
+package sehyunict.tk.cart.dao;
 
 import java.util.List;
 
-import Sehyunict.Tk.cart.entity.CartVo;
+import sehyunict.tk.cart.entity.CartVo;
 
 public interface CartDao {
-	//?ž¥ë°”êµ¬?‹ˆ insert
-	//?ž¥ë°”êµ¬?‹ˆ delete
-	//select ?ž¥ë°”êµ¬?‹ˆ ë¦¬ìŠ¤?Š¸
+	//?ï¿½ï¿½ë°”êµ¬?ï¿½ï¿½ insert
+	//?ï¿½ï¿½ë°”êµ¬?ï¿½ï¿½ delete
+	//select ?ï¿½ï¿½ë°”êµ¬?ï¿½ï¿½ ë¦¬ìŠ¤?ï¿½ï¿½
 	int insert(int userId, CartVo cartVo) throws Exception;
 	
 	int delete(int userId, CartVo cartVo) throws Exception;

@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Review.Service;
+package sehyunict.tk.review.service;
 
-public interface reviewService {
+public interface ReviewService {
 
 }

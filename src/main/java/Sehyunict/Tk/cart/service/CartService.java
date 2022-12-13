@@ -1,12 +1,12 @@
-package Sehyunict.Tk.cart.service;
+package sehyunict.tk.cart.service;
 
 import java.util.List;
 
-import Sehyunict.Tk.cart.entity.CartVo;
+import sehyunict.tk.cart.entity.CartVo;
 
 public interface CartService {
 
-	int put(int userId, CartVo basketVo) throws Exception;
+	int put(int userId, CartVo cartVo) throws Exception;
 	
 	int delete(int userId, CartVo cartVo) throws Exception;
 	

@@ -1,5 +1,5 @@
-package Sehyunict.Tk.Review.Dao;
+package sehyunict.tk.review.dao;
 
-public interface reviewDao {
+public interface ReviewDao {
 
 }
