@@ -9,8 +9,12 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		">
 
+<<<<<<< HEAD
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
 		id="SqlSessionFactory">
+=======
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="SqlSessionFactory">
+>>>>>>> 26a4852f9a92a4424f0966426f01531ab51c9376
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
