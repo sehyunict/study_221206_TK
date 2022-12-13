@@ -9,11 +9,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		">
 
-	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
-		id="SqlSessionFactory"
-		>
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="SqlSessionFactory">
 		<property name="dataSource">
-		<ref bean="dataSource" />
+			<ref bean="dataSource" />
 		</property>
 		<property value="WEB-INF/classes/mybatis-config.xml"
 			name="configLocation" />
