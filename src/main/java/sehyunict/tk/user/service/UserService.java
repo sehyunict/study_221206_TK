@@ -1,5 +1,9 @@
 package sehyunict.tk.user.service;
 
-public interface UserService {
+import sehyunict.tk.user.entity.UserVo;
 
+public interface UserService {
+	
+	//회원정보 조회
+	UserVo getUserInfo(UserVo vo);
 }

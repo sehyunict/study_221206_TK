@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import sehyunict.tk.user.dao.UserDao;
+import sehyunict.tk.user.service.UserDao;
 import sehyunict.tk.cart.dao.CartDao;
 import sehyunict.tk.cart.entity.CartVo;
 
