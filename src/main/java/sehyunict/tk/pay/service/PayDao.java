@@ -14,7 +14,9 @@ import sehyunict.tk.pay.entity.PayVo;
 @Mapper
 public interface PayDao {
 	
+	public Integer selectReservedSeat(int timetableId, String seatName) throws Exception;
 	
+	public int insertPayAndReturnId(PayVo payVo) throws Exception;
 	
 //
 //	private SqlSession sqlSession;
