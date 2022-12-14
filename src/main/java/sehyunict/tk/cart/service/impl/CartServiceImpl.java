@@ -18,12 +18,12 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public int save(int userId, CartVo cartVo) throws Exception {
 		
-		return cartDao.insert(userId, cartVo);
+		return cartDao.insert(cartVo);
 	}
 
 	@Override
 	public int delete(int userId, CartVo cartVo) throws Exception {
-		return cartDao.delete(userId, cartVo);
+		return cartDao.delete(cartVo);
 	}
 
 	@Override
