@@ -15,6 +15,7 @@
 		<li><a href="/item/theater">연극</a></li>
 		<li><a href="/qna">QNA</a></li>
 		<li><a href="/seat">예매</a></li>
+		<li><a href="/cart">장바구니</a></li>
 		<li><input id="keyword" type="search" value="" ></li>
  		<button id="profileBtn" type="button" onclick="profileBtn(); return false;"><img id="profile" src=""></button>
  	</ul>

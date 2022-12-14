@@ -118,8 +118,8 @@ onload= function(){
 						<li style="width: 10px"><input class="cartCheckbox" name="cartCheckbox" type="checkbox" value="\${res[i].cartId}"></li>
 						<li>\${res[i].no} </li>
 						<li>\${res[i].imgPath}</li>
-						<li>\${res[0].itemTitle}</li>
-						<li>\${res[0].startTimeStr}-\${res[i].endTimeStr}</li>
+						<li>\${res[i].itemTitle}</li>
+						<li>\${res[i].startTimeStr}-\${res[i].endTimeStr}</li>
 						<li>\${res[i].seatName}</li>
 						<li>\${res[i].itemPriceStr}원</li>
 					</ul>
@@ -133,16 +133,59 @@ onload= function(){
 		}
 	})
 	
-	$("#deleteBtn").on("click",function(){
-		let arr = $("input[name=cartCheckbox]:checked");
-		
-		console.log(arr[0].value)
-		
-		$("input[name=cartCheckbox]:checked").each(function(){
-		})
-	})
 }
-
+$("#deleteBtn").on("click",function(){
+	let objArr = $("input[name=cartCheckbox]:checked");
+	let cartIdArr = [];
+	for(let obj of objArr){
+		cartIdArr.push(obj.value);
+	}
+	console.log(cartIdArr.toString())
+/* 	$.ajax({
+		url: `/cart?ids=\${cartIdArr.toString()}`,
+		type: "post",
+		dataType: "json", 
+		headers: {
+	            "accept": "application/json;odata=verbose",
+	            "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+	            "X-HTTP-Method": "DELETE",
+	            "If-Match": "*"
+	        },
+ 		traditional: true, 
+		success: function(res){
+			if(res.msg="OK"){
+				console.log("삭제완료")
+			}else{
+				console.log("에러남")
+			}
+			
+		},
+		error: function(e,t) {
+			console.log("ee : "+e)
+			alert(e+"/"+t);
+		}
+	}) */
+	
+	$.ajax({
+		url: `/cart?ids=\${cartIdArr.toString()}`,
+		type: "delete",
+		dataType: "json", 
+/* 		traditional: true, */
+		success: function(res){
+			if(res.msg="OK"){
+				console.log("삭제완료")
+			}else{
+				console.log("에러남")
+			}
+			
+		},
+		error: function(e,t) {
+			console.log("ee : "+e)
+			alert(e+"/"+t);
+		}
+	})
+	
+})
 
 </script>
 </html>

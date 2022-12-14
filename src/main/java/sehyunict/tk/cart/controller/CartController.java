@@ -1,20 +1,22 @@
 package sehyunict.tk.cart.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -52,21 +54,26 @@ public class CartController {
 	}
 
 	@DeleteMapping
-	public Model delete(CartVo cartVo, Model model, HttpSession session) {
+	public Map<String, Object>  delete(@RequestParam List<Integer> ids, HttpSession session) {
+	
+		Map<String, Object> map = new HashMap();
+		
+		System.out.println(ids.toString());
+		
+		map.put("msg", FormStatus.OK);
+		
 
-		try {
-			int userId = hasUserId(session);
-			//int userId = 1;
-			if (cartService.delete(userId, cartVo) != 1)
-				throw new RuntimeException("[Cart delete err] - 정보가 존재하지 않습니다");
-			model.addAttribute("msg", FormStatus.OK);
-		} catch (NullPointerException e) {
-			model.addAttribute("msg", e.getMessage());
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("msg", FormStatus.FAIL);
-		}
-		return model;
+		
+		/*
+		 * try { int userId = hasUserId(session); //int userId = 1; if
+		 * (cartService.delete(userId, cartVo) != 1) throw new
+		 * RuntimeException("[Cart delete err] - 정보가 존재하지 않습니다");
+		 * model.addAttribute("msg", FormStatus.OK); } catch (NullPointerException e) {
+		 * model.addAttribute("msg", e.getMessage()); } catch (Exception e) {
+		 * e.printStackTrace(); model.addAttribute("msg", FormStatus.FAIL); }
+		 */
+		
+		return map;
 	}
 
 	@GetMapping("/list")

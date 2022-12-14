@@ -29,5 +29,4 @@ public class CartVo {
 	private String seatName;
 	private int itemPrice;
 	private String itemPriceStr;
-
 }
