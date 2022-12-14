@@ -16,7 +16,7 @@ public class CartServiceImpl implements CartService{
 	private CartDao cartDao;
 	
 	@Override
-	public int put(int userId, CartVo cartVo) throws Exception {
+	public int save(int userId, CartVo cartVo) throws Exception {
 		
 		return cartDao.insert(userId, cartVo);
 	}

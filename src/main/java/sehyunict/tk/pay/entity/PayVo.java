@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PayVo {
 	
+	private int payId;
 	private int userId;
 	private int itemId;
 	private int timetableId;
