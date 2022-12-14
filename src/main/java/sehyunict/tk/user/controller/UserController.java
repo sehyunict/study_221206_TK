@@ -12,7 +12,7 @@ import sehyunict.tk.user.service.UserService;
 public class UserController {
 	
 	@Autowired
-	private UserService UserService;
+	private UserService userService;
 	
 	@RequestMapping("Mypage.do")
 	public String Mypage() {
@@ -23,11 +23,11 @@ public class UserController {
 	//마이페이지 회원정보조회
 	@RequestMapping("MyUserInfo.do")
 	public String getUserInfo(UserVo vo, Model model) {
+		//로그인기능 없으므로 user id=1임시부여
+		vo.setUser_id(1);
 		
-		// 임시로 user id 정하기
-		vo.setUser_id(1); 
+		model.addAttribute("user", userService.getUserInfo(vo));
 		
-		model.addAttribute("user", UserService.getUserInfo(vo));
 		return "MyUserInfo";
 	}
 }

@@ -5,6 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
+<style>
+	table, th, td{
+		border: 1px solid;
+		text-align: center;
+		border-collapse: collapse;
+		padding: 5px;
+		margin: 10px;
+		
+	}
+</style>
 </head>
 <body>
 	<h2>회원정보</h2>
@@ -16,16 +26,19 @@
 			<a href="#">질문관리</a><br>
 			<a href="MyUserInfo">회원정보</a>
 			
-			<table>
+			<table class="Mypage_table">
 				<tr>
 					<th>이름</th>
 					<th>이메일</th>
 					<th>핸드폰번호</th>
 				</tr>
 				<tr>
-					<td>${UserInfo.user_name}</td>
-					<td>${UserInfo.user_email}</td>
-					<td>${UserInfo.user_phone}</td>
+					<td>${user.user_name}</td>
+					<td>${user.user_email}</td>
+					<td>${user.user_phone}</td>
+				</tr>
+				<tr>
+					<td colspan="3" ><input type="button" value="회원정보 수정하기"></td>
 				</tr>
 				
 			</table>

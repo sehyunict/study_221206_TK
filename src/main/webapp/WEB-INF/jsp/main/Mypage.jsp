@@ -14,7 +14,7 @@
 			<a href="#">장바구니</a><br>
 			<a href="#">리뷰관리</a><br>
 			<a href="#">질문관리</a><br>
-			<a href="MyUserInfo">회원정보</a>
+			<a href="MyUserInfo.do">회원정보</a>
 		
 	</div>
 </body>
