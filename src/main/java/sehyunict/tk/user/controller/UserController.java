@@ -3,6 +3,7 @@ package sehyunict.tk.user.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,10 @@ public class UserController {
 	
 	//마이페이지 회원정보조회
 	@RequestMapping("MyUserInfo.do")
-	public String getUserInfo(UserVo vo, Model model) {
-		//로그인기능 없으므로 user id임시부여
-		vo.setUser_id(55);
+	public String getUserInfo(UserVo vo, Model model, HttpSession session) {
+		//세션에서 user id 가져오기
+		int userId=(int)session.getAttribute("userId");
+		vo.setUser_id(userId);
 		
 		model.addAttribute("user", userService.getUserInfo(vo));
 		
@@ -41,7 +43,9 @@ public class UserController {
 	public String getMyReview(Model model, HttpSession session) {
 		
 		HashMap map=new HashMap();
-		map.put("user_id", (Integer)session.getAttribute("user_id"));
+		int userId=(int)session.getAttribute("userId");
+		
+		map.put("user_id", userId);
 		List<UserVo> myReviewList=userService.getMyReview(map);
 		model.addAttribute("myReviewList", myReviewList);
 		

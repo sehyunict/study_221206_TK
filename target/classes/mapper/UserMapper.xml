@@ -12,6 +12,12 @@
 		 WHERE USER_ID=#{user_id}
 		   
 	</select>
+	<!-- 회원정보 수정하기 -->
+	<update id="updateUserInfo" >
+	
+	
+	</update>
+	
 	
 	<!-- 내가쓴리뷰 목록 -->
 	<select id="getMyReview" parameterType="map" resultType="UserVo">
@@ -23,6 +29,8 @@
 		   AND R.USER_ID=#{user_id}
 	  ORDER BY REVIEW_ID
 	</select>
+	
+	
 
 
 
