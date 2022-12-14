@@ -12,7 +12,7 @@
 		
 			<a href="#">예매내역</a><br>
 			<a href="#">장바구니</a><br>
-			<a href="#">리뷰관리</a><br>
+			<a href="MyReview.do">리뷰관리</a><br>
 			<a href="#">질문관리</a><br>
 			<a href="MyUserInfo.do">회원정보</a>
 		
