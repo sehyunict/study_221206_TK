@@ -22,7 +22,7 @@
 	</delete>
 
 
-	<select id="selectAll" parameterType="java.lang.Integer" resultType="CartVo">
+	<select id="selectAll" parameterType="int" resultType="CartVo">
 
 		SELECT
 		A.timetable_id timetableId
