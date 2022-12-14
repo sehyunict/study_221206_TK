@@ -12,8 +12,6 @@ public interface PayService {
 	
 	int save(PayVo payVo) throws Exception;
 	
-	List<PayVo> getListByTicket(int userId) throws Exception;
-	
-	List<PayVo> getListByPayment(int userId) throws Exception;
+	List<PayVo> getList(int userId, String sortType) throws Exception;
 	
 }
