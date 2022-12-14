@@ -39,9 +39,7 @@
 					<td><a href=""><img class="itemCssList" id="theater_1" src="../resources/image/theater_1.jpg"></a></td>
 					<td><a href=""><img class="itemCssList" id="theater_1" src="../resources/image/theater_1.jpg"></a></td>
 				</tr> 
-				
 			</table>
-				
 	</section>
 
 <jsp:include page="../footer.jsp"/>

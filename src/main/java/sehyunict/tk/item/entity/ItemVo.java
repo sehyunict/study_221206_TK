@@ -31,6 +31,15 @@ public class ItemVo {
 	private String category_id;
 	private int status_id;
 	private int genre_id;
+	
+	//TN_TK_TIMETABLE 테이블
+	private int timetable_id;
+	private int price;
+	private Date start_time;
+	private Date end_time;
+	private int user_id;
+//	private int item_id;
+	
 
 	//TN_TK_LIKE_GENRE 테이블
 //	private int user_id;

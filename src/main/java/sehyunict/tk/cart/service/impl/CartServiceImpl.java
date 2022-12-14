@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sehyunict.tk.cart.dao.CartDao;
 import sehyunict.tk.cart.entity.CartVo;
+import sehyunict.tk.cart.service.CartDao;
 import sehyunict.tk.cart.service.CartService;
 import sehyunict.tk.util.PriceConverter;
 

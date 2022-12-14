@@ -17,8 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import sehyunict.tk.user.dao.UserDao;
-import sehyunict.tk.cart.dao.CartDao;
 import sehyunict.tk.cart.entity.CartVo;
+import sehyunict.tk.cart.service.CartDao;
 
 @Transactional
 @ExtendWith(MockitoExtension.class)
@@ -40,7 +40,6 @@ public class CartDaoTest {
 		
 		//when
 		cartdao.insert(1, input);
-	
 		
 		//then
 		BDDMockito.then(cartdao).should().insert(1, input);

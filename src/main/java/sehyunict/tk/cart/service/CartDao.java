@@ -1,4 +1,4 @@
-package sehyunict.tk.cart.dao;
+package sehyunict.tk.cart.service;
 
 import java.util.List;
 
