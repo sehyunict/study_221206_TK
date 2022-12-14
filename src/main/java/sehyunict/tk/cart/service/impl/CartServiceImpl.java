@@ -1,5 +1,6 @@
 package sehyunict.tk.cart.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -33,9 +34,12 @@ public class CartServiceImpl implements CartService{
 
 	@Override
 	public List<CartVo> getList(int userId) throws Exception {
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
 		List<CartVo> list = cartDao.selectAll(userId);
 		for(CartVo cartVo : list) {
+			cartVo.setStartTimeStr(sdf.format(cartVo.getStartTime()));
+			cartVo.setEndTimeStr(sdf2.format(cartVo.getEndTime()));
 			cartVo.setItemPriceStr(PriceConverter.toChar(cartVo.getItemPrice()));
 		}
 		return list;
