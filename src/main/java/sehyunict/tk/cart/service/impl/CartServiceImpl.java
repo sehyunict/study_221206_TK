@@ -1,7 +1,9 @@
 package sehyunict.tk.cart.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -27,9 +29,12 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public int delete(int userId, CartVo cartVo) throws Exception {
-		cartVo.setUserId(userId);
-		return cartDao.delete(cartVo);
+	public int delete(int userId, List<Integer> ids) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("ids", ids);
+		return cartDao.delete(map);
 	}
 
 	@Override

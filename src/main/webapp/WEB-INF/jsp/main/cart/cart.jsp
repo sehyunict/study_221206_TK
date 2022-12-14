@@ -21,49 +21,61 @@ body {
 	font-family: "Noto Sans KR", sans-serif;
 }
 
-
 li {
 	list-style: none;
 	padding: 10px 30px;
 }
 
 #centerBox {
-	
 	text-align: center;
 }
 
 #cartListBox {
-
-	display:block;
+	display: block;
 }
 
-#cartListBox li ul{
-display: flex;
-border-bottom: 1px solid gray;
+#cartListBox li ul {
+	display: flex;
+	border-bottom: 1px solid gray;
 }
-#cartListBox li ul li{
-width: 100%
+
+#cartListBox li ul li {
+	width: 100%
 }
-.cartCheckbox{
-width:20px;
-height:20px;
+
+.cartCheckbox {
+	width: 20px;
+	height: 20px;
 }
-.btnSt{
-padding: 10px 20px;
+
+.btnSt {
+	padding: 10px 20px;
 }
 </style>
 </head>
 
 <body>
-
 	<div id="centerBox">
+		<h1>${msg}</h1>
 		<h3>장바구니</h3>
 		<ul id="cartListBox">
+			<li>
+				<ul>
+					<li style="width: 10px"><input class="cartCheckbox"
+						type="checkbox" value="7"></li>
+					<li>No</li>
+					<li>사진</li>
+					<li>작품명</li>
+					<li>관람일</li>
+					<li>좌석</li>
+					<li>가격</li>
+				</ul>
+			</li>
 		</ul>
 		<button class="btnSt" id="payBtn">결제</button>
 		<button class="btnSt" id="deleteBtn">삭제</button>
 	</div>
-	 
+
 
 	<div style="padding: 50px 0"></div>
 	<form action="/cart" method="post">
@@ -91,97 +103,61 @@ onload= function(){
 		url:"/cart/list",
 		type: "GET",
 		dataType: "json",
-		success: function(res){
-			//console.log(typeof(res)+"/"+res.length)
-			console.log(res[0].itemTitle)
-			$("#cartListBox").append(
-				`
-				<li>
-					<ul>
-						<li style="width: 10px"><input class="cartCheckbox" type="checkbox"></li>
-						<li>No</li>
-						<li>사진</li>
-						<li>작품명</li>
-						<li>관람일</li>
-						<li>좌석</li>
-						<li>가격</li>
-					</ul>
-				</li>
-				`
-			)
+		success: function(data){
+			if(data.status){
+				for (let i = 0; i < data.result.length; i++) {
+					$("#cartListBox").append(
+					`
+					 <li>
+						<ul>
+							<li style="width: 10px"><input class="cartCheckbox" name="cartCheckbox" type="checkbox" value="\${data.result[i].cartId}"></li>
+							<li>\${data.result[i].no} </li>
+							<li>\${data.result[i].imgPath}</li>
+							<li>\${data.result[i].itemTitle}</li>
+							<li>\${data.result[i].startTimeStr}-\${data.result[i].endTimeStr}</li>
+							<li>\${data.result[i].seatName}</li>
+							<li>\${data.result[i].itemPriceStr}원</li>
+						</ul>
+					</li>
+					`
+					)
+				}
 			
-			for (let i = 0; i < res.length; i++) {
-				$("#cartListBox").append(
-				`
-				 <li>
-					<ul>
-						<li style="width: 10px"><input class="cartCheckbox" name="cartCheckbox" type="checkbox" value="\${res[i].cartId}"></li>
-						<li>\${res[i].no} </li>
-						<li>\${res[i].imgPath}</li>
-						<li>\${res[i].itemTitle}</li>
-						<li>\${res[i].startTimeStr}-\${res[i].endTimeStr}</li>
-						<li>\${res[i].seatName}</li>
-						<li>\${res[i].itemPriceStr}원</li>
-					</ul>
-				</li>
-				`
-				)
+			}else{
+				console.log(data.msg)
+				if(data.msg=="세션만료") alert("다시 로그인하세요")
 			}
 		},
-		error: function(e){
-			console.log("list : "+e);
+		error: function(e, t){
+			console.log(e+" / "+t);
 		}
 	})
 	
 }
 $("#deleteBtn").on("click",function(){
 	let objArr = $("input[name=cartCheckbox]:checked");
-	let cartIdArr = [];
+	let ids = [];
 	for(let obj of objArr){
-		cartIdArr.push(obj.value);
+		ids.push(obj.value);
 	}
-	console.log(cartIdArr.toString())
-/* 	$.ajax({
-		url: `/cart?ids=\${cartIdArr.toString()}`,
-		type: "post",
-		dataType: "json", 
-		headers: {
-	            "accept": "application/json;odata=verbose",
-	            "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-	            "X-HTTP-Method": "DELETE",
-	            "If-Match": "*"
-	        },
- 		traditional: true, 
-		success: function(res){
-			if(res.msg="OK"){
-				console.log("삭제완료")
-			}else{
-				console.log("에러남")
-			}
-			
-		},
-		error: function(e,t) {
-			console.log("ee : "+e)
-			alert(e+"/"+t);
-		}
-	}) */
-	
+
 	$.ajax({
-		url: `/cart?ids=\${cartIdArr.toString()}`,
+		url: `/cart?ids=\${ids.toString()}`,
 		type: "delete",
 		dataType: "json", 
-/* 		traditional: true, */
-		success: function(res){
-			if(res.msg="OK"){
-				console.log("삭제완료")
+		success: function(data){
+			if(data.status){
+				console.log(data.msg)
+				for(let obj of objArr){
+					obj.remove()
+				}
 			}else{
-				console.log("에러남")
+				console.log(data.msg)
+				if(data.msg=="세션만료") alert("다시 로그인 하세요")
 			}
-			
 		},
 		error: function(e,t) {
-			console.log("ee : "+e)
-			alert(e+"/"+t);
+			console.log(e+" / "+t)
 		}
 	})
 	

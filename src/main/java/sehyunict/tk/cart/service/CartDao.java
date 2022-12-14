@@ -1,6 +1,7 @@
 package sehyunict.tk.cart.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +14,6 @@ public interface CartDao{
 	
 	List<CartVo> selectAll(int userId) throws Exception;
 	
-	int delete(CartVo cartVo) throws Exception;
+	int delete(Map<String, Object> map) throws Exception;
 
 }

@@ -1,19 +1,13 @@
 package sehyunict.tk.cart.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import sehyunict.tk.cart.entity.CartVo;
-import sehyunict.tk.cart.entity.constant.FormStatus;
 import sehyunict.tk.cart.service.CartService;
+import sehyunict.tk.constant.CustomStatus;
+import sehyunict.tk.constant.FormStatus;
+import sehyunict.tk.constant.UserStatus;
 
 @RequestMapping("/cart")
 @RestController
@@ -32,85 +28,75 @@ public class CartController {
 	private CartService cartService;
 
 	@PostMapping
-	public String save(CartVo cartVo, Model model, HttpSession session) {
-
+	public ModelMap save(CartVo cartVo, HttpSession session) {
+		ModelMap mm = new ModelMap();
 		try {
 			int userId = hasUserId(session);
-			
 			if (cartService.save(userId, cartVo) != 1)
 				throw new Exception("cart put error");
-			model.addAttribute("msg", FormStatus.OK);
-			System.out.println(FormStatus.OK);
-
+			setStatus(mm, FormStatus.INSERT_OK);
 		} catch (NullPointerException e) {
-			model.addAttribute("msg", e.getMessage());
+			setStatus(mm, UserStatus.SESSION_FAIL);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("msg", FormStatus.FAIL);
-			System.out.println(FormStatus.FAIL);
+			setStatus(mm, FormStatus.INSERT_FAIL);
 		}
-
-		return "cart";
+		return mm;
 	}
 
 	@DeleteMapping
-	public Map<String, Object>  delete(@RequestParam List<Integer> ids, HttpSession session) {
-	
-		Map<String, Object> map = new HashMap();
-		
-		System.out.println(ids.toString());
-		
-		map.put("msg", FormStatus.OK);
-		
-
-		
-		/*
-		 * try { int userId = hasUserId(session); //int userId = 1; if
-		 * (cartService.delete(userId, cartVo) != 1) throw new
-		 * RuntimeException("[Cart delete err] - 정보가 존재하지 않습니다");
-		 * model.addAttribute("msg", FormStatus.OK); } catch (NullPointerException e) {
-		 * model.addAttribute("msg", e.getMessage()); } catch (Exception e) {
-		 * e.printStackTrace(); model.addAttribute("msg", FormStatus.FAIL); }
-		 */
-		
-		return map;
+	public ModelMap delete(@RequestParam List<Integer> ids, HttpSession session) {
+		ModelMap mm = new ModelMap();
+		try {
+			int userId = hasUserId(session);
+			if (cartService.delete(userId, ids) != 1)
+				throw new RuntimeException("[Cart delete err] - 정보가 존재하지 않습니다");
+			setStatus(mm, FormStatus.DELETE_OK);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			setStatus(mm, UserStatus.SESSION_FAIL);
+		} catch (Exception e) {
+			e.printStackTrace();
+			setStatus(mm, FormStatus.DELETE_FAIL);
+		}
+		return mm;
 	}
 
 	@GetMapping("/list")
-	public List<CartVo> getList(Model model, HttpSession session) {
-		List<CartVo> cartList=null;
+	public ModelMap getList(HttpSession session) {
+		ModelMap mm = new ModelMap();
 		try {
 			int userId = hasUserId(session);
-			//int userId = 1;
-			cartList = cartService.getList(userId);
-			model.addAttribute("cartList", cartList);
-			for (CartVo c : cartList) {
-				System.out.println(c.toString());
-			}
-			model.addAttribute("msg", FormStatus.OK);
-		}catch (NullPointerException e) {
+			List<CartVo> result = cartService.getList(userId);
+			mm.addAttribute("result", result);
+			setStatus(mm, FormStatus.SELECT_OK);
+		} catch (NullPointerException e) {
 			e.printStackTrace();
-			model.addAttribute("msg", e.getMessage());
+			setStatus(mm, UserStatus.SESSION_FAIL);
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("msg", FormStatus.FAIL);
+			setStatus(mm, FormStatus.SELECT_FAIL);
 		}
-
-		return cartList;
+		return mm;
 	}
 
+	// @ResponseStatus(HttpStatus.BAD_GATEWAY)
 	@GetMapping
 	public ModelAndView getCartMain(ModelAndView mv) {
 		mv.setViewName("cart/cart");
+		// mv.setStatus(HttpStatus.BAD_GATEWAY);
 		return mv;
 	}
 
 	private int hasUserId(HttpSession session) throws NullPointerException {
-
-		if (session.getAttribute("userId") == null)
+		Object userId = session.getAttribute("userId");
+		if (userId == null)
 			throw new NullPointerException("session hasn't userId");
-		return (int) session.getAttribute("userId");
-
+		return (int) userId;
+	}
+	private void setStatus(ModelMap mm, CustomStatus status) {
+		mm.addAttribute("msg", status.getDescription());
+		mm.addAttribute("status", status.getStatus());
 	}
 
 }
