@@ -16,7 +16,6 @@
 
 	<button id="btn" type="button">겟리스트</button>
 </body>
-</html>
 <script>
 	
 	$("#btn").on("click", function(){
@@ -36,3 +35,4 @@
  
 	console.log(typeof(${cartList}))
 </script>
+</html>
