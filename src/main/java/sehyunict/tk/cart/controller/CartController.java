@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sehyunict.tk.cart.entity.CartVo;
 import sehyunict.tk.cart.service.CartService;
+import sehyunict.tk.cart.service.impl.CartServiceImpl;
 
 @RequestMapping("/cart")
 @RestController
@@ -33,7 +34,7 @@ public class CartController {
 		int userId = 1;
 		
 		try {
-			if(cartService.put(userId, cartVo)!=1)
+			if(cartService.save(userId, cartVo)!=1)
 				throw new Exception("cart put error");
 			model.addAttribute("msg", "put_ok");
 		} catch (Exception e) {
@@ -77,6 +78,12 @@ public class CartController {
 		
 		
 		return mav;
+	}
+	
+	@GetMapping
+	public ModelAndView getCartMain(ModelAndView mv) {
+		mv.setViewName("CartMain");
+		return mv;
 	}
 	
 }

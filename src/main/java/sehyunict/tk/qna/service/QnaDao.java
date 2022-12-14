@@ -2,34 +2,24 @@ package sehyunict.tk.qna.service;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Repository;
-
+import org.apache.ibatis.annotations.Mapper;
 import sehyunict.tk.qna.entity.QnaVo;
 
-@Repository
-public class QnaDao {
+@Mapper
+public interface QnaDao {
 	
-	private SqlSession sqlSession;
-	
-	public static String namespace = "sehyun.tk.dao.qnaMapper.";
-	
-	public int insert(int userId, QnaVo qnaVo) throws Exception {
+	public int insert(QnaVo qnaVo) throws Exception;
 		 //필요한 정보 "userId" "title" "content" "qnaId"
-	}
-		
+	public int update(QnaVo qnavo) throws Exception;
 	
-	public int update(int userId, QnaVo qnavo) throws Exception {
-		//필요한 정보 "userId" "title" "content" "qnaId"
-	}
+	public int delete(QnaVo qnavo) throws Exception; 
 	
+	public QnaVo select(int qnaId) throws Exception;
 	
-	public int delete(int userId, QnaVo qnavo) throws Exception {
-		//필요한 정보 "userId" "title" "content" "qnaId"
-	}
+	public List<QnaVo> selectAll() throws Exception;
 	
 	
-	public List<QnaVo> selectAll (int userId) throws Exception {
-		return sqlSession.selectList(namespace+"selectAll", userId);
-	}
+// mapper.xml에 정의한 쿼리문을 실행하는 메소드
+// 메소드의 매개변수는 mapper 쿼리문에 필요한 데이터를 고려해서 매개변수 설정 
+// 	
 }

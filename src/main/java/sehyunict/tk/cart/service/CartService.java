@@ -6,7 +6,7 @@ import sehyunict.tk.cart.entity.CartVo;
 
 public interface CartService {
 
-	int put(int userId, CartVo cartVo) throws Exception;
+	int save(int userId, CartVo cartVo) throws Exception;
 	
 	int delete(int userId, CartVo cartVo) throws Exception;
 	

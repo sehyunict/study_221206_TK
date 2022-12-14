@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+
+--헤더관련
+header{
+	z-index: 0;
+	background: #ff8040;
+	color: white;
+	padding: 30px;
+}
+
+#profile{
+	z-index: 2;
+	width: 50px;
+	height: 50px;
+}
+
+#profileBtn{
+}
+
+nav{
+	z-index: 0;
+	background: #008000;
+	text-align: center;
+	vertical-align: center;
+	
+}
+nav ul{
+	margin-left: 20px;
+	vertical-align: center;
+}
+nav li{
+	list-style: none;
+	display: inline-block;
+	padding: 20px;
+	padding-right: 80px;
+}
+
+nav li:hover{
+	background: #0080ff;
+}
+
+nav a{
+	text-decoration: none;
+	color:white;
+}
+
+section{
+	margin: 0 auto;
+	width: 100%;
+	background: #eaeaea;
+	height: 1200px;
+}
+section h2{
+	padding-top: 50px;
+	padding-bottom: 30px;
+	
+}
+section form, table{
+	margin: 0 auto;
+	
+}
+
+footer{
+	clear:both;
+	background: #800000;
+	color: white;
+	padding: 20px;
+}
+
+
+.itemCssList {
+	width: 200px;
+	height: 200px;
+}
+
+#musical_1_detail{
+	width: 300px;
+	height: 400px;
+}
+.recommendItem{
+	width: 130px;
+	height: 130px;
+}
+
+
+/* 로그인창(login.jsp) */
+.loginStyle{
+	margin: 0 auto;
+	padding-top: 150px;
+	width: 1350px;
+}
+
+.loginInfo{
+	padding-top: 25px;
+	margin: 0 auto;
+	width: 230px;
+	height: 100px;
+	background: #283149;
+}
+.loginInfo p{
+	color: white;
+	display: inline-block;
+}
+.loginInfo a{
+	color: blue;
+	text-decoration: underline;
+}
+#loginStyle1{
+	width: 500px;
+	margin: 0 auto;
+	padding: 40px;
+	background: #DFF6FF;
+	filter: drop-shadow(5px 5px 5px #000);
+	margin-bottom: 50px;
+}
+#loginStyle1 form{
+	
+}
+#loginStyle1 table{
+	margin: 0 auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding: 25px;
+	border:0px;
+}
+#loginStyle1 table tr{
+	border: 0px;
+}
+#loginStyle1 table th{
+	border: 0px;
+	padding: 20px;
+	text-align: left;
+	background: #f0faff;
+}
+#loginStyle1 table td{
+	border: 0px;
+	background: #f0faff;
+	
+}
+
+#loginStyle1 form input[type="text"],input[type="password"]{
+	padding: 5px 15px;
+}
+#loginStyle1 button[type="submit"]{
+	width: 416px;
+	padding: 15px 50px;
+	font-size: 25px;
+	background:linear-gradient(to bottom, #B1D0E0 5%, #1A374D 100%);
+	color: white;
+	border-radius: 20px;
+	border: gray;
+	margin-bottom: 15px;
+		
+}
+
+#loginStyle1 button[type="submit"]:active{
+	background: #000000;
+	box-shadow: 2px 2px 0 rgb(0,0,0,0.5);
+	position: relative; 
+	top:2px;
+} 
+
+#loginStyle2{
+	padding: 20px;
+}
+
+
+
+
+
+
+

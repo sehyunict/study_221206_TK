@@ -54,7 +54,7 @@
 		ORDER BY
 		E.pay_DATE DESC, D.SEAT_NAME
 	</select>
-	<select id="selectAllBypayment" parameterType="int"
+	<select id="selectAllByPayment" parameterType="int"
 		resultType="payVo">
 		SELECT
 		A.PRICE itemPrice

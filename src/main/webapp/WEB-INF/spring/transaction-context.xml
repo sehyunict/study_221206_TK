@@ -10,5 +10,4 @@
 		">
 
 	<tx:annotation-driven />
-
 </beans>

@@ -20,6 +20,7 @@ public class QnaVo {
 	private String title;
 	private String content;
 	private int userId;
+	private String userName;
 	private Date createdAt; 
 
 }
