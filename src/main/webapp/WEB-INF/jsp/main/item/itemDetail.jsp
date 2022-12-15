@@ -12,6 +12,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
+<c:forEach>
+
+</c:forEach>
+
 <jsp:include page="../header.jsp"/>
 
  <section class="taxMain">

@@ -6,12 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
 import sehyunict.tk.item.entity.ItemVo;
 import sehyunict.tk.item.service.ItemDao;
 import sehyunict.tk.item.service.ItemService;
 
-@Service
+@Service("itemService")
 public class ItemServiceImpl implements ItemService{
 	@Autowired
 	private ItemDao itemdao;
@@ -25,11 +24,33 @@ public class ItemServiceImpl implements ItemService{
 		return insertVO;
 	}
 
+//	@Override
+//	public List<ItemVo> getList() throws Exception {
+//		System.out.println("get List...");
+//		return itemdao.selectList();
+//	}
+	
 	@Override
-	public List<ItemVo> getList() throws Exception {
-		System.out.println("get List...");
-		return itemdao.selectList();
+	public List<ItemVo> movieGetList() throws Exception {
+		System.out.println("movieGetList...");
+		return itemdao.movieSelectList();
 	}
+
+	@Override
+	public List<ItemVo> theaterGetList() throws Exception {
+		System.out.println("theaterGetList...");
+		return itemdao.theaterSelectList();
+	}
+
+	@Override
+	public List<ItemVo> exhibitionGetList() throws Exception {
+		System.out.println("exhibitionGetList...");
+		List<ItemVo> list = itemdao.exhibitionSelectList();
+	
+		
+		return list;
+	}	
+	
 
 	@Override
 	public ItemVo get(int item_id) throws Exception {
@@ -60,4 +81,6 @@ public class ItemServiceImpl implements ItemService{
 			return itemdao.delete(item_id) == 1;	//1은 true 0은 false
 		}
 	}
+
+
 }

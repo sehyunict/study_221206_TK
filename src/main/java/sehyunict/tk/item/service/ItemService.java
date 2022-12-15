@@ -8,8 +8,18 @@ public interface ItemService {
 	//item 등록
 	ItemVo register(ItemVo itemvo) throws Exception;
 	
-	//item 목록조회
-	List<ItemVo> getList() throws Exception;
+//	//item 목록조회
+//	List<ItemVo> getList() throws Exception;
+
+	//목록페이지-영화
+	List<ItemVo> movieGetList() throws Exception;
+
+	//목록페이지-연극
+	List<ItemVo> theaterGetList() throws Exception;
+	
+	//목록페이지-전시회
+	List<ItemVo> exhibitionGetList() throws Exception;	
+	
 	
 	//item 상세조회
 	ItemVo get(int item_id) throws Exception;
