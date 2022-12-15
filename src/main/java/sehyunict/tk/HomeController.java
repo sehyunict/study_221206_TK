@@ -18,8 +18,14 @@ public class HomeController {
 		session.setAttribute("userId", 55);
 		System.out.println("home왔따감");
 		
+		
+		
 		return "home";
 	}
+	
+	
+	
+	
 	
 	
 }

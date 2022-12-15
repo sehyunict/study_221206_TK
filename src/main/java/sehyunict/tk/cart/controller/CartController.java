@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,13 +29,17 @@ public class CartController {
 	private CartService cartService;
 
 	@PostMapping
-	public ModelMap save(CartVo cartVo, HttpSession session) {
+	public ModelMap save(@Validated CartVo cartVo, HttpSession session) {
 		ModelMap mm = new ModelMap();
 		try {
 			int userId = hasUserId(session);
-			if (cartService.save(userId, cartVo) != 1)
-				throw new Exception("cart put error");
-			setStatus(mm, FormStatus.INSERT_OK);
+			int result = cartService.save(userId, cartVo);
+			if(result == -1) 
+				setStatus(mm, FormStatus.INSERT_FAIL_COUNT_OVER);
+			else if (result != 1)
+				throw new Exception("[cart put error]");
+			else 
+				setStatus(mm, FormStatus.INSERT_OK);
 		} catch (NullPointerException e) {
 			setStatus(mm, UserStatus.SESSION_FAIL);
 		} catch (Exception e) {
