@@ -14,7 +14,7 @@
 	
 
 
-	th,td{
+	td{
 		border-right: 1px solid grey;
 		text-align: center;
 		border-collapse: collapse;
@@ -24,8 +24,13 @@
 		border-bottom: 1px solid grey;
 	}
 	
-	th{
+	input{
+		width:300px;
+	}
+	
+	.cell{
 		background-color: lightgrey;
+		width: 130px;
 	}
 	
 	table{
@@ -55,22 +60,32 @@
 	</div>
 
 	<section>
-			<table class="Mypage_table">
+		<form action="updateForm.do" method="post">
+			<table class="Mypage_table">	
 				<tr>
-					<th>이름</th>
-					<th>이메일</th>
-					<th>핸드폰번호</th>
+					<td class="cell">이름</td>
+					<td><input type="text" name="user_name" value="${user.user_name}"></td>
 				</tr>
 				<tr>
-					<td>${user.user_name}</td>
-					<td>${user.user_email}</td>
-					<td>${user.user_phone}</td>
+					<td class="cell">이메일</td>
+					<td><input type="text" name="user_email" value="${user.user_email}"></td>
 				</tr>
 				<tr>
-					<td colspan="3" ><input type="button" value="회원정보 수정하기"></td>
+					<td class="cell">비밀번호</td>
+					<td><input type="text" name="user_pwd" value="${user.user_pwd}"></td>
 				</tr>
-				
+				<tr>
+					<td class="cell">핸드폰번호</td>
+					<td><input type="text" name="user_phone" value="${user.user_phone}"></td>
+				</tr>
+				<tr>
+					<td colspan="4" >
+						<input type="hidden" name="user_id" value="${sessionScope.userId}">
+						<button type="submit"> 수정 완료 </button>
+					</td>
+				</tr>
 			</table>
+		</form>
 	</section>
 </body>
 </html>
