@@ -103,5 +103,11 @@ public class CartController {
 		mm.addAttribute("msg", status.getDescription());
 		mm.addAttribute("status", status.getStatus());
 	}
+	
+	@PostMapping("/test")
+	public void getTest(String testStr) {
+		
+		System.out.println(testStr);
+	}
 
 }

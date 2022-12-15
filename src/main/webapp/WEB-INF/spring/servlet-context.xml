@@ -25,6 +25,7 @@
 		<beans:property name="prefix"
 			value="/WEB-INF/jsp/main/" />
 		<beans:property name="suffix" value=".jsp" />
+
 	</beans:bean>
 
 	<context:component-scan

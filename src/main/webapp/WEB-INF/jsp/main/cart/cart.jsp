@@ -94,10 +94,41 @@ li {
 		<button>장바구니 삭제</button>
 	</form>
  -->
+ 
+ <form id="testForm" action="/cart/test" method="post">
+	 <input type="text"
+			name="testStr" value="안녕하세요">
+
+		<button id="testBtn" type="button">테스트버튼</button>
+	</form>
+	
+	
+	 <form action="/cart/test" method="post">
+	 <input type="text"
+			name="testStr" value="폼 포스트">
+
+		<button >테스트버튼</button>
+	</form>
 
 </body>
 
 <script>
+$("#testBtn").on("click",function(){
+let formValues = $("#testForm").serialize()
+	
+	$.ajax({
+		url: "/cart/test",
+		type: "post",
+		data: formValues,
+		dataType: "json",
+		success: function (data) {
+			
+		
+		}
+	})
+})
+
+
 onload= function getList(){
 	$.ajax({
 		url:"/cart/list",
