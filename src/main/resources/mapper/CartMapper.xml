@@ -15,29 +15,39 @@
 		, default)
 	</insert>
 
-	<delete id="delete" parameterType="CartVo">
+	<delete id="delete" parameterType="Map">
 
 		DELETE
 		FROM
 		tn_tk_cart
 		WHERE
 		user_id = #{userId}
-		AND timetable_id = #{timetableId}
-		AND seat_id = #{seatId}
+		<foreach collection="ids" item="cartId" index="idx">
+			<if test="idx == 0">
+				AND
+				cart_id = #{cartId}
+			</if>
+			OR
+			cart_id = #{cartId}
+		</foreach>
 
 	</delete>
 
 
 	<select id="selectAll" parameterType="int" resultType="CartVo">
 		SELECT
-          ROW_NUMBER() OVER (ORDER BY A.created_at, A.seat_id,  A.timetable_id) no
-        , A.cart_id cartId
+		ROW_NUMBER() OVER (ORDER BY A.created_at, A.seat_id, A.timetable_id)
+		no
+		, A.cart_id cartId
 		, A.timetable_id timetableId
-		, B.start_time startTime
+		, B.start_time
+		startTime
 		, B.end_time endTime
 		, C.title itemTitle
-		, C.image_path imagePath
-		, A.seat_id seatId
+		, C.image_path
+		imagePath
+		,
+		A.seat_id seatId
 		, D.seat_name seatName
 		, B.price itemPrice
 		FROM
@@ -46,17 +56,19 @@
 		, tn_tk_item C
 		, tn_tk_seat D
 		WHERE
-        A.user_id = #{userId}
-        AND
+		A.user_id = #{userId}
+		AND
 		A.timetable_id = B.timetable_id
 		AND
-		B.item_id = C.item_id
-    	AND
+		B.item_id =
+		C.item_id
+		AND
 		A.seat_id = D.seat_id
 		ORDER BY
 		A.created_at
-        , A.seat_id
-        , A.timetable_id
+		, A.seat_id
+		,
+		A.timetable_id
 	</select>
 
 

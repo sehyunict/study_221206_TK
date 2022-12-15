@@ -3,15 +3,16 @@ package sehyunict.tk.qna.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import sehyunict.tk.cart.entity.constant.FormStatus;
 import sehyunict.tk.qna.entity.QnaVo;
 import sehyunict.tk.qna.service.QnaService;
 
@@ -42,7 +43,7 @@ public class QnaController {
 
 	}
 
-	@PostMapping
+	@PostMapping("/modify")
 	public String modify(QnaVo qnaVo, HttpSession session) {
 		
 		try {
@@ -57,7 +58,7 @@ public class QnaController {
 		return "qna";
 	}
 
-	@GetMapping
+	@GetMapping("/remove")
 	public String remove(QnaVo qnaVo, HttpSession session) {
 		
 		try {
@@ -71,23 +72,35 @@ public class QnaController {
 		return "qna";
 	}
 
-	@GetMapping
-	public QnaVo getQna(int qnaId) {
-		QnaVo qnaVo = null;
+	@GetMapping("/{qnaId}")
+	public QnaVo getQna(@PathVariable int qnaId) {
+		QnaVo qnaVo = null;	
 		try {
-			qnaVo = qnaService.getQna(qnaId);	//qnaId만 가지고 qna게시글 볼 수 있게??
+			qnaVo = qnaService.getQna(qnaId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return qnaVo;
 	}
-
+//save랑 delete처럼 !=1 안해줘도 되는이유는 성공한 행의 개수를 반환하기보다는 데이터를 가져오는것이기때문에 안해도된다	
+// qnaVo를 qnaService로 보내고 select해서 가져온 데이터들을 예외가 안뜨면 view로 보내는과정?
+	
 	@GetMapping("/list")
 	public List<QnaVo> getList() {
-		List<QnaVo> qnaList = null;	//qna list는 로그인 없어도 볼 수 있으니까??
-		
+		List<QnaVo> qnaList = null;	
+		try {
+			qnaList = qnaService.getList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return qnaList;
+	}
+	@GetMapping
+	public ModelAndView getQnaMain() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qna/qna");
+		return mav;
 	}
 
 }
