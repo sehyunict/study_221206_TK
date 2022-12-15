@@ -21,13 +21,28 @@ public class UserServiceImpl implements UserService{
 	public UserVo getUserInfo(UserVo vo) {
 		return userDao.getUserInfo(vo);
 	}
+	
+	//회원정보 수정
+	@Override
+	public void updateUserInfo(UserVo vo) {
+			userDao.updateUserInfo(vo);
+	}
+	
+	//회원정보 수정시 비밀번호 확인
+//	@Override
+//	public UserVo pwCheck(UserVo vo) {
+//		
+//		return null;
+//	}
 
+	
 	//내가 쓴 리뷰 목록
 	@Override
 	public List<UserVo> getMyReview(HashMap map) {
 		return userDao.getMyReview(map);
 	}
-	
+
+
 	
 	
 	
