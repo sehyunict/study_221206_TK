@@ -23,10 +23,8 @@ public class QnaServiceImpl implements QnaService{
 		//qnaVo는 실제 데이터의 주소값을 참조하는 참조변수이다
 		//setUserId() 호출 시 qnaVo의 주소값은 변동이 없고 해당 주소의 실제데이터만 변경되는 것이다
 		return qnaDao.insert(qnaVo);
-		//위에서 qnaVo에 정보를 다 넣은후에 그 qnaVo를 가지고 qnaDao의 insert메소드에 넣은값을 return한다
-		//결국 save메소드에서는 정보들을 넣어서 Dao에 insert 메서드로 전달하는 메소드 (전달이 포인트인가?)
-		//(이름은save지만 진짜로 저장을 여기서 하는건아니다 dao가고~ 쿼리문가고~) 
-		//(어디로 가서 요청을 처리할건지 명시만 해주는 느낌?)
+		//위에서 qnaVo에 정보를 다 넣은후에 그 qnaVo를 가지고 qnaDao의 insert메소드에 qnaVo 넣는다
+		//결국 save메소드에서는 정보들을 넣어서 Dao에 insert 메서드로 전달
 	}
 
 	@Override
