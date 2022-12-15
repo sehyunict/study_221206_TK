@@ -25,6 +25,8 @@ public interface PayDao {
 	
 	public List<PayVo> selectAllByPayment(int userId) throws Exception;
 	
+	public List<PayVo> selectAllSeat(int timetableId) throws Exception;
+	
 //
 //	private SqlSession sqlSession;
 //	private static String namespace = "sehyun.tk.dao.payMapper.";

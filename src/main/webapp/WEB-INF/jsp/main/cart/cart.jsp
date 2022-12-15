@@ -71,8 +71,8 @@ li {
 				</ul>
 			</li>
 		</ul>
-		<button class="btnSt" id="payBtn">결제</button>
-		<button class="btnSt" id="deleteBtn">삭제</button>
+		<button class="btnSt" id="payBtn" type="button">결제</button>
+		<button class="btnSt" id="deleteBtn" type="button">삭제</button>
 	</div>
 
 
@@ -94,40 +94,13 @@ li {
 		<button>장바구니 삭제</button>
 	</form>
  -->
- 
- <form id="testForm" action="/cart/test" method="post">
-	 <input type="text"
-			name="testStr" value="안녕하세요">
-
-		<button id="testBtn" type="button">테스트버튼</button>
-	</form>
-	
-	
-	 <form action="/cart/test" method="post">
-	 <input type="text"
-			name="testStr" value="폼 포스트">
-
-		<button >테스트버튼</button>
-	</form>
 
 </body>
 
 <script>
-$("#testBtn").on("click",function(){
-let formValues = $("#testForm").serialize()
-	
-	$.ajax({
-		url: "/cart/test",
-		type: "post",
-		data: formValues,
-		dataType: "json",
-		success: function (data) {
-			
-		
-		}
-	})
+$("#payBtn").on("click", function(){
+	location.href="/pay" 
 })
-
 
 onload= function getList(){
 	$.ajax({
@@ -144,7 +117,7 @@ onload= function getList(){
 							<li style="width: 10px"><input class="cartCheckbox" name="cartCheckbox" type="checkbox" value="\${data.result[i].cartId}"></li>
 							<li>\${data.result[i].no} </li>
 							<li>\${data.result[i].imgPath}</li>
-							<li>\${data.result[i].itemTitle}</li>
+							<li>\${data.result[i].itemTitle==null?"현재는 판매가 중지된 상품입니다":data.result[i].itemTitle}</li>
 							<li>\${data.result[i].startTimeStr}-\${data.result[i].endTimeStr}</li>
 							<li>\${data.result[i].seatName}</li>
 							<li>\${data.result[i].itemPriceStr}원</li>
@@ -153,7 +126,6 @@ onload= function getList(){
 					`
 					)
 				}
-			
 			}else{
 				alert(data.msg)
 			}
