@@ -36,7 +36,7 @@ public class PayController {
 		return "seat";
 	}
 	
-	@PostMapping
+	@PostMapping()
 	public String save(PayVo payVo, Model  m) {
 		try {
 			if(payService.save(payVo)!=1) 
