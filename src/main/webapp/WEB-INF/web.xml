@@ -4,9 +4,8 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 	<display-name>study_tk</display-name>
-<!--  	<welcome-file-list>
-		<welcome-file>/WEB-INF/jsp/main/home.jsp</welcome-file>
-	</welcome-file-list>  -->
+	<!-- <welcome-file-list> <welcome-file>/WEB-INF/jsp/main/home.jsp</welcome-file> 
+		</welcome-file-list> -->
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -45,4 +44,22 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+	<!-- 한글변환 필터 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>

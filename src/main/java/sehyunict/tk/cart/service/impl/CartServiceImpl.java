@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +21,12 @@ public class CartServiceImpl implements CartService{
 	
 	@Override
 	public int save(int userId, CartVo cartVo) throws Exception {
-		cartVo.setUserId(userId);
 		
+		int count = cartDao.selectCount(userId);
+		System.out.println("count"+count);
+		if(count>=10) return -1;
+		
+		cartVo.setUserId(userId);
 		return cartDao.insert(cartVo);
 	}
 
@@ -49,5 +51,5 @@ public class CartServiceImpl implements CartService{
 		}
 		return list;
 	}
-
+	
 }
