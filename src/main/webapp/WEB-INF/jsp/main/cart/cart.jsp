@@ -56,7 +56,6 @@ li {
 
 <body>
 	<div id="centerBox">
-		<h1>${msg}</h1>
 		<h3>장바구니</h3>
 		<ul id="cartListBox">
 			<li>
@@ -78,14 +77,15 @@ li {
 
 
 	<div style="padding: 50px 0"></div>
-	<form action="/cart" method="post">
-		<input type="text" name="userId" value="1"> <input type="text"
-			name="timetableId" value="48"> <input type="text"
-			name="seatId" value="9">
-		<button>장바구니 저장</button>
+	<form id="cartSaveForm">
+		<input type="text" name="userId" value="55"
+			placeholder="유저 고유 아이디 1~100"> <input type="text"
+			name="timetableId" placeholder="타임테이블 47~91"> <input
+			type="text" name="seatId" placeholder="좌석 아이디 1~30">
+		<button type="button" id="cartSaveBtn">장바구니 저장</button>
 	</form>
 
-	<form action="/cart" method="post">
+	<!-- 	<form action="/cart" method="post">
 		<input type="hidden" name="_method" value="DELETE"> <input
 			type="text" name="userId" value="1"> <input type="text"
 			name="timetableId" value="47"> <input type="text"
@@ -93,12 +93,12 @@ li {
 
 		<button>장바구니 삭제</button>
 	</form>
-
+ -->
 
 </body>
 
 <script>
-onload= function(){
+onload= function getList(){
 	$.ajax({
 		url:"/cart/list",
 		type: "GET",
@@ -108,7 +108,7 @@ onload= function(){
 				for (let i = 0; i < data.result.length; i++) {
 					$("#cartListBox").append(
 					`
-					 <li>
+					 <li name="cartList">
 						<ul>
 							<li style="width: 10px"><input class="cartCheckbox" name="cartCheckbox" type="checkbox" value="\${data.result[i].cartId}"></li>
 							<li>\${data.result[i].no} </li>
@@ -124,17 +124,14 @@ onload= function(){
 				}
 			
 			}else{
-				console.log(data.msg)
-				if(data.msg=="세션만료") alert("다시 로그인하세요")
+				alert(data.msg)
 			}
 		},
 		error: function(e, t){
 			console.log(e+" / "+t);
 		}
 	})
-	
-}
-$("#deleteBtn").on("click",function(){
+	$("#deleteBtn").on("click",function(){
 	let objArr = $("input[name=cartCheckbox]:checked");
 	let ids = [];
 	for(let obj of objArr){
@@ -148,12 +145,15 @@ $("#deleteBtn").on("click",function(){
 		success: function(data){
 			if(data.status){
 				console.log(data.msg)
-				for(let obj of objArr){
-					obj.remove()
-				}
+				$("li[name=cartList]").remove()
+				
+				/* for(let obj of objArr){
+					obj.parentNode.parentNode.remove()
+				} 
+				location.href="/cart" */
+				getList()
 			}else{
-				console.log(data.msg)
-				if(data.msg=="세션만료") alert("다시 로그인 하세요")
+				alert(data.msg)
 			}
 		},
 		error: function(e,t) {
@@ -162,6 +162,29 @@ $("#deleteBtn").on("click",function(){
 	})
 	
 })
+
+$("#cartSaveBtn").on("click", function(){
+	
+	let formValues = $("#cartSaveForm").serialize()
+	
+	$.ajax({
+		url: "/cart",
+		type: "post",
+		data: formValues,
+		dataType: "json",
+		success: function (data) {
+			if(data.status){
+				alert("장바구니에 잘 담겼습니다")
+				location.href="/cart"
+			}else{
+				alert(data.msg)
+			}
+		}
+	})
+})
+	
+}
+
 
 </script>
 </html>

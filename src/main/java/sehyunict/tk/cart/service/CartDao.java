@@ -15,5 +15,7 @@ public interface CartDao{
 	List<CartVo> selectAll(int userId) throws Exception;
 	
 	int delete(Map<String, Object> map) throws Exception;
+	
+	int selectCount(int userId) throws Exception;
 
 }
