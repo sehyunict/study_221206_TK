@@ -40,6 +40,9 @@ td {
 	margin-top: 100px;
 	margin-left: 100px;
 }
+.back-yellow{
+background: yellow;
+}
 </style>
 </head>
 
@@ -99,7 +102,7 @@ $("body").on("click", function(e){
 			alert("이미 예약된 좌석입니다.")
 			return
 		}
-		$(e.target).css("background-color", "yellow")
+		$(e.target).toggleClass("back-yellow")
 	}
 	e.stopPropagation();
 })
