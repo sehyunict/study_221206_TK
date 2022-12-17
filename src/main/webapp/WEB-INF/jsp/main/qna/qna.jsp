@@ -52,7 +52,7 @@ ul {
 					`
 					<ul>
 						<li>\${i+1}</li>
-						<li>\${data[i].title}</li>	
+						<li><a href="/qna/\${data[i].qnaId}">\${data[i].title}</a></li>	
 						<li>\${data[i].userName}</li>
 					</ul>
 					`		

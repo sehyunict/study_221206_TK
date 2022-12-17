@@ -73,15 +73,22 @@ public class QnaController {
 	}
 
 	@GetMapping("/{qnaId}")
-	public QnaVo getQna(@PathVariable int qnaId) {
+	public ModelAndView getQna(@PathVariable int qnaId, ModelAndView mav) {
+		
+		mav.setViewName("qna/qnaDetail");
+		System.out.println("Dddddd");
 		QnaVo qnaVo = null;	
 		try {
 			qnaVo = qnaService.getQna(qnaId);
+			mav.addObject("qnaVo", qnaVo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(mav.getView());
+		System.out.println(mav.getViewName());
+		System.out.println("Dddddd");
 		
-		return qnaVo;
+		return mav;
 	}
 //save랑 delete처럼 !=1 안해줘도 되는이유는 성공한 행의 개수를 반환하기보다는 데이터를 가져오는것이기때문에 안해도된다	
 // qnaVo를 qnaService로 보내고 select해서 가져온 데이터들을 예외가 안뜨면 view로 보내는과정?
