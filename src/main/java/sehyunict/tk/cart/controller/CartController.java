@@ -29,7 +29,7 @@ public class CartController {
 	private CartService cartService;
 
 	@PostMapping
-	public ModelMap save(@Validated CartVo cartVo, HttpSession session) {
+	public ModelMap save(CartVo cartVo, HttpSession session) {
 		ModelMap mm = new ModelMap();
 		try {
 			int userId = hasUserId(session);
@@ -54,8 +54,8 @@ public class CartController {
 		ModelMap mm = new ModelMap();
 		try {
 			int userId = hasUserId(session);
-			if (cartService.delete(userId, ids) != 1)
-				throw new RuntimeException("[Cart delete err] - 정보가 존재하지 않습니다");
+			if (cartService.delete(userId, ids) < 1)
+				throw new RuntimeException("[Cart delete err] - 에러요");
 			setStatus(mm, FormStatus.DELETE_OK);
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -103,5 +103,5 @@ public class CartController {
 		mm.addAttribute("msg", status.getDescription());
 		mm.addAttribute("status", status.getStatus());
 	}
-
+		
 }

@@ -71,8 +71,8 @@ li {
 				</ul>
 			</li>
 		</ul>
-		<button class="btnSt" id="payBtn">결제</button>
-		<button class="btnSt" id="deleteBtn">삭제</button>
+		<button class="btnSt" id="payBtn" type="button">결제</button>
+		<button class="btnSt" id="deleteBtn" type="button">삭제</button>
 	</div>
 
 
@@ -98,6 +98,29 @@ li {
 </body>
 
 <script>
+$("#payBtn").on("click", function(){
+	let objArr = $("input[name=cartCheckbox]:checked");
+	let timetableId;
+	let set = new Set();
+	
+	if(objArr.length == 0){
+		alert("선택된 항목이 없습니다")
+		return
+	}
+	
+	for(let obj of objArr){
+		timetableId = obj.dataset.timetableid
+		set.add(timetableId)
+	}
+	
+	if(set.size!=1){
+		alert("같이 결제하려는 작품은 하나여야합니다")
+		return
+	}
+	
+	 location.href="/pay/"+timetableId;
+})
+
 onload= function getList(){
 	$.ajax({
 		url:"/cart/list",
@@ -110,10 +133,10 @@ onload= function getList(){
 					`
 					 <li name="cartList">
 						<ul>
-							<li style="width: 10px"><input class="cartCheckbox" name="cartCheckbox" type="checkbox" value="\${data.result[i].cartId}"></li>
+							<li style="width: 10px"><input class="cartCheckbox" name="cartCheckbox" type="checkbox" value="\${data.result[i].cartId}" data-timetableid="\${data.result[i].timetableId}"></li>
 							<li>\${data.result[i].no} </li>
 							<li>\${data.result[i].imgPath}</li>
-							<li>\${data.result[i].itemTitle}</li>
+							<li>\${data.result[i].timetableId} -- \${data.result[i].itemTitle==null?"현재는 판매가 중지된 상품입니다":data.result[i].itemTitle}</li>
 							<li>\${data.result[i].startTimeStr}-\${data.result[i].endTimeStr}</li>
 							<li>\${data.result[i].seatName}</li>
 							<li>\${data.result[i].itemPriceStr}원</li>
@@ -122,7 +145,6 @@ onload= function getList(){
 					`
 					)
 				}
-			
 			}else{
 				alert(data.msg)
 			}
@@ -133,6 +155,10 @@ onload= function getList(){
 	})
 	$("#deleteBtn").on("click",function(){
 	let objArr = $("input[name=cartCheckbox]:checked");
+	if(objArr.length == 0){
+		alert("선택된 항목이 없습니다")
+		return
+	}
 	let ids = [];
 	for(let obj of objArr){
 		ids.push(obj.value);
