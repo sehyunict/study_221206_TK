@@ -54,7 +54,7 @@
 		
 			<a href="#">예매내역</a>
 			<a href="#">장바구니</a>
-			<a href="#">리뷰관리</a>
+			<a href="MyReview.do">리뷰관리</a>
 			<a href="#">질문관리</a>
 			<a href="MyUserInfo.do">회원정보</a>
 	</div>
@@ -64,23 +64,23 @@
 			<table class="Mypage_table">	
 				<tr>
 					<td class="cell">이름</td>
-					<td><input type="text" name="user_name" value="${user.user_name}"></td>
+					<td><input type="text" name="userName" value="${user.userName}"></td>
 				</tr>
 				<tr>
 					<td class="cell">이메일</td>
-					<td><input type="text" name="user_email" value="${user.user_email}"></td>
+					<td><input type="text" name="userEmail" value="${user.userEmail}"></td>
 				</tr>
 				<tr>
 					<td class="cell">비밀번호</td>
-					<td><input type="text" name="user_pwd" value="${user.user_pwd}"></td>
+					<td><input type="text" name="userPwd" value="${user.userPwd}"></td>
 				</tr>
 				<tr>
 					<td class="cell">핸드폰번호</td>
-					<td><input type="text" name="user_phone" value="${user.user_phone}"></td>
+					<td><input type="text" name="userPhone" value="${user.userPhone}"></td>
 				</tr>
 				<tr>
 					<td colspan="4" >
-						<input type="hidden" name="user_id" value="${sessionScope.userId}">
+						<input type="hidden" name="userId" value="${sessionScope.userId}">
 						<button type="submit"> 수정 완료 </button>
 					</td>
 				</tr>
