@@ -14,49 +14,24 @@
 <body>
 
 	<header>
-		<h2>작성글</h2>
+		<h2>QNA 조회</h2>
 	</header>
 	<div id="qnaSelectBox">
 		<ul>
 			<li>No</li>
-			<li>TITLE</li>
-			<li>CONTENT</li>
-			<li>USER</li>
-			<li>DATE</li>
+			<li>TITLE : ${qnaVo.title} </li>
+			<li>CONTENT : <span> ${qnaVo.content} </span></li>
+			<li>USER : <span> ${qnaVo.userName} </span></li>
+			<li>DATE : ${qnaVo.createdAtStr} </li>
 		</ul>
-		<button id="updateBtn">수정</button>
-		<button id="deleteBtn">삭제</button>
+		<button><a href="/qna/qnaModify/${qnaVo.qnaId}">수정</a></button>
+		<button><a href="/qna/remove/${qnaVo.qnaId}">삭제</a></button>
 	</div>
-	<form id="qnaSaveForm">
-		<input type="text" name="userId" value="55">
-		<input type="text" name="qnaId">
-		<input type="text" name="title">
-		<input type="text" name="content">
-		<button type="button" id="qnaSaveBtn">저장</button>
-	</form>
+	
 	
 </body>
 
 <script>
-$("#qnaSaveBtn").on("click", function(){
 	
-	let formValues = $("#qnaSaveForm").serialize()
-	
-	$.ajax({
-		url : "/qna",
-		type : "post",
-		data : formValues,
-		dataType : "json",
-		success : function (data){
-			if(data.status){
-				alert("qna 저장되었습니다")
-				location.href = "/qna"
-			}else{
-				alert(data.msg)
-			}
-		}
-	})
-	
-})	
 </script>
 </html>

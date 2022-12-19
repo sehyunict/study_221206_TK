@@ -1,6 +1,7 @@
 package sehyunict.tk.qna.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import sehyunict.tk.qna.entity.QnaVo;
@@ -12,7 +13,7 @@ public interface QnaDao {
 		 //필요한 정보 "userId" "title" "content" "qnaId"
 	public int update(QnaVo qnavo) throws Exception;
 	
-	public int delete(QnaVo qnavo) throws Exception; 
+	public int delete(Map<String, Integer> map) throws Exception; 
 	
 	public QnaVo select(int qnaId) throws Exception;
 	

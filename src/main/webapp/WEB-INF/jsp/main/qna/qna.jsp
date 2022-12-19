@@ -25,16 +25,15 @@ ul {
 		<h2>QNA 게시판</h2>
 	</header>
 	<button id="getListBtn" type="button">리스트 목록</button>
+	<button>
+		<a href="/qna/qnaContent">글쓰기</a>
+	</button>
+	<ul>
+		<li>No</li>
+		<li>TITLE</li>
+		<li>USER</li>
+	</ul>
 	<div id="qnaListBox">
-
-		<ul>
-			<li>No</li>
-			<li>TITLE</li>
-			<li>USER</li>
-		</ul>
-
-
-
 	</div>
 </body>
 
@@ -42,10 +41,12 @@ ul {
 	$("#getListBtn").on("click", function() {
 
 		$.ajax({
-			url : "/qna/list", //요청할 url (리스트 뽑을거니까 /qna/list)
-			type : "GET", //list 가져올거니까 get 타입으로 가져오겠다
+			url : "/qna/list", //url (리스트 뽑을거니까 /qna/list)
+			type : "GET", //(type:요청하는타입)get요청을 하겠다
 			dataType : "json", //서버에서 반환되는 데이터형식 json 
 			success : function(data) {
+				$("#qnaListBox").children().remove();
+				
 				console.log(data)
 				for (let i = 0; i < 10; i++) {
 					$("#qnaListBox").append(
