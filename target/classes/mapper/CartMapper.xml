@@ -6,53 +6,70 @@
 <mapper namespace="sehyunict.tk.cart.service.CartDao">
 
 	<insert id="insert" parameterType="CartVo">
-		INSERT INTO TN_tk_CART
-		VALUES(#{timetableId}, #{userId}, #{seatId}, default)
+		INSERT INTO
+		tn_tk_cart
+		VALUES(
+		tn_tk_cart_seq.nextval
+		, #{timetableId}
+		, #{userId}
+		, #{seatId}
+		, default)
 	</insert>
 
-	<delete id="delete" parameterType="CartVo">
-	
-	DELETE
-	FROM
-	TN_tk_CART
-	WHERE
-	user_id = #{userId}
-	AND timetable_id = #{timetableId} 
-	AND seat_id = #{seatId}
+	<delete id="delete" parameterType="Map">
+
+		DELETE
+		FROM
+		tn_tk_cart
+		WHERE
+		user_id = #{userId}
+		<foreach collection="ids" item="cartId" index="idx">
+			<if test="idx == 0">
+				AND
+				cart_id = #{cartId}
+			</if>
+			OR
+			cart_id = #{cartId}
+		</foreach>
 
 	</delete>
 
 
 	<select id="selectAll" parameterType="int" resultType="CartVo">
-
 		SELECT
-		A.timetable_id timetableId
-		, B.start_time startTime
+		ROW_NUMBER() OVER (ORDER BY A.created_at, A.seat_id, A.timetable_id)
+		no
+		, A.cart_id cartId
+		, A.timetable_id timetableId
+		, B.start_time
+		startTime
 		, B.end_time endTime
 		, C.title itemTitle
-		, D.seat_id seatId
-		, E.seat_name seatName
+		, C.image_path
+		imagePath
+		,
+		A.seat_id seatId
+		, D.seat_name seatName
 		, B.price itemPrice
 		FROM
-		TN_tk_CART A
-		, TN_tk_TIMETABLE B
-		, TN_tk_item C
-		, TN_tk_RESERVED_SEATS D
-		, TN_tk_SEAT E
+		tn_tk_cart A
+		, tn_tk_timetable B
+		, tn_tk_item C
+		, tn_tk_seat D
 		WHERE
+		A.user_id = #{userId}
+		AND
 		A.timetable_id = B.timetable_id
 		AND
-		B.item_id = C.item_id
+		B.item_id =
+		C.item_id
 		AND
-		B.timetable_id = D.timetable_id
-		AND
-    	A.SEAT_ID = D.SEAT_ID
-    	AND
-		D.seat_id = E.seat_id
-		AND
-		A.user_id = #{userId}
+		A.seat_id = D.seat_id
 		ORDER BY
 		A.created_at
+		, A.seat_id
+		,
+		A.timetable_id
 	</select>
 
 

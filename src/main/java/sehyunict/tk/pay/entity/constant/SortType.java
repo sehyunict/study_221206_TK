@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum SortType {
+	
 	TICKET("티켓"),
 	PAYMENT("결제");
 	

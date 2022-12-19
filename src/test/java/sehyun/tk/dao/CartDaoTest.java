@@ -1,12 +1,8 @@
 package sehyun.tk.dao;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -17,8 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import sehyunict.tk.user.dao.UserDao;
-import sehyunict.tk.cart.service.CartDao;
+//github.com/sehyunict/study_221206_TK.git
 import sehyunict.tk.cart.entity.CartVo;
 import sehyunict.tk.cart.service.CartDao;
 

@@ -2,6 +2,8 @@ package sehyunict.tk.item.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import sehyunict.tk.item.entity.ItemVo;
 
 public interface ItemService {
@@ -20,9 +22,8 @@ public interface ItemService {
 	//목록페이지-전시회
 	List<ItemVo> exhibitionGetList() throws Exception;	
 	
-	
 	//item 상세조회
-	ItemVo get(int item_id) throws Exception;
+	List<ItemVo> getDetailList(int item_id) throws Exception;
 	
 	//item 수정
 	boolean modify(ItemVo itemvo) throws Exception;

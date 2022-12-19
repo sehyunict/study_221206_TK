@@ -25,7 +25,9 @@ public class ItemVo {
 	private String caution;
 	private String image_path;
 	private Date start_day;
+	private String start_day_str;
 	private Date end_day;
+	private String end_day_str;
 	private Date reg_date;
 	private String writer;
 	private String category_id;

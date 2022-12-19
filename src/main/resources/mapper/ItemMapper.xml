@@ -10,14 +10,14 @@
 	</insert>
 
 
-	<resultMap type="ItemVo" id="itemList">
+<!-- 	<resultMap type="ItemVo" id="itemList">
 
 		<result column="START_DAY" property="START_DAY" jdbcType="DATE"/>
 		<result column="END_DAY" property="END_DAY" jdbcType="DATE"/>
-	</resultMap>
+	</resultMap> -->
 
 	<!-- 목록페이지-영화  -->
-	<select id="movieSelectList" parameterType="Map" resultMap="itemList">
+	<select id="movieSelectList" parameterType="Map" resultType="ItemVo">
 		SELECT  
 		    A.ITEM_ID 
 		  , A.TITLE 
@@ -40,7 +40,7 @@
 	</select>
 	
 	<!-- 목록페이지-연극 -->
-	<select id="theaterSelectList" parameterType="Map" resultMap="itemList">
+	<select id="theaterSelectList" parameterType="Map" resultType="ItemVo">
 		SELECT  
 		    A.ITEM_ID 
 		  , A.TITLE 
@@ -68,8 +68,8 @@
 		    A.ITEM_ID 
 		  , A.TITLE 
 		  , A.IMAGE_PATH 
-		  , A.START_DAY start_day
-		  , A.END_DAY end_day
+		  , A.START_DAY
+		  , A.END_DAY
 		FROM 
 		    TN_TK_ITEM A
 		  , TC_TK_CODE T1
@@ -106,8 +106,8 @@
 		    A.ITEM_ID = B.ITEM_ID
 	</select>
 	
-	<!-- item + timetable 단건조회  -->
-	<select id="select" parameterType="Map" resultType="ItemVo">
+	<!-- 특정 item의 상세정보(timetable 포함) 조회  -->
+	<select id="itemDetailList" parameterType="Map" resultType="ItemVo">
 		SELECT * 
 		FROM 
 		    TN_TK_ITEM A
@@ -120,10 +120,10 @@
 	
 	
 	<!-- 특정 item 검색(timetable 정보포함) -->
-	<select id="" parameterType="Map" resultType="ItemVo">
+<!-- 	<select id="" parameterType="Map" resultType="ItemVo">
 	
 	
-	</select>
+	</select> -->
 	
 	<!-- 수정 -->
  	<update id="update">

@@ -4,9 +4,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 	<display-name>study_tk</display-name>
-	<welcome-file-list>
+<!--  	<welcome-file-list>
 		<welcome-file>/WEB-INF/jsp/main/home.jsp</welcome-file>
-	</welcome-file-list>
+	</welcome-file-list>  -->
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

@@ -6,52 +6,73 @@
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
-<c:forEach var="member" items="${memberList}">
-	<tr>
-		<td><a href="/member/modify?id=${member.id}">${member.id}</td>
-		<td>${member.name}</td>
-		<td>${member.dept}</td>
-		<td>${member.duty}</td>
-		<td>${member.phone}</td>
-		<td>${member.role}</td>
-		<td><a href="/remove?id=${member.id}">삭제</a></td>
-	</tr>
-</c:forEach>
-
+<c:forEach var="exhibitionList" items="${exhibitionList}"/>
 
 <jsp:include page="../header.jsp"/>
-
-	<section class="memberListSection">
+	<section class="itemListSection">
 			<h2 align="center">전시회</h2>
-			<table border="1"> 
+			<table class="itemTableStyle" border="1"> 
 				<tr>
-					<td><a href="/item/itemDetail"><img class="itemCssList" id="exhibition_1" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_2" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_3" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_4" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_5" src=""></a></td>
-				</tr>
-				<tr>
-					<td><a href=""><img class="itemCssList" id="exhibition_6" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_7" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_8" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_9" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_10" src=""></a></td>
-					<td rowspan="2">선호장르 추천</td>
-					<td rowspan="2">
-						<img class="recommendItem" src="">
-						<img class="recommendItem" src="">
+					<td>
+						<a href="/item/itemDetail?item_id=${exhibitionList.get(0).item_id}"><img class="itemCssList" id="exhibition_1" src="${exhibitionList.get(0).image_path}"></a>
+						<p class="itemTitle"><strong>${exhibitionList.get(0).title}</strong></p>	
+						<p class="itemPeriod">${exhibitionList.get(0).start_day_str} ~ ${exhibitionList.get(0).end_day_str}</p>	
+					</td>
+					<td>
+						<a href=""><img class="itemCssList" id="exhibition_2" src="../resources/image/coming_soon.jpg"></a>
+						<p class="itemTitle"><strong></strong></p>	
+						<p class="itemPeriod"></p>	
+					</td>
+					<td>
+						<a href=""><img class="itemCssList" id="exhibition_3" src="../resources/image/coming_soon.jpg"></a>
+						<p class="itemTitle"><strong></strong></p>	
+						<p class="itemPeriod"></p>			
+					</td>
+					<td>
+						<a href=""><img class="itemCssList" id="exhibition_4" src="../resources/image/coming_soon.jpg"></a>
+						<p class="itemTitle"><strong></strong></p>	
+						<p class="itemPeriod"></p>							
+					</td>
+					<td>
+						<a href=""><img class="itemCssList" id="exhibition_5" src="../resources/image/coming_soon.jpg"></a>
+						<p class="itemTitle"><strong></strong></p>	
+						<p class="itemPeriod"></p>					
 					</td>
 				</tr>
- 				<tr>
-					<td><a href=""><img class="itemCssList" id="exhibition_11" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_12" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_13" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_14" src=""></a></td>
-					<td><a href=""><img class="itemCssList" id="exhibition_15" src=""></a></td>
-				</tr> 
-				
+				<tr>
+					<td>
+						<a href=""><img class="itemCssList" id="exhibition_6" src="../resources/image/coming_soon.jpg"></a>
+						<p class="itemTitle"><strong></strong></p>	
+						<p class="itemPeriod"></p>					
+					</td>
+					<td>
+						<a href=""><img class="itemCssList" id="exhibition_7" src="../resources/image/coming_soon.jpg"></a>
+						<p class="itemTitle"><strong></strong></p>	
+						<p class="itemPeriod"></p>					
+					</td>
+					<td>
+						<a href=""><img class="itemCssList" id="exhibition_8" src="../resources/image/coming_soon.jpg"></a>
+						<p class="itemTitle"><strong></strong></p>	
+						<p class="itemPeriod"></p>					
+					</td>
+					<td>
+						<a href=""><img class="itemCssList" id="exhibition_9" src="../resources/image/coming_soon.jpg"></a>
+						<p class="itemTitle"><strong></strong></p>	
+						<p class="itemPeriod"></p>	
+					</td>
+					<td>
+						<a href=""><img class="itemCssList" id="exhibition_10" src="../resources/image/coming_soon.jpg"></a>
+						<p class="itemTitle"><strong></strong></p>	
+						<p class="itemPeriod"></p>					
+					</td>
+					<td rowspan="2">선호장르 추천</td>
+					<td rowspan="2">
+						<a href="#"><img class="recommendItem" id="" src=""></a>
+						<a href="#"><img class="recommendItem" id="" src=""></a>
+					</td>
+				</tr>
 			</table>
 	</section>
 <jsp:include page="../footer.jsp"/>

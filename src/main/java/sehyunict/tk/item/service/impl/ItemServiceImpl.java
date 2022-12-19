@@ -1,5 +1,6 @@
 package sehyunict.tk.item.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class ItemServiceImpl implements ItemService{
 		
 		System.out.println("register..." + itemvo);
 		ItemVo insertVO = itemdao.insert(itemvo);
+		
 		return insertVO;
 	}
 
@@ -33,29 +35,56 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public List<ItemVo> movieGetList() throws Exception {
 		System.out.println("movieGetList...");
-		return itemdao.movieSelectList();
+		SimpleDateFormat a1 = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat a2 = new SimpleDateFormat("yyyy/MM/dd HH24:mm");
+		
+		List<ItemVo> list = itemdao.movieSelectList();
+
+		for(ItemVo itemVo : list) {
+			itemVo.setStart_day_str(a1.format(itemVo.getStart_day()));
+			itemVo.setEnd_day_str(a1.format(itemVo.getEnd_day()));
+		}
+		
+		return list;
 	}
 
 	@Override
 	public List<ItemVo> theaterGetList() throws Exception {
 		System.out.println("theaterGetList...");
-		return itemdao.theaterSelectList();
+		SimpleDateFormat a1 = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat a2 = new SimpleDateFormat("yyyy/MM/dd HH24:mm");
+		
+		List<ItemVo> list = itemdao.theaterSelectList();
+
+		for(ItemVo itemVo : list) {
+			itemVo.setStart_day_str(a1.format(itemVo.getStart_day()));
+			itemVo.setEnd_day_str(a1.format(itemVo.getEnd_day()));
+		}
+		
+		return list;
 	}
 
 	@Override
 	public List<ItemVo> exhibitionGetList() throws Exception {
 		System.out.println("exhibitionGetList...");
+		SimpleDateFormat a1 = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat a2 = new SimpleDateFormat("yyyy/MM/dd HH24:mm");
+		
 		List<ItemVo> list = itemdao.exhibitionSelectList();
-	
+
+		for(ItemVo itemVo : list) {
+			itemVo.setStart_day_str(a1.format(itemVo.getStart_day()));
+			itemVo.setEnd_day_str(a1.format(itemVo.getEnd_day()));
+		}
 		
 		return list;
 	}	
 	
 
 	@Override
-	public ItemVo get(int item_id) throws Exception {
-		System.out.println("get..." + item_id);
-		return itemdao.select(item_id);
+	public List<ItemVo> getDetailList(int item_id) throws Exception {
+		System.out.println("get..." + item_id );
+		return itemdao.itemDetailList(item_id);
 	}
 
 	@Override
@@ -72,15 +101,21 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public boolean remove(int item_id) throws Exception {
-		ItemVo readVO = itemdao.select(item_id);	//itemvo 매개변수참조 id get
-		if (readVO == null) {
-			System.out.println("해당 아이템은 존재하지 않습니다.");
-			return false;
-		} else {
-			System.out.println("remove..." + item_id);
-			return itemdao.delete(item_id) == 1;	//1은 true 0은 false
-		}
+		// TODO Auto-generated method stub
+		return false;
 	}
+
+//	@Override
+//	public boolean remove(int item_id) throws Exception {
+//		ItemVo readVO = itemdao.itemSelectList();	//itemvo 매개변수참조 id get
+//		if (readVO == null) {
+//			System.out.println("해당 아이템은 존재하지 않습니다.");
+//			return false;
+//		} else {
+//			System.out.println("remove..." + item_id);
+//			return itemdao.delete(item_id) == 1;	//1은 true 0은 false
+//		}
+//	}
 
 
 }

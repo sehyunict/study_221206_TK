@@ -1,6 +1,9 @@
 package sehyunict.tk.cart.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,15 +25,22 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public int delete(int userId, CartVo cartVo) throws Exception {
-		return cartDao.delete(cartVo);
+	public int delete(int userId, List<Integer> ids) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("ids", ids);
+		return cartDao.delete(map);
 	}
 
 	@Override
 	public List<CartVo> getList(int userId) throws Exception {
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
 		List<CartVo> list = cartDao.selectAll(userId);
 		for(CartVo cartVo : list) {
+			cartVo.setStartTimeStr(sdf.format(cartVo.getStartTime()));
+			cartVo.setEndTimeStr(sdf2.format(cartVo.getEndTime()));
 			cartVo.setItemPriceStr(PriceConverter.toChar(cartVo.getItemPrice()));
 		}
 		

@@ -3,6 +3,7 @@ package sehyunict.tk.item.service;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import sehyunict.tk.item.entity.ItemVo;
 
@@ -23,8 +24,8 @@ public interface ItemDao {
 	List<ItemVo> exhibitionSelectList() throws Exception;
 	
 	
-	//item 상세조회
-	ItemVo select(int item_id) throws Exception;
+	//item 상세조회(1영화당 여러 상영시간표)
+	List<ItemVo> itemDetailList(@Param("item_id") int item_id) throws Exception;
 	
 	//item 수정
 	int update(ItemVo itemvo);
