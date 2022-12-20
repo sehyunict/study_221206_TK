@@ -19,58 +19,65 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/mypage/Mypage.do")
-	public String Mypage() {
-		return "/mypage/Mypage";
-	}
-	
-	
+
 	//마이페이지 회원정보조회
-	@RequestMapping(value="/mypage/MyUserInfo.do")
+	@RequestMapping("/mypage/MyUserInfo.do")
 	public String getUserInfo(UserVo vo, Model model, HttpSession session) {
 		//세션에서 user id 가져오기
-		int userId=(int)session.getAttribute("userId");
-		vo.setUser_id(userId);
+		int currentId=(int)session.getAttribute("userId");
+		vo.setUserId(currentId);
 		
 		model.addAttribute("user", userService.getUserInfo(vo));
 		
-		return "MyUserInfo";
+		return "/mypage/MyUserInfo";
 	}
 	
 	
 	//수정페이지로 이동
-	@RequestMapping(value="/mypage/MyUserInfoUpdate.do")
+	@RequestMapping("/mypage/MyUserInfoUpdate.do")
 	public String goUserInfoUpdate(UserVo vo, Model model, HttpSession session) {
 		//세션에서 user id 가져오기
-		int userId=(int)session.getAttribute("userId");
-		vo.setUser_id(userId);
+		int currentId=(int)session.getAttribute("userId");
+		vo.setUserId(currentId);
 		
 		model.addAttribute("user", userService.getUserInfo(vo));
 		
-		return "MyUserInfoUpdate";
+		return "/mypage/MyUserInfoUpdate";
 	}
 	
 	//회원정보 수정하기
-	@RequestMapping(value="updateForm.do")
+	@RequestMapping("/mypage/updateForm.do")
 	public String UserInfoUpdate(UserVo vo,Model model) {
 		userService.updateUserInfo(vo);
-		return "redirect:MyUserInfo.do";
+		return "redirect:/mypage/MyUserInfo.do";
 	}
 	
 	
 	//내가 작성한 리뷰 리스트
-	@RequestMapping(value="/MyReview.do")
+	@RequestMapping("/mypage/MyReview.do")
 	public String getMyReview(Model model, HttpSession session) {
 		
 		HashMap map=new HashMap();
-		int userId=(int)session.getAttribute("userId");
+		int currentId=(int)session.getAttribute("userId");
 		
-		map.put("user_id", userId);
+		map.put("userId", currentId);
 		List<UserVo> myReviewList=userService.getMyReview(map);
 		model.addAttribute("myReviewList", myReviewList);
 		
-		return "MyReview";
+		return "/mypage/MyReview";
 	}
+	
+	//마이페이지에서 리뷰 수정 (제목,내용 변경가능)
+	
+	
+	//마이페이지에서 리뷰 삭제
+	@RequestMapping("/mypage/deleteMyReview.do")
+	public String deleteMyReview(UserVo vo) {
+		userService.deleteMyReview(vo);
+		return "redirect:/mypage/MyReview.do";
+		//삭제기능 미완성~~~
+	}
+	
 	
 	
 }

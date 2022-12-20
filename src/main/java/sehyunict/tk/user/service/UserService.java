@@ -15,5 +15,7 @@ public interface UserService {
 //	UserVo pwCheck(UserVo vo);
 	//내가 쓴 리뷰 조회
 	List<UserVo> getMyReview(HashMap map);
+	//마이페이지에서 리뷰삭제
+	void deleteMyReview(UserVo vo);
 	
 }
