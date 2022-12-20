@@ -42,7 +42,7 @@ public class QnaServiceImpl implements QnaService{
 	public int remove(int userId, int qnaId) throws Exception {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("userId", userId);
-		map.put("qnaId", qnaId);
+		map.put("qnaId", qnaId);	//("qnaId" -> key, qnaId -> value) jsp에서 "qnaId" key값을 호출해서 value값인 qnaId를 쓸 수 있다
 		
 		return qnaDao.delete(map);
 	}
@@ -67,4 +67,9 @@ public class QnaServiceImpl implements QnaService{
 		return list;
 	}
 	
+	@Override
+	public List<QnaVo> search(String keyWord) throws Exception {
+		List<QnaVo> list = qnaDao.selectSearch(keyWord);
+		return list;
+	}
 }

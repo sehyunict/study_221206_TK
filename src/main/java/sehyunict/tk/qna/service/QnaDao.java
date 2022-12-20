@@ -19,6 +19,7 @@ public interface QnaDao {
 	
 	public List<QnaVo> selectAll() throws Exception;
 	
+	public List<QnaVo> selectSearch(String keyWord) throws Exception;
 	
 // mapper.xml에 정의한 쿼리문을 실행하는 메소드
 // 메소드의 매개변수는 mapper 쿼리문에 필요한 데이터를 고려해서 매개변수 설정 

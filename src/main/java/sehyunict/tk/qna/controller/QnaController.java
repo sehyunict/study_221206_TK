@@ -3,13 +3,14 @@ package sehyunict.tk.qna.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,11 +26,10 @@ public class QnaController {
 
 	@PostMapping
 	private ModelAndView save(QnaVo qnaVo, HttpSession session) {
-		//ModelAndView 경로를 담을 수 있는
+		//ModelAndView-> view 경로를 담을 수 있는 객체?
 		//ModelAndView로 저장하고 나면 다시 리스트 목록을 보여주려고 qna/qna(리스트 목록 있는 jsp경로) 경로 지정	
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("qna/qna");
-		
 		//save메서드 실행시 성공실패 나타낼때 예외처리
 		try {
 			int userId = 55;
@@ -110,6 +110,7 @@ public class QnaController {
 		}
 		return qnaList;
 	}
+	
 	@GetMapping
 	public ModelAndView getQnaMain() {
 		ModelAndView mav = new ModelAndView();
@@ -148,6 +149,20 @@ public class QnaController {
 		return mav;		//예외안뜨면 view에 리턴값보낸다
 	}
 //게시물을 수정하는 페이지로 넘어가는 경우에는 get방식을, 내용을 수정해서 수정버튼을 누르는 경우에는 post방식이 사용된다
-
+	
+	@GetMapping("/search")
+	public ModelAndView searchQna(@RequestParam("kw") String keyWord) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qna/qna");
+		System.out.println(keyWord);
+		try {
+			List<QnaVo> list = qnaService.search(keyWord);	
+			mav.addObject("list", list);		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+		
+	}
 
 }

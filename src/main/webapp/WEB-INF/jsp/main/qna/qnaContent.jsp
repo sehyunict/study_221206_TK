@@ -32,13 +32,14 @@ ul {
 
 			</ul>
 		</div>
-		<button type="button" id="qnaSaveBtn">저장</button>
+		<button id="qnaSaveBtn">저장</button>
 	</form>
 
 </body>
 
 <script>
-	$("#qnaSaveBtn").on("click", function() {
+	//ajax 굳이 필요없을거같아서 삭제
+	/* $("#qnaSaveBtn").on("click", function() {
 
 		let formValues = $("#qnaSaveForm").serialize()
 
@@ -48,15 +49,15 @@ ul {
 			data : formValues,
 			dataType : "json",
 			success : function(data) {
-				if (data.status) {
-					alert("qna 저장되었습니다")
-					location.href = "/qna"
-				} else {
-					alert(data.msg)
-				}
+				location.href = "/qna"
+				
+			},
+			error: function(e){
+				alert(e)
 			}
+		
 		})
 
-	})
+	}) */
 </script>
 </html>

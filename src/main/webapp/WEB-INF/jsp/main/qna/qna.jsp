@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,16 +29,44 @@ ul {
 	<button>
 		<a href="/qna/qnaContent">글쓰기</a>
 	</button>
+
 	<ul>
 		<li>No</li>
 		<li>TITLE</li>
 		<li>USER</li>
 	</ul>
-	<div id="qnaListBox">
+
+			<div id="qnaListBox">
+	 <c:forEach var="qnaVo" items="${ list }">	<!-- jstl -> jsp에서 반복처리 할수있는 기능 -->
+	 	<ul>
+	 	<li>${ qnaVo.qnaId }</li>
+	 	<li>${ qnaVo.title }</li>
+	 	<li>${ qnaVo.userName }</li>
+	 	</ul>
+	 	
+	  </c:forEach>
 	</div>
+	
+	
+	<form action="/qna/" method="get">
+		<div class="search">
+			<input name="keyWord" type="text" placeHolder="검색어를 입력해주세요"
+				id="keyWord"></input>
+		<button type="button" id="searchBtn">검색하기</button>
+		</div>
+		</form>
 </body>
 
+
 <script>
+	$("#searchBtn").click(function(){
+		let input = $("input[name=keyWord]").val()
+		location.href="/qna/search?kw="+input+""	//kw -> key값 input-> value값 controller에 있는 @RequestParam("kw")랑 같음
+	})
+		
+		
+		
+
 	$("#getListBtn").on("click", function() {
 
 		$.ajax({
@@ -45,7 +74,7 @@ ul {
 			type : "GET", //(type:요청하는타입)get요청을 하겠다
 			dataType : "json", //서버에서 반환되는 데이터형식 json 
 			success : function(data) {
-				$("#qnaListBox").children().remove();
+				$("#qnaListBox").children().remove();	
 				
 				console.log(data)
 				for (let i = 0; i < 10; i++) {
