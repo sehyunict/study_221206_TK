@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+ -->
+
 <title>마이페이지</title>
 <style>
 	.Mypage_left , .Mypage_section{
@@ -49,38 +52,50 @@
 </head>
 <body>
 	<h2>회원정보</h2>
-	<hr>
+	
 	<div class="Mypage_left">
 		
 			<a href="#">예매내역</a>
 			<a href="#">장바구니</a>
-			<a href="#">리뷰관리</a>
+			<a href="MyReview.do">리뷰관리</a>
 			<a href="#">질문관리</a>
 			<a href="MyUserInfo.do">회원정보</a>
 	</div>
-
+	<hr>
 	<section>
 		
 			<table class="Mypage_table">	
 				<tr>
 					<td class="cell">이름</td>
-					<td>${user.user_name}</td>
+					<td>${user.userName}</td>
 				</tr>
 				<tr>
 					<td class="cell">이메일</td>
-					<td>${user.user_email}</td>
+					<td>${user.userEmail}</td>
 				</tr>
 				<tr>
 					<td class="cell">핸드폰번호</td>
-					<td>${user.user_phone}</td>
+					<td>${user.userPhone}</td>
 				</tr>
 				<tr>
 					<td colspan="4" >
-						<a href="MyUserInfoUpdate.do"><button> 회원정보 수정하기 </button></a>
+<!-- 					<a href="MyUserInfoUpdate.do"> -->
+						<button id="updateBtn"> 회원정보 수정하기 </button>
 					</td>
 				</tr>
 			</table>
 
 	</section>
 </body>
+<script>
+
+$(document).ready(function(){
+	 $('#updateBtn').on('click',function(){
+	
+			alert("연결");
+		});
+
+});
+
+</script>
 </html>

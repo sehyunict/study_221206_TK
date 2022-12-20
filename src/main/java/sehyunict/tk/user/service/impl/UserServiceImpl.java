@@ -41,7 +41,13 @@ public class UserServiceImpl implements UserService{
 	public List<UserVo> getMyReview(HashMap map) {
 		return userDao.getMyReview(map);
 	}
-
+	
+	//마이페이지에서 리뷰삭제
+	@Override
+	public void deleteMyReview(UserVo vo) {
+		userDao.deleteMyReview(vo);
+	}
+	
 
 	
 	

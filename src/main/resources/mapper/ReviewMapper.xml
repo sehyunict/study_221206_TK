@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sehyunict.tk.review.service.ReviewDao">
+
+
+	<!-- 리뷰 전체 보기 -->
+	<select id="reviewAllList" resultType="String">
+		SELECT 
+			*
+		FROM
+			tn_tk_review
+		ORDER BY
+			review_id desc
+
+	</select>
+
+	<!-- 선택 리뷰 보기 -->
+	<select id="selectReviewList" parameterType="int"
+		resultType="reviewVo">
+		<!-- select * from tn_tk_review where timetable_id = #{timetable_id} order 
+			by review_id desc -->
+
+		SELECT
+			 i.title as itemTitle
+			,r.title as reviewTitle
+			,r.content
+			,u.user_name as userName
+			,r.star
+			,r.regdate 
+			,r.review_id reviewId
+		FROM
+			tn_tk_item i
+			,tn_tk_review r
+			,tn_tk_timetable t
+			,tn_tk_user u
+		WHERE
+			r.timetable_id = #{timetableId}
+		and i.item_id = t.item_id
+		and t.timetable_id = r.timetable_id
+		and u.user_id = r.user_id
+		
+		order by r.review_id desc
+
+	</select>
+
+
+	<!-- 평균별점 -->
+	<select id="selectRating" resultType="double">
+		SELECT
+			round( AVG(star), 1)
+		FROM
+			tn_tk_review
+		WHERE
+			timetable_id = #{timetableId}
+	</select>
+
+
+	<!-- 리뷰 등록 -->
+	<insert id="RegReview" parameterType="ReviewVo">
+		<selectKey resultType="int" keyProperty="reviewId" order="BEFORE">
+			SELECT 
+				max(review_id) + 1 
+			FROM 
+				tn_tk_review
+		</selectKey>
+
+		INSERT
+			into tn_tk_review
+			(review_id
+			,user_id
+			,timetable_id
+			,title
+			,content
+			,star
+			,regdate)
+		VALUES
+			(tn_tk_review_seq.nextVal
+			,#{userId}
+			,#{timetableId}
+			,#{reviewTitle}
+			,#{content}
+			,#{star}
+			,SYSDATE)
+
+	</insert>
+	
+	
+	<!-- 리뷰 수정 -->
+	<update id = "updateReview" parameterType="ReviewVo">
+		UPDATE 
+			tn_tk_review
+		SET	
+			title = #{reviewTitle}
+		   ,content = #{content}
+		   ,star = #{star}
+		   ,regdate = SYSDATE	
+		WHERE
+			user_id = #{userId}
+		and timetable_id = #{timetableId}
+		and review_id = #{reviewId}
+	</update>
+
+
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteReview" parameterType="ReviewVo">
+		DELETE
+		FROM
+			tn_tk_review
+		WHERE
+			user_id = #{userId}
+		and review_id = #{reviewId}
+	</delete>
+
+
+</mapper>

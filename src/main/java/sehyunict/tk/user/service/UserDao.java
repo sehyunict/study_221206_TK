@@ -19,4 +19,6 @@ public interface UserDao {
 //	public UserVo pwCheck(UserVo vo);
 	//내가 쓴 리뷰 조회
 	public List<UserVo> getMyReview(HashMap map);
+	//마이페이지에서 리뷰삭제
+	void deleteMyReview(UserVo vo);
 }
