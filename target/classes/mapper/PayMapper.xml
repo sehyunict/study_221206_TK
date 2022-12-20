@@ -20,7 +20,7 @@
 		B.SEAT_NAME = '#{seatName}'
 	</select>
 
-	<select id="selectAllByTicket" parameterType="int"
+	<select id="selectAllByTicket" parameterType="Map"
 		resultType="PayVo">
 		SELECT
 		A.PRICE itemPrice
@@ -56,12 +56,12 @@
 		AND
 		A.pay_ID = E.pay_ID
 		AND
-		E.METHOD_ID = F.ID
+		E.METHOD_ID = F.CODE_ID
 		ORDER BY
 		E.pay_DATE DESC,
 		D.SEAT_NAME
 	</select>
-	<select id="selectAllByPayment" parameterType="int"
+	<select id="selectAllByPayment" parameterType="Map"
 		resultType="PayVo">
 		SELECT
 		A.PRICE itemPrice
@@ -98,7 +98,7 @@
 		A.pay_ID = E.pay_ID
 		AND
 		E.METHOD_ID
-		= F.ID
+		= F.CODE_ID
 		ORDER BY
 		E.pay_DATE DESC, D.SEAT_NAME, E.pay_ID
 	</select>
@@ -163,6 +163,10 @@
 		A.seat_id = B.seat_id(+)
 		AND
 		B.timetable_id(+) = #{timetableId}
+	</select>
+	
+	<select id="selectOrderTotalCount" parameterType="int" resultType="int">
+	SELECT COUNT(ORDER_ID) FROM TH_TK_ORDER WHERE USER_ID = #{userId}
 	</select>
 
 </mapper>

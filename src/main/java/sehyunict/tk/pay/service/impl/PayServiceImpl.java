@@ -1,5 +1,6 @@
 package sehyunict.tk.pay.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,13 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import sehyunict.tk.cart.entity.CartVo;
 import sehyunict.tk.pay.entity.PayVo;
 import sehyunict.tk.pay.service.PayDao;
 import sehyunict.tk.pay.service.PayService;
+import sehyunict.tk.util.Pagination;
+import sehyunict.tk.util.PriceConverter;
 
 @Service("payService")
-public class PayServiceImpl implements PayService{
-	
+public class PayServiceImpl implements PayService {
+
 	@Autowired
 	private PayDao payDao;
 
@@ -23,37 +27,55 @@ public class PayServiceImpl implements PayService{
 		Map map = new HashMap();
 		map.put("timetableId", timetableId);
 		map.put("seatName", seatName);
-		
+
 		return payDao.selectReservedSeat(map);
 	}
 
 	@Override
 	@Transactional
 	public int save(PayVo payVo) throws Exception {
-		try {
-			payDao.insertPayAndReturnId(payVo);
-			payDao.insertOrder(payVo);
-			payDao.insertReservedSeats(payVo);
-			
-		} catch (Exception e) {
-			throw new RuntimeException("pay insert fail, rollback");
-		}
-		return 0;
+
+		payDao.insertPayAndReturnId(payVo);
+		payDao.insertOrder(payVo);
+
+		return payDao.insertReservedSeats(payVo);
 	}
 
+	@Transactional
 	@Override
-	public List<PayVo> getList(int userId, String sortType) throws Exception {
-		if(sortType.equals("ticket")) 
-			return payDao.selectAllByTicket(userId);
-		else if(sortType.equals("payment"))
-			return payDao.selectAllByPayment(userId);
-		else 
-			return null;
+	public List<PayVo> getList(int userId, String sortType, Pagination page) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+		List<PayVo> payList = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("userId", userId);
+
+		if (sortType.equals("ticket"))
+			payList = payDao.selectAllByTicket(map);
+		else if (sortType.equals("payment"))
+			payList = payDao.selectAllByPayment(map);
+		else
+			new RuntimeException("정렬 타입이 적합하지 않습니다");
+
+		for (PayVo payVo : payList) {
+			payVo.setStartTimeStr(sdf.format(payVo.getStartTime()));
+			payVo.setEndTimeStr(sdf2.format(payVo.getEndTime()));
+			payVo.setItemPriceStr(PriceConverter.toChar(payVo.getItemPrice()));
+			payVo.setPayDateStr(sdf.format(payVo.getPayDate()));
+		}
+
+		return payList;
 	}
 
 	@Override
 	public List<PayVo> getSeats(int timetableId) throws Exception {
 		return payDao.selectAllSeat(timetableId);
+	}
+
+	@Override
+	public int getOrderTotalCount(int userId) throws Exception {
+		return payDao.selectOrderTotalCount(userId);
 	}
 
 }

@@ -3,6 +3,7 @@ package sehyunict.tk.pay.service;
 import java.util.List;
 
 import sehyunict.tk.pay.entity.PayVo;
+import sehyunict.tk.util.Pagination;
 
 public interface PayService {
 	
@@ -10,8 +11,10 @@ public interface PayService {
 	
 	int save(PayVo payVo) throws Exception;
 	
-	List<PayVo> getList(int userId, String sortType) throws Exception;
+	List<PayVo> getList(int userId, String sortType, Pagination page) throws Exception;
 	
 	List<PayVo> getSeats(int timetableId) throws Exception;
+	
+	int getOrderTotalCount(int userId) throws Exception;
 	
 }

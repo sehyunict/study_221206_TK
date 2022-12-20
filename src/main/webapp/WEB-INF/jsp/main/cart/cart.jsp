@@ -94,6 +94,8 @@ li {
 		<button>장바구니 삭제</button>
 	</form>
  -->
+ 
+ <a href="/pay/list?st=ticket&pa=1&po=1">나의 예매 정보</a>
 
 </body>
 

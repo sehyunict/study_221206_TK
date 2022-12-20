@@ -21,11 +21,13 @@ public interface PayDao {
 	
 	public int insertReservedSeats(PayVo payVo) throws Exception;
 	
-	public List<PayVo> selectAllByTicket(int userId) throws Exception;
+	public List<PayVo> selectAllByTicket(Map map) throws Exception;
 	
-	public List<PayVo> selectAllByPayment(int userId) throws Exception;
+	public List<PayVo> selectAllByPayment(Map map) throws Exception;
 	
 	public List<PayVo> selectAllSeat(int timetableId) throws Exception;
+	
+	public int selectOrderTotalCount(int userId) throws Exception;
 	
 //
 //	private SqlSession sqlSession;

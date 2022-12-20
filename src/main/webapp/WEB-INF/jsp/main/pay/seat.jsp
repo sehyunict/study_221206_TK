@@ -40,8 +40,13 @@ td {
 	margin-top: 100px;
 	margin-left: 100px;
 }
-.back-yellow{
-background: yellow;
+
+.back-yellow {
+	background: yellow;
+}
+
+#priceBox {
+	position: relative;
 }
 </style>
 </head>
@@ -62,7 +67,26 @@ background: yellow;
 			</c:forEach> --%>
 		</table>
 	</div>
+	<form action="/pay/save" method="POST">
+		<div id="priceBox"
+			style="border: 1px solid black; width: 300px; height: 500px; margin-left: 600px; position: relative;">
+			<div id="pickSeats">
+				<h4>선택한 좌석</h4>
+			</div>
+			<div style="position: absolute; bottom: 60px; left: 30px">
+				<input type="checkbox" id="card" name="methodId" value="14"><label for="card">카드</label>
+				<input type="checkbox" id="phone" name="methodId" value="15"><label for="phone">휴대폰</label>
+				<input type="checkbox" id="account" name="methodId" value="16"><label for="account">무통장입금</label>
+			</div>
 
+			<p style="position: absolute; bottom: 20px; left:50px;">
+				<span id="totalPirce" name="totalPrice"></span> 원
+			</p>
+
+			<button id="doPayBtn" type="button"
+				style="position: absolute; bottom: 10px; padding: 10px; right: 10px;">결제하기</button>
+		</div>
+	</form>
 </body>
 
 <script>
@@ -79,7 +103,7 @@ onload=function(){
 				}
 				$("#seatTable").append(
 						`
-						<td class="seat" value="\${obj.seatId}" data-valid="\${obj.timetableId=="" ? true : false}" style="\${obj.timetableId == "" ? '' : 'background: gray'}">
+						<td class="seat" data-val="\${obj.seatId}" data-valid="\${obj.timetableId=="" ? true : false}" style="\${obj.timetableId == "" ? '' : 'background: gray'}">
 						\${obj.seatName}
 						</td>
 						`)
@@ -95,18 +119,38 @@ onload=function(){
 }
 
 $("body").on("click", function(e){
-	console.log("e "+e.target.nodeName)
 	if(e.target.nodeName=="TD"){
-		console.log(e.target.dataset.valid)
 		if(e.target.dataset.valid == "false"){
 			alert("이미 예약된 좌석입니다.")
 			return
 		}
 		$(e.target).toggleClass("back-yellow")
+		if($(e.target).hasClass("back-yellow")){
+			console.log("val:"+$(e.target).data("val"))
+			$("#pickSeats").append(
+					`
+					<p name="pickSeat" data-val="\${$(e.target).data('val')}">\${$(e.target).text()} </p>
+					<input type="hidden" name="" >
+					
+					`)
+			$("#totalPirce").text(Number($("#totalPirce").text())+10000);
+			
+		}else{
+			for(let obj of \$("#priceBox").children()){
+				console.log(obj.value)
+			}
+		}
 	}
 	e.stopPropagation();
 })
-	
+
+$("#doPayBtn").on("click",function(){
+	$.ajax({
+		url:"/pay/save",
+		dataType: "json",
+		
+	})
+})
 
 	
 </script>

@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PayVo {
 	
+	private int no;
 	private int payId;
 	private int userId;
 	private int itemId;
@@ -27,8 +28,11 @@ public class PayVo {
 	private String itemPriceStr;
 	private String imagePath;
 	private Date startTime;
+	private String startTimeStr;
 	private Date endTime;
+	private String endTimeStr;
 	private Date payDate;
+	private String payDateStr;
 	private String methodName;
 
 }
