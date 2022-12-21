@@ -80,7 +80,7 @@
 							<td>${RList.content}</td>
 							<td>${RList.star}/5</td>
 							<td>
-								<a href=""><button id="updateBtn">수정</button></a>
+								<button>수정완료</button>
 								<button id="deleteBtn">삭제</button></a>
 								<input name="reviewId" type=hidden value=${RList.reviewId}>
 							</td>
@@ -94,15 +94,7 @@
 </body>
 <script>
 
-
-
-
-
 $(document).ready(function(){
-	//수정
-	
-	
-	//삭제
 	 $('#deleteBtn').on('click',function(){
 		 	
 		const reviewId=$('input[name=reviewId]').val();
