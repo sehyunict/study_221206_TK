@@ -14,7 +14,7 @@ import lombok.Setter;
 public class PayVo {
 	
 	private int no;
-	private int payId;
+	private Integer payId;
 	private int userId;
 	private int itemId;
 	private int timetableId;

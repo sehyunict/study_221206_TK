@@ -137,8 +137,8 @@ onload= function getList(){
 						<ul>
 							<li style="width: 10px"><input class="cartCheckbox" name="cartCheckbox" type="checkbox" value="\${data.result[i].cartId}" data-timetableid="\${data.result[i].timetableId}"></li>
 							<li>\${data.result[i].no} </li>
-							<li>\${data.result[i].imgPath}</li>
-							<li>\${data.result[i].timetableId} -- \${data.result[i].itemTitle==null?"현재는 판매가 중지된 상품입니다":data.result[i].itemTitle}</li>
+							<li>\${data.result[i].imgPath==null?"이미지를 찾을 수 없음" : data.result[i].imgPath}</li>
+							<li>\${data.result[i].itemTitle==null?"현재는 판매가 중지된 상품입니다":data.result[i].itemTitle}</li>
 							<li>\${data.result[i].startTimeStr}-\${data.result[i].endTimeStr}</li>
 							<li>\${data.result[i].seatName}</li>
 							<li>\${data.result[i].itemPriceStr}원</li>

@@ -69,18 +69,20 @@ public class PayController {
 	
 	
 	@PostMapping
-	public ModelAndView save(PayVo payVo) {
-		ModelAndView mav = new ModelAndView();
-		try {
-			if(payService.save(payVo)!=1) 
-				throw new RuntimeException("save error");
-			mav.addObject("status", FormStatus.INSERT_OK);
-			
-		} catch (Exception e) {
-			mav.addObject("status", FormStatus.INSERT_FAIL);
-			mav.setViewName("error/error");
-			e.getMessage();
-		}
+	public ModelAndView save(PayVo payVo, Integer[] seatIds, HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView("jsonView");
+		mav.setViewName("jsonView");
+		ModelMap mm = new ModelMap();
+		/*
+		 * try { int userId = hasUserId(session); payVo.setUserId(userId);
+		 * if(payService.save(payVo, seatIds)!=1) throw new
+		 * RuntimeException("save error"); mav.addObject("status",
+		 * FormStatus.INSERT_OK);
+		 * 
+		 * } catch (Exception e) { mav.addObject("status", FormStatus.INSERT_FAIL);
+		 * mav.setViewName("error/error"); e.getMessage(); e.printStackTrace(); }
+		 */
 		return mav;
 	}
 	

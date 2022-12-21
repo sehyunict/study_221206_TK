@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import sehyunict.tk.cart.entity.CartVo;
@@ -24,24 +25,27 @@ public class PayServiceImpl implements PayService {
 
 	@Override
 	public Integer hasReservedSeat(int timetableId, String seatName) throws Exception {
-		Map map = new HashMap();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("timetableId", timetableId);
 		map.put("seatName", seatName);
 
 		return payDao.selectReservedSeat(map);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
-	@Transactional
-	public int save(PayVo payVo) throws Exception {
-
+	public int save(PayVo payVo, Integer[] seatIds) throws Exception {
+		
 		payDao.insertPayAndReturnId(payVo);
-		payDao.insertOrder(payVo);
-
-		return payDao.insertReservedSeats(payVo);
+		for(int seatId : seatIds) {
+			System.out.println("seatid"+seatId);
+			payVo.setSeatId(seatId);
+			payDao.insertOrder(payVo);
+			payDao.insertReservedSeat(payVo);
+		}
+		return 1;
 	}
-
-	@Transactional
+	
 	@Override
 	public List<PayVo> getList(int userId, String sortType, Pagination page) throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");

@@ -9,7 +9,7 @@ public interface PayService {
 	
 	Integer hasReservedSeat(int timetableId, String seatName) throws Exception;
 	
-	int save(PayVo payVo) throws Exception;
+	int save(PayVo payVo, Integer[] seatIds) throws Exception;
 	
 	List<PayVo> getList(int userId, String sortType, Pagination page) throws Exception;
 	

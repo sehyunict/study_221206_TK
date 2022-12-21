@@ -15,11 +15,11 @@ public interface PayDao {
 	
 	public Integer selectReservedSeat(Map map) throws Exception;
 	
-	public PayVo insertPayAndReturnId(PayVo payVo) throws Exception;
+	public int insertPayAndReturnId(PayVo payVo) throws Exception;
 	
 	public int insertOrder(PayVo payVo) throws Exception;
 	
-	public int insertReservedSeats(PayVo payVo) throws Exception;
+	public int insertReservedSeat(PayVo payVo) throws Exception;
 	
 	public List<PayVo> selectAllByTicket(Map map) throws Exception;
 	

@@ -49,6 +49,10 @@ td {
 ul {
 	display: flex
 }
+img{
+width:150px;
+height:100px;
+}
 </style>
 </head>
 

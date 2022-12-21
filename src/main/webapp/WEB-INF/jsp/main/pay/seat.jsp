@@ -67,25 +67,26 @@ td {
 			</c:forEach> --%>
 		</table>
 	</div>
-	<form action="/pay/save" method="POST">
+	<form id="priceForm" action="/pay/save" method="POST">
 		<div id="priceBox"
 			style="border: 1px solid black; width: 300px; height: 500px; margin-left: 600px; position: relative;">
 			<div id="pickSeats">
 				<h4>선택한 좌석</h4>
 			</div>
 			<div style="position: absolute; bottom: 60px; left: 30px">
-				<input type="checkbox" id="card" name="methodId" value="14"><label for="card">카드</label>
-				<input type="checkbox" id="phone" name="methodId" value="15"><label for="phone">휴대폰</label>
-				<input type="checkbox" id="account" name="methodId" value="16"><label for="account">무통장입금</label>
+				<input type="radio" id="card" name="methodId" value="14"><label for="card">카드</label>
+				<input type="radio" id="phone" name="methodId" value="15"><label for="phone">휴대폰</label>
+				<input type="radio" id="account" name="methodId" value="16"><label for="account">무통장입금</label>
 			</div>
 
 			<p style="position: absolute; bottom: 20px; left:50px;">
-				<span id="totalPirce" name="totalPrice"></span> 원
+				<input id="totalPrice" name="totalprice" readonly="readonly" style="border:none; width:50px;">원
 			</p>
 
 			<button id="doPayBtn" type="button"
 				style="position: absolute; bottom: 10px; padding: 10px; right: 10px;">결제하기</button>
 		</div>
+		
 	</form>
 </body>
 
@@ -97,6 +98,9 @@ onload=function(){
 		type: "GET",
 		dataType: "json",
 		success: function(data){
+			$("#priceForm").append(`
+					<input type="hidden" name="timetableId" value="\${data.seats[0].timetableId}">
+					`)
 			for(let obj of data.seats){
 				if(obj.seatId%10==1){
 					$("#seatTable").append("<tr>")
@@ -126,14 +130,14 @@ $("body").on("click", function(e){
 		}
 		$(e.target).toggleClass("back-yellow")
 		if($(e.target).hasClass("back-yellow")){
-			console.log("val:"+$(e.target).data("val"))
+			console.log("val:"+$("#totalPrice").val())
 			$("#pickSeats").append(
 					`
 					<p name="pickSeat" data-val="\${$(e.target).data('val')}">\${$(e.target).text()} </p>
-					<input type="hidden" name="" >
+					<input type="hidden" name="seatIds" value="\${$(e.target).data('val')}" >
 					
 					`)
-			$("#totalPirce").text(Number($("#totalPirce").text())+10000);
+			$("#totalPrice").val(Number($("#totalPrice").val())+10000);
 			
 		}else{
 			for(let obj of \$("#priceBox").children()){
@@ -145,11 +149,32 @@ $("body").on("click", function(e){
 })
 
 $("#doPayBtn").on("click",function(){
+	let arr = $("input[name=seatIds]")
+	let ids=[]
+	for(let obj of arr){
+		ids.push(obj.value)
+	}
+	
+	$("#seatIds").val(ids.toString())
+	
+	let formValues = $("#priceForm").serialize();
+	
+	
 	$.ajax({
-		url:"/pay/save",
+		url:"/pay",
 		dataType: "json",
+		type:"POST",
+		data: formValues,
+		success: function(data){
+			console.log("seccess")
+		},
+		error: function(e, t) {
+			alert(e+" / "+t)
+		}
 		
 	})
+	
+	
 })
 
 	
