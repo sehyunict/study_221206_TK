@@ -67,15 +67,22 @@ public class UserController {
 		return "/mypage/MyReview";
 	}
 	
-	//마이페이지에서 리뷰 수정 (제목,내용 변경가능)
 	
+	//마이페이지에서 나의 리뷰 수정페이지로 이동
+	@RequestMapping("/mypage/MyReviewUpdate.do")
+	public String goMyReviewUpdate(UserVo vo,Model model,HttpSession session) {
+		
+		return "/mypage/MyReviewUpdate";
+	}
+	
+	
+	//마이페이지에서 리뷰 수정 (제목,내용 변경가능)
 	
 	//마이페이지에서 리뷰 삭제
 	@RequestMapping("/mypage/deleteMyReview.do")
 	public String deleteMyReview(UserVo vo) {
 		userService.deleteMyReview(vo);
 		return "redirect:/mypage/MyReview.do";
-		//삭제기능 미완성~~~
 	}
 	
 	

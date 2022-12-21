@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
- -->
+
 
 <title>마이페이지</title>
 <style>
@@ -79,23 +79,13 @@
 				</tr>
 				<tr>
 					<td colspan="4" >
-<!-- 					<a href="MyUserInfoUpdate.do"> -->
-						<button id="updateBtn"> 회원정보 수정하기 </button>
+					<a href="MyUserInfoUpdate.do">
+						<button id="updateBtn"> 회원정보 수정하기 </button></a>
 					</td>
 				</tr>
 			</table>
 
 	</section>
 </body>
-<script>
 
-$(document).ready(function(){
-	 $('#updateBtn').on('click',function(){
-	
-			alert("연결");
-		});
-
-});
-
-</script>
 </html>
