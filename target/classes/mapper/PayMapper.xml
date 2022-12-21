@@ -3,21 +3,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sehyunict.tk.pay.service.PayDao">
-	<select id="selectReservedSeat" parameterType="Map"
-		resultType="Integer">
+	<select id="selectReservedSeat" parameterType="Map" resultType="int">
 		SELECT
-		A.SEAT_ID seatId
+			COUNT(reserved_seats_id)
 		FROM
-		TN_tk_RESERVED_SEATS A
-		,
-		TN_tk_SEAT B
+			tn_tk_reserved_seats
 		WHERE
-		A.TIMETABLE_ID = #{timetableId}
+			timetable_id = #{timetableId}
 		AND
-		A.SEAT_ID =
-		B.SEAT_ID
-		AND
-		B.SEAT_NAME = '#{seatName}'
+			seat_id IN (
+			<foreach collection="seatIds" item="seatId" index="idx">
+			<if test="idx==0">
+			#{seatId}
+			</if>
+			<if test="idx!=0">
+			, #{seatId}
+			</if>
+			</foreach>
+			)
 	</select>
 
 	<select id="selectAllByTicket" parameterType="Map"

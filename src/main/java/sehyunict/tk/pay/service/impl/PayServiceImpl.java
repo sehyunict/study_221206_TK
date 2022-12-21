@@ -24,17 +24,17 @@ public class PayServiceImpl implements PayService {
 	private PayDao payDao;
 
 	@Override
-	public Integer hasReservedSeat(int timetableId, String seatName) throws Exception {
+	public Integer hasReservedSeat(int timetableId, int[] seatIds) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("timetableId", timetableId);
-		map.put("seatName", seatName);
+		map.put("seatIds", seatIds);
 
 		return payDao.selectReservedSeat(map);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
-	public int save(PayVo payVo, Integer[] seatIds) throws Exception {
+	public int save(PayVo payVo, int[] seatIds) throws Exception {
 		
 		payDao.insertPayAndReturnId(payVo);
 		for(int seatId : seatIds) {

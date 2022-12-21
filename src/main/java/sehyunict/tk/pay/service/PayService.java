@@ -7,9 +7,9 @@ import sehyunict.tk.util.Pagination;
 
 public interface PayService {
 	
-	Integer hasReservedSeat(int timetableId, String seatName) throws Exception;
+	Integer hasReservedSeat(int timetableId, int[] seatIds) throws Exception;
 	
-	int save(PayVo payVo, Integer[] seatIds) throws Exception;
+	int save(PayVo payVo, int[] seatIds) throws Exception;
 	
 	List<PayVo> getList(int userId, String sortType, Pagination page) throws Exception;
 	

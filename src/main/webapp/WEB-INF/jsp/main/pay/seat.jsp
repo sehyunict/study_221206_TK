@@ -54,20 +54,10 @@ td {
 <body>
 	<div id="centerBox">
 		<table id="seatTable">
-			<%-- 
-			<c:forEach var="payVo" items="${mm}">
-				<c:if test="${(payVo.seatId%10) == 1}">
-					<tr>
-				</c:if>
-				<td class="seat" name="${payVo.seatId}">"${payVo.seatName}"</td>
-
-				<c:if test="${(payVo.seatId%10) == 1}">
-					</tr>
-				</c:if>
-			</c:forEach> --%>
+	
 		</table>
 	</div>
-	<form id="priceForm" action="/pay/save" method="POST">
+	<form id="priceForm" >
 		<div id="priceBox"
 			style="border: 1px solid black; width: 300px; height: 500px; margin-left: 600px; position: relative;">
 			<div id="pickSeats">
@@ -97,11 +87,12 @@ onload=function(){
 		url: "/pay/seats/"+${timetableId},
 		type: "GET",
 		dataType: "json",
-		success: function(data){
+		success: function(res){
+			console.log("resres"+res)
 			$("#priceForm").append(`
-					<input type="hidden" name="timetableId" value="\${data.seats[0].timetableId}">
+					<input type="hidden" name="timetableId" value="\${res.seats[0].timetableId}">
 					`)
-			for(let obj of data.seats){
+			for(let obj of res.seats){
 				if(obj.seatId%10==1){
 					$("#seatTable").append("<tr>")
 				}
@@ -145,7 +136,6 @@ $("body").on("click", function(e){
 			}
 		}
 	}
-	e.stopPropagation();
 })
 
 $("#doPayBtn").on("click",function(){
@@ -159,14 +149,20 @@ $("#doPayBtn").on("click",function(){
 	
 	let formValues = $("#priceForm").serialize();
 	
-	
 	$.ajax({
 		url:"/pay",
 		dataType: "json",
 		type:"POST",
 		data: formValues,
-		success: function(data){
-			console.log("seccess")
+		success: function(res){
+			if(res.status.flag){
+				alert(`결제가 완료 되었습니다
+						확인을 누르시면 예매내역페이지로 이동합니다`)
+				location.href="/pay/list?st=ticket&pa=1&po=1"
+			}else{
+				alert("이미 예약된 좌석이 존재합니다")
+				location.reload();
+			}
 		},
 		error: function(e, t) {
 			alert(e+" / "+t)
