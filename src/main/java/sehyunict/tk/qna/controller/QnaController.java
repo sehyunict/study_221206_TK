@@ -26,19 +26,17 @@ public class QnaController {
 
 	@PostMapping
 	private ModelAndView save(QnaVo qnaVo, HttpSession session) {
-		//ModelAndView-> view 경로를 담을 수 있는 객체?
+		//ModelAndView-> controller처리 결과 후 응답할 view나 view에 전달할 값을 저장 및 전달하는 클래스(데이터와 뷰를 동시에 설정가능)
 		//ModelAndView로 저장하고 나면 다시 리스트 목록을 보여주려고 qna/qna(리스트 목록 있는 jsp경로) 경로 지정	
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("qna/qna");
+		mav.setViewName("qna/qna");	//데이터보낼 view 경로
 		//save메서드 실행시 성공실패 나타낼때 예외처리
 		try {
 			int userId = 55;
-			// 성공한 행의 개수를 1로 반환
-			// save된거면 1로 반환,qnaService.save(userId, qnaVo) 1이 아니면 저장이 안된거고
-			// 에러를 던져준다 = throw
-			if (qnaService.save(userId, qnaVo) != 1) 
+			// 성공한 행의 개수를 1로 반환, save된거면 1로 반환,qnaService.save(userId, qnaVo) 1이 아니면 저장이 안된거고
+			// 요청한곳으로 에러를 던져준다 = throw (controller에서는 view가 될거고 service에서는 controller가 되는건가)
+			if (qnaService.save(userId, qnaVo) != 1) //1은 어디에 나오는거지?
 				throw new Exception("qna save error");
-			// qnaService.save(userId, qnaVo) 1이면 저장이 잘 된거니 아래 print문이 실행된다
 
 		} catch (Exception e) { // 에러 캐치
 			e.printStackTrace();
@@ -124,12 +122,18 @@ public class QnaController {
 //mav변수의 setViewName객체에 qna/qna (jsp경로를 넣어준다)
 //Getmapping으로 selectAll()해서 받은 데이터들을 qna.jsp로 경로를 지정함
 //qna.jsp로 가는 경로
+	
 	@GetMapping("/qnaContent")
 	public ModelAndView getQnaContent() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("qna/qnaContent");
 		return mav;
 	}
+
+	
+	
+	
+	
 //GetMapping으로 getQna()해서 받은 데이터들을 qnaContent.jsp으로 경로 지정함	
 //qna/qnaContent 
 //qnaContent.jsp로 가는 경로
@@ -164,5 +168,38 @@ public class QnaController {
 		return mav;
 		
 	}
+	
+//	@GetMapping("/list")
+//	public ModelAndView qnaPageList(ModelAndView mav, 
+//			@RequestParam(value = "currPageNo", required = false, defaultValue = "1") String tmpcurrPageNo, 
+//   	 		@RequestParam(value = "range", required = false, defaultValue = "1") String tmprange) {
+//		
+//		int currPageNo = 0;
+//		int range = 0;
+//		
+//		try {			
+//			currPageNo = Integer.parseInt(tmpcurrPageNo);
+//			range = Integer.parseInt(tmprange);
+//			
+//		} catch(NumberFormatException e) {
+//			currPageNo = 1;
+//			range = 1;			
+//		}
+//	
+//	}
+//	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

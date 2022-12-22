@@ -18,6 +18,11 @@ ul {
 	border-bottom: 1px solid gray;
 	padding: 5px;
 }
+
+.titleSt{
+	text-align: left;
+}
+
 </style>
 </head>
 <body>
@@ -82,7 +87,7 @@ ul {
 					`
 					<ul>
 						<li>\${i+1}</li>
-						<li><a href="/qna/\${data[i].qnaId}">\${data[i].title}</a></li>	
+						<li><a class="titleSt" href="/qna/\${data[i].qnaId}">\${data[i].title}</a></li>	
 						<li>\${data[i].userName}</li>
 					</ul>
 					`		

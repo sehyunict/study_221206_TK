@@ -92,6 +92,5 @@
 		QNA_ID DESC
 	
 	</select>
-
-
+	
 </mapper>
