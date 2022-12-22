@@ -2,11 +2,11 @@ package sehyunict.tk.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
+
 
 @Getter
 @AllArgsConstructor
-public enum FormStatus implements CustomStatus {
+public enum FormStatus implements BaseStatus {
 	
 	INSERT_OK("성공", true),
 	UPDATE_OK("성공", true),
@@ -19,6 +19,6 @@ public enum FormStatus implements CustomStatus {
 	SELECT_FAIL("실패", false);
 
 	private final String description;
-	private final Boolean status;
+	private final Boolean flag;
 
 }

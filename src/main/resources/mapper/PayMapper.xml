@@ -3,49 +3,57 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sehyunict.tk.pay.service.PayDao">
-	<select id="selectReservedSeat" parameterType="Map"
-		resultType="Integer">
+	<select id="selectReservedSeat" parameterType="Map" resultType="int">
 		SELECT
-		A.SEAT_ID seatId
+			COUNT(reserved_seats_id)
 		FROM
-		TN_tk_RESERVED_SEATS A
-		,
-		TN_tk_SEAT B
+			tn_tk_reserved_seats
 		WHERE
-		A.TIMETABLE_ID = #{timetableId}
+			timetable_id = #{timetableId}
 		AND
-		A.SEAT_ID =
-		B.SEAT_ID
-		AND
-		B.SEAT_NAME = '#{seatName}'
+			seat_id IN (
+			<foreach collection="seatIds" item="seatId" index="idx">
+			<if test="idx==0">
+			#{seatId}
+			</if>
+			<if test="idx!=0">
+			, #{seatId}
+			</if>
+			</foreach>
+			)
 	</select>
 
-	<select id="selectAllByTicket" parameterType="int"
+	<select id="selectAllByTicket" parameterType="Map"
 		resultType="PayVo">
+
 		SELECT
 		A.PRICE itemPrice
 		, B.START_TIME startTime
 		, B.END_TIME
 		endTime
-		, C.TITLE itemTitle
+		, C.TITLE
+		itemTitle
 		,
 		C.IMAGE_PATH imagePath
 		, D.SEAT_NAME
 		seatName
-		, E.pay_DATE payDate
+		, E.pay_DATE
+		payDate
 		, F.CODE_NAME methodName
 		FROM
 		TH_tk_ORDER A
 		,
 		TN_tk_TIMETABLE B
-		, TN_tk_item C
+		,
+		TN_tk_item C
 		, TN_tk_SEAT D
 		, TN_tk_pay E
 		,
 		TC_tk_CODE
 		F
 		WHERE
-		A.USER_ID = #{userId}
+		A.USER_ID =
+		#{userId}
 		AND
 		A.TIMETABLE_ID =
 		B.TIMETABLE_ID
@@ -56,12 +64,12 @@
 		AND
 		A.pay_ID = E.pay_ID
 		AND
-		E.METHOD_ID = F.ID
+		E.METHOD_ID = F.CODE_ID
 		ORDER BY
 		E.pay_DATE DESC,
 		D.SEAT_NAME
 	</select>
-	<select id="selectAllByPayment" parameterType="int"
+	<select id="selectAllByPayment" parameterType="Map"
 		resultType="PayVo">
 		SELECT
 		A.PRICE itemPrice
@@ -77,14 +85,11 @@
 		, F.CODE_NAME methodName
 		FROM
 		TH_tk_ORDER A
-		,
-		TN_tk_TIMETABLE B
+		, TN_tk_TIMETABLE B
 		, TN_tk_item C
 		, TN_tk_SEAT D
 		, TN_tk_pay E
-		,
-		TC_tk_CODE
-		F
+		, TC_tk_CODE F
 		WHERE
 		A.USER_ID = 3
 		AND
@@ -98,27 +103,31 @@
 		A.pay_ID = E.pay_ID
 		AND
 		E.METHOD_ID
-		= F.ID
+		= F.CODE_ID
 		ORDER BY
 		E.pay_DATE DESC, D.SEAT_NAME, E.pay_ID
 	</select>
 
-	<insert id="insertPayAndReturnId" parameterType="map"
-		useGeneratedKeys="true" keyProperty="payId" keyColumn="pay_id">
+	<insert id="insertPayAndReturnId" parameterType="PayVo" useGeneratedKeys = "false">
+		<selectKey keyProperty="payId" resultType="int"
+			order="AFTER">
+
+			SELECT tn_tk_pay_seq.currval FROM DUAL
+
+		</selectKey>
+
 		INSERT INTO
-		TN_tk_pay
+		tn_tk_pay
 		VALUES
 		(
-		TN_tk_pay_SEQ.NEXTVAL
+		tn_tk_pay_seq.nextval
 		, #{totalprice}
-		, (SELECT CODE_ID
-		FROM TC_tk_CODE WHERE CODE_ID = #{methodName})
-		,
-		SYSDATE
+		, SYSDATE
 		, #{userId}
-		,
-		SYSDATE
+		, SYSDATE
+		, #{methodId}
 		)
+
 	</insert>
 
 
@@ -128,34 +137,32 @@
 		VALUES
 		(
 		TH_tk_ORDER_SEQ.NEXTVAL
-		, (SELECT SEAT_ID FROM TN_tk_SEAT WHERE
-		SEAT_ID = #{seatId})
-		, #{itemPrice}
+		, #{seatId}
+		, 10000
 		, #{timetableId}
 		, #{payId}
-		,
-		#{userId}
+		, #{userId}
 		)
 
 	</insert>
 	<insert id="insertReservedSeat" parameterType="map">
 		INSERT INTO
-		TN_tk_RESERVED_SEATS.NEXTVAL
+		TN_tk_RESERVED_SEATS
 		VALUES
 		(
-		TN_tk_RESERVED_SEATS_SEQ
-		,
-		#{timetableId}
-		, (SELECT SEAT_ID FROM TN_tk_SEAT WHERE SEAT_ID =
-		#{seatId})
+		TN_tk_RESERVED_SEATS_SEQ.NEXTVAL
+		, #{timetableId}
+		, #{seatId}
 		)
 	</insert>
 
-	<select id="selectAllSeat" parameterType="int" resultType="PayVo">
+	<select id="selectAllSeat" parameterType="int"
+		resultType="PayVo">
 		SELECT
 		A.seat_id seatId
 		, A.seat_name seatName
-		, B.timetable_id timetableId
+		,
+		B.timetable_id timetableId
 		FROM
 		tn_tk_seat A
 		, tn_tk_reserved_seats B
@@ -163,6 +170,11 @@
 		A.seat_id = B.seat_id(+)
 		AND
 		B.timetable_id(+) = #{timetableId}
+	</select>
+
+	<select id="selectOrderTotalCount" parameterType="int"
+		resultType="int">
+		SELECT COUNT(ORDER_ID) FROM TH_TK_ORDER WHERE USER_ID = #{userId}
 	</select>
 
 </mapper>

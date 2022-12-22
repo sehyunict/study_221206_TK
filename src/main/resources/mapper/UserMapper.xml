@@ -36,17 +36,6 @@
 	
 	</update>
 	
-	<!-- 비밀번호 체크 -->
-	<select id="pwCheck" resultType="UserVo">
-		SELECT
-			USER_PWD
-		  FROM
-		  	TN_TK_USER
-		 WHERE
-		 	USER_PWD=#{user_pwd}
-	
-	</select>
-	
 	
 	<!-- 내가 쓴 리뷰 목록 -->
 	<select id="getMyReview" parameterType="map" resultType="UserVo">
@@ -56,6 +45,7 @@
 		   ,R.STAR
 		   ,U.USER_NAME
            ,I.TITLE as movie_title
+           ,R.REVIEW_ID
 		  FROM 
 		    TN_TK_REVIEW R
 		   ,TN_TK_USER U
@@ -72,12 +62,24 @@
 	  ORDER BY 
 	  		REVIEW_ID
 	</select>
+	<!-- 리뷰 수정 하기 -->
+	<update id="updateMyReview" parameterType="UserVo">
+		UPDATE
+			TN_TK_REVIEW
+		   SET
+		  	TITLE=#{title}
+		   ,CONTENT=#{content}
+		   ,STAR=#{star}
+		 WHERE
+		 	REVIEW_ID=#{reviewId}
 	
+	</update>
 	<!-- 리뷰 삭제 하기 -->
-	<delete id="deleteMyReview" parameterType="userVo">
+	<delete id="deleteMyReview" parameterType="UserVo">
 		DELETE FROM
 			TN_TK_REVIEW
-		 WHERE REVIEW_ID=#{reviewId}
+		 WHERE 
+		 	REVIEW_ID=#{reviewId}
 	</delete>
 	
 	<!-- 내가 쓴 문의사항 목록 -->
