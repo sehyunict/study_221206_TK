@@ -6,45 +6,51 @@
 
 	<insert id="insert" parameterType="QnaVo">
 		INSERT INTO TN_TK_QNA
-		VALUES(#{qnaId}, #{title}, #{content}, #{userId}, default)
+		VALUES(tn_tk_qna_seq.nextval, #{title}, #{content}, #{userId}, default)
 	</insert>
-
+<!-- tn_tk_qna_seq.nextval 시퀀스로 데이터 번호매기는거 현재 99개의 qna가 있으니 추가하면 시퀀스번호100번부터(101번?) 추가 -->
 	<update id="update" parameterType="QnaVo">
-		UPDATE TN_TK_QNA
-		SET QNA_TITLE = #{title}
-		, QNA_CONTENT = #{content}
-		WHERE USER_ID = #{userId}
-		AND QNA_ID = #{qnaId}
+		UPDATE 
+			TN_TK_QNA
+		SET 
+			QNA_TITLE = #{title}
+			, QNA_CONTENT = #{content}
+		WHERE 
+			USER_ID = #{userId}		<!-- 일단 지금 userId = 55 만 수정 삭제 가능하게 지정해둠 -->
+		AND 
+			QNA_ID = #{qnaId}
 		<!-- where 없으면 모든제목과 글이 다 바뀌니까 수정한 회원아이디만 바뀌게하려고 -->
 		<!-- set은 수정된거(제목이랑 내용)를 넣어주는거 -->
 	</update>
 
-	<delete id="delete" parameterType="QnaVo">
+	<delete id="delete" parameterType="Map">
 		DELETE
 		FROM
-		TN_TK_QNA
+			TN_TK_QNA
 		WHERE
-		USER_ID = #{userId}
-		AND QNA_ID = #{qnaId}
+			USER_ID = #{userId}
+		AND 
+			QNA_ID = #{qnaId}
 
 	</delete>
 
 	<select id="select" parameterType="int" resultType="QnaVo">
 		<!-- qna 개별 게시글로 보기 -->
-		<!-- qna 제목클릭했을때 qnaId가 필요하니까 매개변수타입은int -->
+		<!-- qna 제목클릭했을때 qnaId가 필요하니까 매개변수타입은 int -->
 		SELECT
-		A.QNA_ID qnaId
-		, A.QNA_TITLE title
-		, A.QNA_CONTENT content
-		, B.USER_ID userId
-		, B.USER_NAME userName
-		, A.CREATED_AT createdAt
+			A.QNA_ID qnaId
+			, A.QNA_TITLE title
+			, A.QNA_CONTENT content
+			, B.USER_ID userId
+			, B.USER_NAME userName
+			, A.CREATED_AT createdAt
 		FROM
-		TN_TK_QNA A
-		, TN_TK_USER B
+			TN_TK_QNA A
+			, TN_TK_USER B
 		WHERE
-		A.USER_ID = B.USER_ID
-		AND QNA_ID = #{qnaId}
+			A.USER_ID = B.USER_ID
+		AND 
+			QNA_ID = #{qnaId}
 		<!-- QNA_ID = #{qnaId} 의미는 사용자가 요청한 qnaId랑 일치하는 글만 보여줄려고 -->
 
 	</select>
@@ -53,20 +59,38 @@
 	<select id="selectAll" resultType="QnaVo">
 		<!-- 전체qna 목록 보기 -->
 		SELECT
+			A.QNA_ID qnaId
+			, A.QNA_TITLE title
+			, B.USER_ID userId
+			, B.USER_NAME userName
+			, A.CREATED_AT createdAt
+		FROM
+			TN_TK_QNA A
+			, TN_TK_USER B
+		WHERE
+			A.USER_ID = B.USER_ID
+		ORDER BY
+			QNA_ID DESC
+	</select>
+	
+	<select id="selectSearch" parameterType="String" resultType="QnaVo">
+	<!-- 검색기능 -->
+	SELECT 
 		A.QNA_ID qnaId
 		, A.QNA_TITLE title
-		, B.USER_ID userId
+		, A.USER_ID userId
 		, B.USER_NAME userName
-		, A.CREATED_AT createdAt
-		FROM
+		, A.CREATED_AT createdAt  
+	FROM 
 		TN_TK_QNA A
-		, TN_TK_USER B
-		WHERE
+		, TN_TK_USER B 
+	WHERE 
 		A.USER_ID = B.USER_ID
-		ORDER BY
+	AND 
+		QNA_TITLE LIKE '%'||#{keyWord}||'%'
+	ORDER BY 
 		QNA_ID DESC
+	
 	</select>
-
-
-
+	
 </mapper>
