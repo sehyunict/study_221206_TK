@@ -51,6 +51,10 @@ li {
 .btnSt {
 	padding: 10px 20px;
 }
+img{
+width:150px;
+height:100px;
+}
 </style>
 </head>
 
@@ -137,7 +141,7 @@ onload= function getList(){
 						<ul>
 							<li style="width: 10px"><input class="cartCheckbox" name="cartCheckbox" type="checkbox" value="\${res.cartList[i].cartId}" data-timetableid="\${res.cartList[i].timetableId}"></li>
 							<li>\${res.cartList[i].no} </li>
-							<li>\${res.cartList[i].imgPath==null?"이미지를 찾을 수 없음" : res.cartList[i].imgPath}</li>
+							<li><img src="../\${res.cartList[i].imagePath}" alt="이미지가 존재하지 않습니다"></img></li>
 							<li>\${res.cartList[i].itemTitle==null?"현재는 판매가 중지된 상품입니다":res.cartList[i].itemTitle}</li>
 							<li>\${res.cartList[i].startTimeStr}-\${res.cartList[i].endTimeStr}</li>
 							<li>\${res.cartList[i].seatName}</li>
