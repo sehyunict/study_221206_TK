@@ -148,7 +148,7 @@ onload= function getList(){
 					)
 				}
 			}else{
-				alert(res.status.description)
+				alert('로그인이 필요합니다')
 			}
 		},
 		error: function(e, t){
@@ -204,7 +204,7 @@ $("#cartSaveBtn").on("click", function(){
 				alert("장바구니에 잘 담겼습니다")
 				location.href="/cart"
 			}else{
-				alert(res.status.description)
+				alert("장바구니 안 상품은 최대 10개입니다")
 			}
 		}
 	})

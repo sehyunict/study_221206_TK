@@ -23,6 +23,7 @@ public class PayServiceImpl implements PayService {
 	@Autowired
 	private PayDao payDao;
 
+	//사용자가 요청한 좌석이 예약테이블에 있는지 조회 후 반환, 리턴값이 0이 아니라면 예약불가
 	@Override
 	public Integer hasReservedSeat(int timetableId, int[] seatIds) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();

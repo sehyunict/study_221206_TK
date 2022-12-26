@@ -1,5 +1,7 @@
 package sehyunict.tk.pay.entity.constant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
