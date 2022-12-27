@@ -53,7 +53,7 @@ public class CartController {
 		mav.addObject("status", FormStatus.OK);
 		return mav;
 	}
-
+ 
 	@GetMapping("/list")
 	public ModelAndView getList(HttpSession session) throws Exception {
 		mav = new ModelAndView("jsonView");
