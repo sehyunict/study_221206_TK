@@ -28,20 +28,26 @@ public class UserServiceImpl implements UserService{
 			userDao.updateUserInfo(vo);
 	}
 	
-	//회원정보 수정시 비밀번호 확인
-//	@Override
-//	public UserVo pwCheck(UserVo vo) {
-//		
-//		return null;
-//	}
 
-	
 	//내가 쓴 리뷰 목록
 	@Override
 	public List<UserVo> getMyReview(HashMap map) {
 		return userDao.getMyReview(map);
 	}
 
+	//마이페이지에서 리뷰수정
+	@Override
+	public void updateMyReview(UserVo vo) {
+		userDao.updateMyReview(vo);
+		
+	}
+
+	
+	//마이페이지에서 리뷰삭제
+	@Override
+	public void deleteMyReview(UserVo vo) {
+		userDao.deleteMyReview(vo);
+	}
 
 	
 	

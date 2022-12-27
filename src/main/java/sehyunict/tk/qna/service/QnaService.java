@@ -10,9 +10,11 @@ public interface QnaService {
 	
 	int modify(int userId, QnaVo qnaVo) throws Exception;
 	
-	int remove(int userId, QnaVo qnaVo) throws Exception;
+	int remove(int userId, int qnaId) throws Exception;
 	
 	QnaVo getQna(int qnaId) throws Exception;
 	
 	List<QnaVo> getList() throws Exception;
+	
+	List<QnaVo> search(String keyWord) throws Exception;
 }

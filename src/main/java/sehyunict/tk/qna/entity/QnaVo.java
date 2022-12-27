@@ -22,5 +22,6 @@ public class QnaVo {
 	private int userId;
 	private String userName;
 	private Date createdAt; 
+	private String createdAtStr;
 
 }

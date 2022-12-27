@@ -1,6 +1,11 @@
 package sehyunict.tk.qna.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.print.attribute.HashAttributeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,16 +39,26 @@ public class QnaServiceImpl implements QnaService{
 	}
 
 	@Override
-	public int remove(int userId, QnaVo qnaVo) throws Exception {
-		qnaVo.setUserId(userId);
-		return qnaDao.delete(qnaVo);
+	public int remove(int userId, int qnaId) throws Exception {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("userId", userId);	//key값인 "userId" (String)을 부르면 value인 userId (integer) 호출할수있다 
+		map.put("qnaId", qnaId);	//("qnaId" -> key, qnaId -> value) jsp에서 "qnaId" key값을 호출해서 value값인 qnaId를 쓸 수 있다
+		
+		return qnaDao.delete(map);
 	}
 
 	@Override
 	public QnaVo getQna(int qnaId) throws Exception {
-		return qnaDao.select(qnaId);
-		//qnaVo에 안넣고 바로 qnaId만 qnaDao의 select메서드로 보낼거니까 바로 넣어서 return 해줘도 되나?
-	}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		//SimpleDateFormat클래스를 이용해서 "yyyy/MM/dd" 형식으로 날짜 포맷
+		QnaVo qnaVo = qnaDao.select(qnaId); 
+		//qnaDao의 select메서드에 qnaID넣은걸 QnaVo 참조변수타입의 qnaVo변수에 담는다		
+		String tmp = sdf.format(qnaVo.getCreatedAt());	//  "2022/12/12"
+		//getter 로 qnaVo의 getCreatedAt()로 가져와서 날짜포맷변수인sdf의 format메서드에 담는다 그리고 그것을 또 tmp에 담는다 
+		qnaVo.setCreatedAtStr(tmp);
+		//tmp를 set으로 넣는다
+		return qnaVo; 
+		}
 
 	@Override
 	public List<QnaVo> getList() throws Exception {	//매개변수 없는이유 로그인 안해도 qna목록 볼수있게하려고
@@ -51,4 +66,9 @@ public class QnaServiceImpl implements QnaService{
 		return list;
 	}
 	
+	@Override
+	public List<QnaVo> search(String keyWord) throws Exception {
+		List<QnaVo> list = qnaDao.selectSearch(keyWord);
+		return list;
+	}
 }

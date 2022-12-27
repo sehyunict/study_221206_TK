@@ -27,7 +27,6 @@ public class PriceConverter {
 			if(i==0) sb.reverse().insert(offset, ",").reverse();
 			else sb.reverse().insert(offset*(i+1)+i, ",").reverse();
 		}
-		System.out.println(sb.toString());
 		return sb.toString();
 	}
 	

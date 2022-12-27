@@ -51,6 +51,10 @@ li {
 .btnSt {
 	padding: 10px 20px;
 }
+img{
+width:150px;
+height:100px;
+}
 </style>
 </head>
 
@@ -94,6 +98,8 @@ li {
 		<button>장바구니 삭제</button>
 	</form>
  -->
+ 
+ <a href="/pay/list">나의 예매 정보</a>
 
 </body>
 
@@ -126,27 +132,27 @@ onload= function getList(){
 		url:"/cart/list",
 		type: "GET",
 		dataType: "json",
-		success: function(data){
-			if(data.status){
-				for (let i = 0; i < data.result.length; i++) {
+		success: function(res){
+			if(res.status.flag){
+				for (let i = 0; i < res.cartList.length; i++) {
 					$("#cartListBox").append(
 					`
 					 <li name="cartList">
 						<ul>
-							<li style="width: 10px"><input class="cartCheckbox" name="cartCheckbox" type="checkbox" value="\${data.result[i].cartId}" data-timetableid="\${data.result[i].timetableId}"></li>
-							<li>\${data.result[i].no} </li>
-							<li>\${data.result[i].imgPath}</li>
-							<li>\${data.result[i].timetableId} -- \${data.result[i].itemTitle==null?"현재는 판매가 중지된 상품입니다":data.result[i].itemTitle}</li>
-							<li>\${data.result[i].startTimeStr}-\${data.result[i].endTimeStr}</li>
-							<li>\${data.result[i].seatName}</li>
-							<li>\${data.result[i].itemPriceStr}원</li>
+							<li style="width: 10px"><input class="cartCheckbox" name="cartCheckbox" type="checkbox" value="\${res.cartList[i].cartId}" data-timetableid="\${res.cartList[i].timetableId}"></li>
+							<li>\${res.cartList[i].no} </li>
+							<li><img src="../\${res.cartList[i].imagePath}" alt="이미지가 존재하지 않습니다"></img></li>
+							<li>\${res.cartList[i].itemTitle==null?"현재는 판매가 중지된 상품입니다":res.cartList[i].itemTitle}</li>
+							<li>\${res.cartList[i].startTimeStr}-\${res.cartList[i].endTimeStr}</li>
+							<li>\${res.cartList[i].seatName}</li>
+							<li>\${res.cartList[i].itemPriceStr}원</li>
 						</ul>
 					</li>
 					`
 					)
 				}
 			}else{
-				alert(data.msg)
+				alert('로그인이 필요합니다')
 			}
 		},
 		error: function(e, t){
@@ -168,9 +174,8 @@ onload= function getList(){
 		url: `/cart?ids=\${ids.toString()}`,
 		type: "delete",
 		dataType: "json", 
-		success: function(data){
-			if(data.status){
-				console.log(data.msg)
+		success: function(res){
+			if(res.status.flag){
 				$("li[name=cartList]").remove()
 				
 				/* for(let obj of objArr){
@@ -179,7 +184,7 @@ onload= function getList(){
 				location.href="/cart" */
 				getList()
 			}else{
-				alert(data.msg)
+				alert(res.status.description)
 			}
 		},
 		error: function(e,t) {
@@ -198,12 +203,12 @@ $("#cartSaveBtn").on("click", function(){
 		type: "post",
 		data: formValues,
 		dataType: "json",
-		success: function (data) {
-			if(data.status){
+		success: function (res) {
+			if(res.status.flag){
 				alert("장바구니에 잘 담겼습니다")
 				location.href="/cart"
 			}else{
-				alert(data.msg)
+				alert("장바구니 안 상품은 최대 10개입니다")
 			}
 		}
 	})

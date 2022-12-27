@@ -25,6 +25,7 @@
 		<constructor-arg ref="SqlSessionFactory" />
 	</bean>
 	
+
 	<!-- 파일업로드 빈 등록 -->
 	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
 		<property name="maxUploadSize" value="100000000"/>	
@@ -41,7 +42,7 @@
     </property>       
   </bean> -->
 
-	
+
 	<mybatis-spring:scan base-package="sehyunict.tk" />
 
 </beans>

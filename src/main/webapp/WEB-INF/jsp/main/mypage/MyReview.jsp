@@ -5,7 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 <title>마이페이지</title>
+
 <style>
 	.Mypage_left , .Mypage_section{
 		display: inline;
@@ -33,7 +36,7 @@
 		border-top:1px solid grey;
 		border-left:1px solid grey;
 		border-spacing: 0px;
-		width: 800px;
+		width: 90%;
 	
 	}
 	
@@ -45,7 +48,7 @@
 </head>
 <body>
 	<h2>내가 쓴 리뷰</h2>
-	<hr>
+	
 	<div class="Mypage_left">
 		
 			<a href="#">예매내역</a>
@@ -54,7 +57,7 @@
 			<a href="#">질문관리</a>
 			<a href="MyUserInfo.do">회원정보</a>
 	</div>
-			
+	<hr>		
 	<section class="Mypage_section">
 			<c:if test="${empty myReviewList}">
 				<p>작성한 리뷰가 없습니다.</p>
@@ -64,17 +67,23 @@
 					<table class="Mypage_table">
 					
 						<tr>
-							<th>이름</th>
-							<th>제목</th>
-							<th>한줄평</th>
+							<th>영화</th>
+							<th>리뷰제목</th>
+							<th>리뷰내용</th>
 							<th>평점</th>
+							<th>수정/삭제</th>
 						</tr>
 					<c:forEach items="${myReviewList}" var="RList">
 						<tr>
-							<td>${RList.user_name}</td>
+							<td>${RList.movieTitle}</td>
 							<td>${RList.title}</td>
 							<td>${RList.content}</td>
 							<td>${RList.star}/5</td>
+							<td>
+								<a href=""><button id="updateBtn">수정</button></a>
+								<button id="deleteBtn">삭제</button></a>
+								<input name="reviewId" type=hidden value=${RList.reviewId}>
+							</td>
 						
 						</tr>
 					</c:forEach>
@@ -83,4 +92,30 @@
 				</c:if>
 	</section>
 </body>
+<script>
+
+
+
+
+
+$(document).ready(function(){
+	//수정
+	
+	
+	//삭제
+	 $('#deleteBtn').on('click',function(){
+		 	
+		const reviewId=$('input[name=reviewId]').val();
+	
+			if(!confirm("리뷰를 삭제하시겠습니까?")){
+				return false;
+			}else{
+				location.href='deleteMyReview.do?reviewId='+reviewId;
+				
+			};
+		});
+
+});
+
+</script>
 </html>

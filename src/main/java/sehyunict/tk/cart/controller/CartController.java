@@ -5,8 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import sehyunict.tk.cart.entity.CartVo;
+import sehyunict.tk.cart.exception.FormException;
+import sehyunict.tk.cart.exception.UserException;
 import sehyunict.tk.cart.service.CartService;
-import sehyunict.tk.constant.CustomStatus;
 import sehyunict.tk.constant.FormStatus;
 import sehyunict.tk.constant.UserStatus;
 
@@ -27,81 +26,62 @@ public class CartController {
 
 	@Autowired
 	private CartService cartService;
+	private ModelAndView mav;
 
 	@PostMapping
-	public ModelMap save(CartVo cartVo, HttpSession session) {
-		ModelMap mm = new ModelMap();
-		try {
-			int userId = hasUserId(session);
-			int result = cartService.save(userId, cartVo);
-			if(result == -1) 
-				setStatus(mm, FormStatus.INSERT_FAIL_COUNT_OVER);
-			else if (result != 1)
-				throw new Exception("[cart put error]");
-			else 
-				setStatus(mm, FormStatus.INSERT_OK);
-		} catch (NullPointerException e) {
-			setStatus(mm, UserStatus.SESSION_FAIL);
-		} catch (Exception e) {
-			e.printStackTrace();
-			setStatus(mm, FormStatus.INSERT_FAIL);
-		}
-		return mm;
+	public ModelAndView save(CartVo cartVo, HttpSession session) throws Exception {
+		mav = new ModelAndView("jsonView"); 
+		int userId = getUserId(session);
+		int result = cartService.save(userId, cartVo);
+		if(result == -1) 
+			throw new FormException(FormStatus.INSERT_FAIL_MAX_OVER, "[cart save fail] - 장바구니 상품 최대 개수 초과");
+		else if (result < 1)
+			throw new FormException(FormStatus.FAIL, "[cart save fail] - 정상 삽입된 행이 없음");
+		else 
+			mav.addObject("status", FormStatus.OK);
+		return mav;
 	}
 
 	@DeleteMapping
-	public ModelMap delete(@RequestParam List<Integer> ids, HttpSession session) {
-		ModelMap mm = new ModelMap();
-		try {
-			int userId = hasUserId(session);
-			if (cartService.delete(userId, ids) < 1)
-				throw new RuntimeException("[Cart delete err] - 에러요");
-			setStatus(mm, FormStatus.DELETE_OK);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			setStatus(mm, UserStatus.SESSION_FAIL);
-		} catch (Exception e) {
-			e.printStackTrace();
-			setStatus(mm, FormStatus.DELETE_FAIL);
-		}
-		return mm;
+	public ModelAndView delete(@RequestParam("ids") List<Integer> cartIds, HttpSession session) throws Exception {
+		mav = new ModelAndView("jsonView");
+	
+		int userId = getUserId(session);
+		if (cartService.delete(userId, cartIds) < 1)
+			throw new FormException(FormStatus.FAIL, "[cart delete error] - 요청정보와 일치하는 정보가 없음");
+		
+		mav.addObject("status", FormStatus.OK);
+		return mav;
+	}
+ 
+	@GetMapping("/list")
+	public ModelAndView getList(HttpSession session) throws Exception {
+		mav = new ModelAndView("jsonView");
+		
+		int userId = getUserId(session);
+		List<CartVo> cartList = cartService.getList(userId);
+		mav.addObject("cartList", cartList);
+		mav.addObject("status", FormStatus.OK);
+		
+		return mav;
 	}
 
-	@GetMapping("/list")
-	public ModelMap getList(HttpSession session) {
-		ModelMap mm = new ModelMap();
-		try {
-			int userId = hasUserId(session);
-			List<CartVo> result = cartService.getList(userId);
-			mm.addAttribute("result", result);
-			setStatus(mm, FormStatus.SELECT_OK);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			setStatus(mm, UserStatus.SESSION_FAIL);
-		} catch (Exception e) {
-			e.printStackTrace();
-			setStatus(mm, FormStatus.SELECT_FAIL);
-		}
-		return mm;
-	}
 
 	// @ResponseStatus(HttpStatus.BAD_GATEWAY)
 	@GetMapping
-	public ModelAndView getCartMain(ModelAndView mv) {
-		mv.setViewName("cart/cart");
-		// mv.setStatus(HttpStatus.BAD_GATEWAY);
-		return mv;
+	public ModelAndView getCartMain() {
+		mav = new ModelAndView();
+		mav.setViewName("cart/cart");
+		
+		return mav;
 	}
 
-	private int hasUserId(HttpSession session) throws NullPointerException {
+	private int getUserId(HttpSession session) throws UserException {
 		Object userId = session.getAttribute("userId");
 		if (userId == null)
-			throw new NullPointerException("session hasn't userId");
+			throw new UserException(UserStatus.SESSION_FAIL,"Session hasn't userId");
 		return (int) userId;
 	}
-	private void setStatus(ModelMap mm, CustomStatus status) {
-		mm.addAttribute("msg", status.getDescription());
-		mm.addAttribute("status", status.getStatus());
-	}
+
 		
 }

@@ -28,8 +28,10 @@
 				AND
 				cart_id = #{cartId}
 			</if>
-			OR
-			cart_id = #{cartId}
+			<if test="idx != 0">
+				OR
+				cart_id = #{cartId}
+			</if>
 		</foreach>
 
 	</delete>

@@ -10,7 +10,8 @@
 </head>
 <body>
 	
-	<h1>${model.msg}</h1>
+
+	<h1>${status.description}</h1>
 
 </body>
 </html>

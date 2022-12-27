@@ -3,10 +3,12 @@
 
 <configuration>
 	<settings>
+
 		<!-- Camel Case, Snake Case로만 다를 경우 resultMap을 안 써도 이 코드 쓰면 알아서 바꿔줌 -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
 	
+
 	<typeAliases>
 
 		<typeAlias alias="CartVo"
