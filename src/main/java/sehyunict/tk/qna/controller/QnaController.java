@@ -129,6 +129,7 @@ public class QnaController {
 		try {
 			QnaVo qnaVo = qnaService.getQna(qnaId);	//넘겨준qnaId랑 일치하는 qnaId를 가지고 있는 qnaVo를 리턴
 			mav.addObject("qnaVo", qnaVo);	//리턴값을 키와벨류 형태로 추가 (키로 jsp에서 값을 불러옴)
+			mav.addObject("userId",55);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

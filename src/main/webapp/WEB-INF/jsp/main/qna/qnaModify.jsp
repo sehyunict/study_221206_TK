@@ -21,7 +21,7 @@
 			<ul>
 				<li>TITLE :<input name="title" value="${qnaVo.title}"></li>
 				<li>CONTENT :<input name="content" value="${qnaVo.content}"></li>
-				<li>USER :<input name="userName" value="${qnaVo.userName}"></li>
+				<li>USER :<input name="userName" value="${qnaVo.userName}" readonly="readonly" style="border:none"></li>
 			</ul>
 			<button type="submit">수정완료</button>
 		</form>
