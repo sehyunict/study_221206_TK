@@ -20,7 +20,7 @@ ul {
 }
 
 .titleSt{
-	text-align: left;
+	text-align:left;
 }
 
 </style>
@@ -42,12 +42,13 @@ ul {
 	</ul>
 
 			<div id="qnaListBox">
-	 <c:forEach var="qnaVo" items="${ list }">	<!-- jstl -> jsp에서 반복처리 할수있는 기능 -->
+	 <c:forEach var="qnaVo" items="${ list }">	<!-- jstl -> jsp에서 반복처리 할수있는 기능 --> 
 	 	<ul>
 	 	<li>${ qnaVo.qnaId }</li>
 	 	<li>${ qnaVo.title }</li>
 	 	<li>${ qnaVo.userName }</li>
 	 	</ul>
+	 
 	 	
 	  </c:forEach>
 	</div>
@@ -64,11 +65,13 @@ ul {
 
 
 <script>
+	
+	
+
 	$("#searchBtn").click(function(){
 		let input = $("input[name=keyWord]").val()
 		location.href="/qna/search?kw="+input+""	//kw -> key값 input-> value값 controller에 있는 @RequestParam("kw")랑 같음
 	})
-		
 		
 		
 
@@ -76,21 +79,20 @@ ul {
 
 		$.ajax({
 			url : "/qna/list", //url (리스트 뽑을거니까 /qna/list)
-			type : "GET", //(type:요청하는타입)get요청을 하겠다
-			dataType : "json", //서버에서 반환되는 데이터형식 json 
-			success : function(data) {
+			type : "GET", //(type:요청하는타입)get요청을 하겠다 
+			dataType : "json", //서버에서 반환되는 데이터형식 json  (받을때 json)
+			success : function(data) {	//data = qnaList
 				$("#qnaListBox").children().remove();	
-				
 				console.log(data)
-				for (let i = 0; i < 10; i++) {
-					$("#qnaListBox").append(
+				for (let i = 0; i < 10; i++) {	//일단 10개만 보여주려고
+					$("#qnaListBox").append(	//qnaListBox 밑으로 덧붙여라			
 					`
 					<ul>
-						<li>\${i+1}</li>
+						<li>\${i+1}</li>	
 						<li><a class="titleSt" href="/qna/\${data[i].qnaId}">\${data[i].title}</a></li>	
-						<li>\${data[i].userName}</li>
+						<li>\${data[i].userName}</li>	
 					</ul>
-					`		
+					`	
 					)
 					
 				}

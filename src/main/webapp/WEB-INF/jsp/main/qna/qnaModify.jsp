@@ -19,10 +19,9 @@
 		<form action="/qna/modify" method="post">	<!-- controller의 @postMapping(/qna/modify) 경로 -->
 			<input type="hidden" name="qnaId" value="${qnaVo.qnaId}">	
 			<ul>
-				<li>TITLE : <input name="title" value="${qnaVo.title}"></li>
-				<li>CONTENT :  <input name="content" value="${qnaVo.content}"></li>
+				<li>TITLE :<input name="title" value="${qnaVo.title}"></li>
+				<li>CONTENT :<input name="content" value="${qnaVo.content}"></li>
 				<li>USER :<input name="userName" value="${qnaVo.userName}"></li>
-				
 			</ul>
 			<button type="submit">수정완료</button>
 		</form>

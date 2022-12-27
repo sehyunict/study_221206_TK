@@ -20,8 +20,8 @@
 		<ul>
 			<li>No</li>
 			<li>TITLE : ${qnaVo.title} </li>
-			<li>CONTENT : <span> ${qnaVo.content} </span></li>
-			<li>USER : <span> ${qnaVo.userName} </span></li>
+			<li>CONTENT : ${qnaVo.content} </li>
+			<li>USER :  ${qnaVo.userName} </li>
 			<li>DATE : ${qnaVo.createdAtStr} </li>
 		</ul>
 		<button><a href="/qna/qnaModify/${qnaVo.qnaId}">수정</a></button>
