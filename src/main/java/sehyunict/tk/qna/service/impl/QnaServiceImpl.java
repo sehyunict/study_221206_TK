@@ -54,7 +54,7 @@ public class QnaServiceImpl implements QnaService{
 		QnaVo qnaVo = qnaDao.select(qnaId); 
 		//qnaDao의 select메서드에 qnaID넣은걸 QnaVo 참조변수타입의 qnaVo변수에 담는다		
 		String tmp = sdf.format(qnaVo.getCreatedAt());	//  "2022/12/12"
-		//qnaVo의 getter getCreatedAt()로 가져와서 날짜포맷변수인sdf의 format메서드에 담는다 그리고 그것을 또 tmp에 담는다 
+		//getter 로 qnaVo의 getCreatedAt()로 가져와서 날짜포맷변수인sdf의 format메서드에 담는다 그리고 그것을 또 tmp에 담는다 
 		qnaVo.setCreatedAtStr(tmp);
 		//tmp를 set으로 넣는다
 		return qnaVo; 
