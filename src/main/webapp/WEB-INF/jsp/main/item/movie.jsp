@@ -46,54 +46,20 @@
 						<p class="itemTitle"><strong></strong></p>	
 						<p class="itemPeriod"></p>			
 					</td>			
-					</td>
 					<td>
 						<a href="#"><img class="itemCssList" id="movie_7" src="../resources/image/coming_soon.jpg"></a>
 						<p class="itemTitle"><strong></strong></p>	
 						<p class="itemPeriod"></p>			
 					</td>	
-					</td>
 					<td>
 						<a href="#"><img class="itemCssList" id="movie_8" src="../resources/image/coming_soon.jpg"></a>
 						<p class="itemTitle"><strong></strong></p>	
 						<p class="itemPeriod"></p>			
 					</td>						
-					</td>
 					<td><a href="#"><img class="itemCssList" id="movie_9" src="../resources/image/coming_soon.jpg"></a></td>
 					<td><a href="#"><img class="itemCssList" id="movie_10" src="../resources/image/coming_soon.jpg"></a></td>
-					<td rowspan="2">선호장르 추천</td>
-					<td rowspan="2">
-						<a href="#"><img class="recommendItem" id="" src=""></a>
-						<a href="#"><img class="recommendItem" id="" src=""></a>
-					</td>
+					
 				</tr>
- 				<tr>
-					<td>
-						<a href="#"><img class="itemCssList" id="movie_11" src="../resources/image/coming_soon.jpg"></a>
-						<p class="itemTitle"><strong></strong></p>	
-						<p class="itemPeriod"></p>			
-					</td>
-					<td>
-						<a href="#"><img class="itemCssList" id="movie_12" src="../resources/image/coming_soon.jpg"></a>
-						<p class="itemTitle"><strong></strong></p>	
-						<p class="itemPeriod"></p>				
-					</td>
-					<td>
-						<a href="#"><img class="itemCssList" id="movie_13" src="../resources/image/coming_soon.jpg"></a>
-						<p class="itemTitle"><strong></strong></p>	
-						<p class="itemPeriod"></p>				
-					</td>
-					<td>
-						<a href="#"><img class="itemCssList" id="movie_14" src="../resources/image/coming_soon.jpg"></a>
-						<p class="itemTitle"><strong></strong></p>	
-						<p class="itemPeriod"></p>				
-					</td>
-					<td>
-						<a href="#"><img class="itemCssList" id="movie_15" src="../resources/image/coming_soon.jpg"></a>
-						<p class="itemTitle"><strong></strong></p>	
-						<p class="itemPeriod"></p>				
-					</td>
-				</tr> 
 			</table>
 	</section>
 <jsp:include page="../footer.jsp"/>

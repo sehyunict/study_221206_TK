@@ -51,6 +51,7 @@ td {
 </style>
 </head>
 
+<jsp:include page="../header.jsp"/>
 <body>
 	<div id="centerBox">
 		<table id="seatTable">

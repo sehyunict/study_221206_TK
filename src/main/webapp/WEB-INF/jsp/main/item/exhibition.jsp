@@ -40,38 +40,6 @@
 						<p class="itemPeriod"></p>					
 					</td>
 				</tr>
-				<tr>
-					<td>
-						<a href=""><img class="itemCssList" id="exhibition_6" src="../resources/image/coming_soon.jpg"></a>
-						<p class="itemTitle"><strong></strong></p>	
-						<p class="itemPeriod"></p>					
-					</td>
-					<td>
-						<a href=""><img class="itemCssList" id="exhibition_7" src="../resources/image/coming_soon.jpg"></a>
-						<p class="itemTitle"><strong></strong></p>	
-						<p class="itemPeriod"></p>					
-					</td>
-					<td>
-						<a href=""><img class="itemCssList" id="exhibition_8" src="../resources/image/coming_soon.jpg"></a>
-						<p class="itemTitle"><strong></strong></p>	
-						<p class="itemPeriod"></p>					
-					</td>
-					<td>
-						<a href=""><img class="itemCssList" id="exhibition_9" src="../resources/image/coming_soon.jpg"></a>
-						<p class="itemTitle"><strong></strong></p>	
-						<p class="itemPeriod"></p>	
-					</td>
-					<td>
-						<a href=""><img class="itemCssList" id="exhibition_10" src="../resources/image/coming_soon.jpg"></a>
-						<p class="itemTitle"><strong></strong></p>	
-						<p class="itemPeriod"></p>					
-					</td>
-					<td rowspan="2">선호장르 추천</td>
-					<td rowspan="2">
-						<a href="#"><img class="recommendItem" id="" src=""></a>
-						<a href="#"><img class="recommendItem" id="" src=""></a>
-					</td>
-				</tr>
 			</table>
 	</section>
 <jsp:include page="../footer.jsp"/>

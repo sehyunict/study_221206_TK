@@ -56,6 +56,7 @@ height:100px;
 </style>
 </head>
 
+<jsp:include page="../header.jsp"/>
 <body>
 	<div id="centerBox">
 		<ul>

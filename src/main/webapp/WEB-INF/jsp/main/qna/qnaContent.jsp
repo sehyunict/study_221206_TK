@@ -12,12 +12,45 @@ ul {
 	list-style: none;
 	width: 100%;
 	height: 100%;
+}
 
+li {
+	
+}
+
+span {
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+}
+
+body {
+	text-align: center
+}
+
+input {
+	font-size: 20px;
+	width: 400px;
+	padding: 10px;
+}
+
+textarea {
+	font-size: 20px;
+	width: 400px;
+	height: 200px;
+	resize: none;
+	padding: 10px;
+}
+
+button {
+	padding: 10px 20px;
+	margin-top: 20px;
+	justify-content: center;
 }
 </style>
 </head>
 <body>
-
+	<jsp:include page="../header.jsp" />
 	<header>
 		<h2>QNA 작성</h2>
 	</header>
@@ -25,16 +58,14 @@ ul {
 	<form id="qnaSaveForm" method="post" action="/qna">
 		<div id="qnaSelectBox">
 			<ul>
-
-				<li>TITLE <input type="text" name="title"></li>
-				<li>CONTENT <input type="text" name="content"></li>
-				<li>USER </li>
+				<li><span>TITLE</span> <input type="text" name="title"></li>
+				<li><span>CONTENT</span> <textarea name="content"></textarea></li>
+				<!-- <li><span>USER</span></li> -->
 
 			</ul>
 		</div>
 		<button id="qnaSaveBtn">저장</button>
 	</form>
-
 </body>
 
 <script>

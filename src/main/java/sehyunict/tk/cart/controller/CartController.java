@@ -66,8 +66,7 @@ public class CartController {
 		return mav;
 	}
 
-
-	// @ResponseStatus(HttpStatus.BAD_GATEWAY)
+	// @ResponseStatus(HttpStatus.OK)
 	@GetMapping
 	public ModelAndView getCartMain() {
 		mav = new ModelAndView();

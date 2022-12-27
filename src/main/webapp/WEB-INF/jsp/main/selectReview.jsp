@@ -103,7 +103,7 @@
 	<%-- <form action="${sehyunict.review.controller}/selectReview" method="GET">
 
  	</form> --%>
-
+<jsp:include page="header.jsp"/>
 	<div class="container">
 		<h2>리뷰 목록</h2>
 

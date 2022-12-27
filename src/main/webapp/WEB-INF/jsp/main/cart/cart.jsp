@@ -57,8 +57,9 @@ height:100px;
 }
 </style>
 </head>
-
+<jsp:include page="../header.jsp"/>
 <body>
+
 	<div id="centerBox">
 		<h3>장바구니</h3>
 		<ul id="cartListBox">

@@ -51,6 +51,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 	<h2>회원정보</h2>
 	
 	<div class="Mypage_left">

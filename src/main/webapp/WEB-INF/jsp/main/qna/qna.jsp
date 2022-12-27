@@ -26,6 +26,7 @@ ul {
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 
 	<header>
 		<h2>QNA 게시판</h2>
@@ -65,7 +66,6 @@ ul {
 
 
 <script>
-	
 	
 
 	$("#searchBtn").click(function(){
