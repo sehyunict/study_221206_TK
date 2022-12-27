@@ -11,7 +11,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:forEach var="detailList" items="${detailList}"/>
+<c:set var="detailList" value="${detailList}" scope="page"/>
+
 
 <jsp:include page="../header.jsp"/>
  <section class="itemDetailSection">
@@ -19,10 +20,10 @@
 		<h1 align="center">상세페이지</h1>
 	</div>
 		<div id="itemDetailStyle_A2" class="itemDetailStyle">
-			<table border="1">
+			<table class="itemDetailTableStyle" border="1">
 				<tr>
 					<td rowspan="3">
-						<img id="itemImg" src="${detailList.get(0).image_path}">
+						<img id="itemImg" src="${detailList.get(0).imagePath}">
 					</td>
 					<td ></td>
 					<td>제목</td>

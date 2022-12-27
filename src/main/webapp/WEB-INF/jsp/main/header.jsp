@@ -3,6 +3,10 @@
 
 
 <link rel="stylesheet" type="text/css" href="/resources/css/design.css?after">
+<!-- ajax사용 위해 라이브러리 추가 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
+</script>
+
 <header>
 	<h1 align="center">전시회/영화/연극 예매는 K 파크!</h1>
 </header>
@@ -16,8 +20,9 @@
 		<li><a href="/qna">QNA</a></li>
 		<li><a href="/seat">예매</a></li>
 		<li><a href="/cart">장바구니</a></li>
-		<li><a href="/adminItemDetail">상품관리(관리자)</a></li>
+		<li><a href="/item/adminItemList">상품관리(관리자)</a></li>
 		<li><input id="keyword" type="search" value="" ></li>
  		<button id="profileBtn" type="button" onclick="profileBtn(); return false;"><img id="profile" src=""></button>
  	</ul>
 </nav>
+

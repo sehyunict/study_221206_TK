@@ -4,135 +4,233 @@
         
 <mapper namespace="sehyunict.tk.item.service.ItemDao">
 	
-	<!-- item 등록 -->
-	<insert id="insert">
-	
-	</insert>
-
-
-<!-- 	<resultMap type="ItemVo" id="itemList">
-
-		<result column="START_DAY" property="START_DAY" jdbcType="DATE"/>
-		<result column="END_DAY" property="END_DAY" jdbcType="DATE"/>
-	</resultMap> -->
-
 	<!-- 목록페이지-영화  -->
 	<select id="movieSelectList" parameterType="Map" resultType="ItemVo">
-		SELECT  
-		    A.ITEM_ID 
-		  , A.TITLE 
-		  , A.IMAGE_PATH 
+		SELECT 
+		    A.ITEM_ID
+		  , A.TITLE
+		  , T1.CODE_NAME
+		  , T2.CODE_NAME
 		  , A.START_DAY
-		  , A.END_DAY
-		FROM 
+		  , A.END_DAY  
+		  , A.IMAGE_PATH
+		FROM    
 		    TN_TK_ITEM A
+		  , TN_TK_TIMETABLE B
 		  , TC_TK_CODE T1
 		  , TC_TK_CODE T2
 		WHERE
+		    A.ITEM_ID = B.ITEM_ID
+		AND
 		    A.CATEGORY_ID = T1.CODE_ID
 		AND
-		    A.STATUS_ID = T2.CODE_ID   
+		    A.STATUS_ID = T2.CODE_ID
 		AND
 		    A.CATEGORY_ID = '3'
 		AND
 		    A.STATUS_ID = '12'
-		ORDER BY A.END_DAY	
+		GROUP BY
+		    A.ITEM_ID
+		  , A.TITLE
+		  , T1.CODE_NAME
+		  , T2.CODE_NAME
+		  , A.START_DAY
+		  , A.END_DAY  
+		  , A.IMAGE_PATH
+		ORDER BY A.END_DAY
 	</select>
 	
 	<!-- 목록페이지-연극 -->
 	<select id="theaterSelectList" parameterType="Map" resultType="ItemVo">
-		SELECT  
-		    A.ITEM_ID 
-		  , A.TITLE 
-		  , A.IMAGE_PATH 
+		SELECT 
+		    A.ITEM_ID
+		  , A.TITLE
+		  , T1.CODE_NAME
+		  , T2.CODE_NAME
 		  , A.START_DAY
-		  , A.END_DAY
-		FROM 
+		  , A.END_DAY  
+		  , A.IMAGE_PATH
+		FROM    
 		    TN_TK_ITEM A
+		  , TN_TK_TIMETABLE B
 		  , TC_TK_CODE T1
 		  , TC_TK_CODE T2
 		WHERE
+		    A.ITEM_ID = B.ITEM_ID
+		AND
 		    A.CATEGORY_ID = T1.CODE_ID
 		AND
-		    A.STATUS_ID = T2.CODE_ID   
+		    A.STATUS_ID = T2.CODE_ID
 		AND
 		    A.CATEGORY_ID = '4'
 		AND
 		    A.STATUS_ID = '12'
+		GROUP BY
+		    A.ITEM_ID
+		  , A.TITLE
+		  , T1.CODE_NAME
+		  , T2.CODE_NAME
+		  , A.START_DAY
+		  , A.END_DAY  
+		  , A.IMAGE_PATH
 		ORDER BY A.END_DAY
 	</select>	
 	
 	<!-- 목록페이지-전시회 -->
 	<select id="exhibitionSelectList" parameterType="Map" resultType="ItemVo">
-		SELECT  
-		    A.ITEM_ID 
-		  , A.TITLE 
-		  , A.IMAGE_PATH 
+		SELECT 
+		    A.ITEM_ID
+		  , A.TITLE
+		  , T1.CODE_NAME
+		  , T2.CODE_NAME
 		  , A.START_DAY
-		  , A.END_DAY
-		FROM 
+		  , A.END_DAY  
+		  , A.IMAGE_PATH
+		FROM    
 		    TN_TK_ITEM A
+		  , TN_TK_TIMETABLE B
 		  , TC_TK_CODE T1
 		  , TC_TK_CODE T2
 		WHERE
+		    A.ITEM_ID = B.ITEM_ID
+		AND
 		    A.CATEGORY_ID = T1.CODE_ID
 		AND
-		    A.STATUS_ID = T2.CODE_ID   
+		    A.STATUS_ID = T2.CODE_ID
 		AND
 		    A.CATEGORY_ID = '5'
 		AND
 		    A.STATUS_ID = '12'
-		ORDER BY A.END_DAY		
+		GROUP BY
+		    A.ITEM_ID
+		  , A.TITLE
+		  , T1.CODE_NAME
+		  , T2.CODE_NAME
+		  , A.START_DAY
+		  , A.END_DAY  
+		  , A.IMAGE_PATH
+		ORDER BY A.END_DAY
 	</select>
 
- 	<!-- item 목록조회  -->
-<!--	
-	<select id="selectList" parameterType="Map" resultType="ItemVo">
-		SELECT *
-		FROM
+ 	<!-- 관리자 item 목록조회  -->
+	<select id="adminSelectList" parameterType="Map" resultType="ItemVo">
+		SELECT  
+		    A.ITEM_ID
+		  , A.TITLE
+		  , A.CATEGORY_ID
+		  , T1.CODE_NAME 
+		  , T2.CODE_NAME AS CODE_NAME1
+		  , A.START_DAY
+		  , A.END_DAY
+		  , T3.CODE_NAME AS CODE_NAME2 
+		FROM 
 		    TN_TK_ITEM A
-		  , TN_TK_TIMETABLE B
-		WHERE 
-		    A.ITEM_ID = B.ITEM_ID
-	</select> -->
-	
-	<!-- item + timetable 목록조회  -->
-	<select id="selectList2" parameterType="Map" resultType="ItemVo">
-		SELECT * 
-		FROM
-		    TN_TK_ITEM A
-		  , TN_TK_TIMETABLE B
+		  , TC_TK_CODE T1
+		  , TC_TK_CODE T2
+		  , TC_TK_CODE T3
 		WHERE
-		    A.ITEM_ID = B.ITEM_ID
+		    A.CATEGORY_ID = T1.CODE_ID
+		AND    
+		    A.GENRE_ID = T2.CODE_ID  
+		AND
+		    A.STATUS_ID = T3.CODE_ID       
+		ORDER BY
+		    A.CATEGORY_ID, A.END_DAY
 	</select>
 	
-	<!-- 특정 item의 상세정보(timetable 포함) 조회  -->
+	<!-- 상세조회 item + timetable  -->
 	<select id="itemDetailList" parameterType="Map" resultType="ItemVo">
 		SELECT * 
 		FROM 
 		    TN_TK_ITEM A
-		  , TN_TK_TIMETABLE B 
+		  , TN_TK_TIMETABLE B  
 		WHERE 
-		    A.ITEM_ID = B.ITEM_ID
-		AND 
-		    A.ITEM_ID = #{item_id}		    	
+			A.ITEM_ID = B.ITEM_ID
+		AND
+		    A.ITEM_ID = #{itemId}		    	
 	</select>
 	
+	<!-- 관리자 상세조회 item -->
+	<select id="adminItemDetail" parameterType="Map" resultType="ItemVo">
+		SELECT * 
+		FROM 
+		    TN_TK_ITEM
+		WHERE 
+		    ITEM_ID = #{itemId}		    	
+	</select> 
 	
 	<!-- 특정 item 검색(timetable 정보포함) -->
-<!-- 	<select id="" parameterType="Map" resultType="ItemVo">
+	<select id="" parameterType="Map" resultType="ItemVo">
+	
+	</select>
+	
+	<!-- 관리자 item 등록 -->
+	<insert id="insert" parameterType="ItemVo">
+	INSERT INTO 
+	TN_TK_ITEM
+	(
+	ITEM_ID
+	,TITLE
+	,DIRECTOR
+	,ACTOR
+	,SUMMARY
+	,RUNNINGTIME
+	,CAUTION, START_DAY, END_DAY, REG_DATE, CATEGORY_ID
+							   , STATUS_ID, GENRE_ID) VALUES
+							  (TN_TK_ITEM_SEQ.NEXTVAL
+							  , #{title}
+							  , #{director}
+							  , #{actor}
+							  , #{summary}
+							  , #{runningtime}
+							  , #{caution} 
+							  , #{startDay, jdbcType=DATE}
+							  , #{endDay, jdbcType=DATE}
+							  , SYSDATE
+							  , #{categoryId}
+						      , #{statusId, jdbcType=INTEGER}
+						      , #{genreId, jdbcType=INTEGER})
+	</insert>
+	
+	<!-- 관리자 timetable 등록 -->
+	<insert id="insert2">
+		INSERT INTO TN_TK_TIMETABLE VALUES(
+			 TN_TK_TIMETABLE_SEQ.NEXTVAL,#{price},#{startTime},#{endTime}
+			,#{userId},#{itemId})
+	</insert>
 	
 	
-	</select> -->
-	
-	<!-- 수정 -->
- 	<update id="update">
-	
+	<!-- 맨앞 맨뒤컬럼 쉼표 주의..  -->
+	<!-- 관리자 item 수정 -->
+ 	<update id="update" parameterType="ItemVo">
+		UPDATE 
+		    TN_TK_ITEM 
+		SET 
+		   TITLE  	  	= #{title, jdbcType=VARCHAR}
+		  , DIRECTOR  	= #{director, jdbcType=VARCHAR}
+		  , ACTOR     	= #{actor, jdbcType=VARCHAR}
+		  , SUMMARY   	= #{summary, jdbcType=VARCHAR}
+		  , RUNNINGTIME = #{runningtime, jdbcType=VARCHAR}
+		  , CAUTION 	= #{caution, jdbcType=VARCHAR}
+
+		  , START_DAY 	= #{startDay, jdbcType=DATE}
+		  , END_DAY 	= #{endDay, jdbcType=DATE}
+
+
+		  , CATEGORY_ID = #{categoryId, jdbcType=VARCHAR}
+		  , STATUS_ID 	= #{statusId, jdbcType=INTEGER}
+		  , GENRE_ID 	= #{genreId, jdbcType=INTEGER}   
+		WHERE
+		  ITEM_ID = #{itemId}
 	</update>
 	
-	<!-- 삭제 -->
+	<!-- 관리자 item 삭제 -->
 	<delete id="delete">
-	
+		DELETE
+		FROM 
+			TN_TK_ITEM
+		WHERE 
+			ITEM_ID = #{itemId}		
 	</delete>
 	
 </mapper>        

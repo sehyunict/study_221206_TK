@@ -7,8 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum UserStatus implements CustomStatus{
 	
-	SESSION_OK("세션유효", true),
-	SESSION_FAIL("세션만료", false);
+	SESSION_OK("세션 유효", true),
+	SESSION_FAIL("로그인이 필요합니다", false);
 	
 	private final String description;
 	private final Boolean status;

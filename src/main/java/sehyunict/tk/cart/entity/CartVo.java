@@ -3,6 +3,7 @@ package sehyunict.tk.cart.entity;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

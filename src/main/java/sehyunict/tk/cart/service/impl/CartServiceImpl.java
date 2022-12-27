@@ -21,6 +21,11 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public int save(int userId, CartVo cartVo) throws Exception {
 		
+		int count = cartDao.selectCount(userId);
+		System.out.println("count"+count);
+		if(count>=10) return -1;
+		
+		cartVo.setUserId(userId);
 		return cartDao.insert(cartVo);
 	}
 
@@ -46,5 +51,5 @@ public class CartServiceImpl implements CartService{
 		
 		return list;
 	}
-
+	
 }

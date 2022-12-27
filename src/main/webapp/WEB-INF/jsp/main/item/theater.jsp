@@ -8,37 +8,35 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
-<c:forEach var="theaterList" items="${theaterList}"/>
-
 <jsp:include page="../header.jsp"/>
 	<section class="itemListSection">
 			<h2 align="center">연극</h2>
 			<table class="itemTableStyle" border="1">
 				<tr>
 					<td>
-						<a href="/item/itemDetail?item_id=${theaterList.get(0).item_id}"><img class="itemCssList" id="theater_1" src="${theaterList.get(0).image_path}"></a>
+						<a href="/item/itemDetail?itemId=${theaterList.get(0).itemId}"><img class="itemCssList" id="theater_1" src="${theaterList.get(0).imagePath}"></a>
 						<p class="itemTitle"><strong>${theaterList.get(0).title}</strong></p>	
-						<p class="itemPeriod">${theaterList.get(0).start_day_str} ~ ${theaterList.get(0).end_day_str}</p>						
+						<p class="itemPeriod">${theaterList.get(0).startDayStr} ~ ${theaterList.get(0).endDayStr}</p>						
 					</td>
 					<td>
-						<a href="/item/itemDetail?item_id=${theaterList.get(1).item_id}"><img class="itemCssList" id="theater_2" src="${theaterList.get(1).image_path}"></a>
+						<a href="/item/itemDetail?itemId=${theaterList.get(1).itemId}"><img class="itemCssList" id="theater_2" src="${theaterList.get(1).imagePath}"></a>
 						<p class="itemTitle"><strong>${theaterList.get(1).title}</strong></p>	
-						<p class="itemPeriod">${theaterList.get(1).start_day_str} ~ ${theaterList.get(1).end_day_str}</p>					
+						<p class="itemPeriod">${theaterList.get(1).startDayStr} ~ ${theaterList.get(1).endDayStr}</p>					
 					</td>
 					<td>
-						<a href="/item/itemDetail?item_id=${theaterList.get(2).item_id}"><img class="itemCssList" id="theater_3" src="${theaterList.get(2).image_path}"></a>
+						<a href="/item/itemDetail?itemId=${theaterList.get(2).itemId}"><img class="itemCssList" id="theater_3" src="${theaterList.get(2).imagePath}"></a>
 						<p class="itemTitle"><strong>${theaterList.get(2).title}</strong></p>	
-						<p class="itemPeriod">${theaterList.get(2).start_day_str} ~ ${theaterList.get(2).end_day_str}</p>						
+						<p class="itemPeriod">${theaterList.get(2).startDayStr} ~ ${theaterList.get(2).endDayStr}</p>						
 					</td>
 					<td>
-						<a href="/item/itemDetail?item_id=${theaterList.get(3).item_id}"><img class="itemCssList" id="theater_4" src="${theaterList.get(3).image_path}"></a>
+						<a href="/item/itemDetail?itemId=${theaterList.get(3).itemId}"><img class="itemCssList" id="theater_4" src="${theaterList.get(3).imagePath}"></a>
 						<p class="itemTitle"><strong>${theaterList.get(3).title}</strong></p>	
-						<p class="itemPeriod">${theaterList.get(3).start_day_str} ~ ${theaterList.get(3).end_day_str}</p>						
+						<p class="itemPeriod">${theaterList.get(3).startDayStr} ~ ${theaterList.get(3).endDayStr}</p>						
 					</td>
 					<td>
-						<a href="/item/itemDetail?item_id=${theaterList.get(4).item_id}"><img class="itemCssList" id="theater_5" src="${theaterList.get(4).image_path}"></a>
+						<a href="/item/itemDetail?itemId=${theaterList.get(4).itemId}"><img class="itemCssList" id="theater_5" src="${theaterList.get(4).imagePath}"></a>
 						<p class="itemTitle"><strong>${theaterList.get(4).title}</strong></p>	
-						<p class="itemPeriod">${theaterList.get(4).start_day_str} ~ ${theaterList.get(4).end_day_str}</p>					
+						<p class="itemPeriod">${theaterList.get(4).startDayStr} ~ ${theaterList.get(4).endDayStr}</p>					
 					</td>
 				</tr>
 				<tr>

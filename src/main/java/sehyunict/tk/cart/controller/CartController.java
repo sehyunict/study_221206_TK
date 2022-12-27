@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,9 +33,13 @@ public class CartController {
 		ModelMap mm = new ModelMap();
 		try {
 			int userId = hasUserId(session);
-			if (cartService.save(userId, cartVo) != 1)
-				throw new Exception("cart put error");
-			setStatus(mm, FormStatus.INSERT_OK);
+			int result = cartService.save(userId, cartVo);
+			if(result == -1) 
+				setStatus(mm, FormStatus.INSERT_FAIL_COUNT_OVER);
+			else if (result != 1)
+				throw new Exception("[cart put error]");
+			else 
+				setStatus(mm, FormStatus.INSERT_OK);
 		} catch (NullPointerException e) {
 			setStatus(mm, UserStatus.SESSION_FAIL);
 		} catch (Exception e) {
@@ -49,8 +54,8 @@ public class CartController {
 		ModelMap mm = new ModelMap();
 		try {
 			int userId = hasUserId(session);
-			if (cartService.delete(userId, ids) != 1)
-				throw new RuntimeException("[Cart delete err] - 정보가 존재하지 않습니다");
+			if (cartService.delete(userId, ids) < 1)
+				throw new RuntimeException("[Cart delete err] - 에러요");
 			setStatus(mm, FormStatus.DELETE_OK);
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -98,5 +103,5 @@ public class CartController {
 		mm.addAttribute("msg", status.getDescription());
 		mm.addAttribute("status", status.getStatus());
 	}
-
+		
 }

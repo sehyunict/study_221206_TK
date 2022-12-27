@@ -8,7 +8,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
-<c:forEach var="exhibitionList" items="${exhibitionList}"/>
 
 <jsp:include page="../header.jsp"/>
 	<section class="itemListSection">
@@ -16,9 +15,9 @@
 			<table class="itemTableStyle" border="1"> 
 				<tr>
 					<td>
-						<a href="/item/itemDetail?item_id=${exhibitionList.get(0).item_id}"><img class="itemCssList" id="exhibition_1" src="${exhibitionList.get(0).image_path}"></a>
+						<a href="/item/itemDetail?itemId=${exhibitionList.get(0).itemId}"><img class="itemCssList" id="exhibition_1" src="${exhibitionList.get(0).imagePath}"></a>
 						<p class="itemTitle"><strong>${exhibitionList.get(0).title}</strong></p>	
-						<p class="itemPeriod">${exhibitionList.get(0).start_day_str} ~ ${exhibitionList.get(0).end_day_str}</p>	
+						<p class="itemPeriod">${exhibitionList.get(0).startDayStr} ~ ${exhibitionList.get(0).endDayStr}</p>	
 					</td>
 					<td>
 						<a href=""><img class="itemCssList" id="exhibition_2" src="../resources/image/coming_soon.jpg"></a>

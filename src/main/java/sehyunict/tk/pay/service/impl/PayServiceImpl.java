@@ -51,4 +51,9 @@ public class PayServiceImpl implements PayService{
 			return null;
 	}
 
+	@Override
+	public List<PayVo> getSeats(int timetableId) throws Exception {
+		return payDao.selectAllSeat(timetableId);
+	}
+
 }

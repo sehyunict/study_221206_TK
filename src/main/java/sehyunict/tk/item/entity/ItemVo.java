@@ -2,6 +2,8 @@ package sehyunict.tk.item.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,31 +18,41 @@ import lombok.ToString;
 public class ItemVo {
 	
 	//TN_TK_ITEM 테이블
-	private int item_id;
+	private int itemId;
 	private String title;
 	private String director;
 	private String actor;
 	private String summary;
 	private String runningtime;
 	private String caution;
-	private String image_path;
-	private Date start_day;
-	private String start_day_str;
-	private Date end_day;
-	private String end_day_str;
-	private Date reg_date;
+	private String originImagePath;	//업로드 전 이미지 경로
+	private String imagePath;	//db에 저장될 이미지 경로(../resources/image/xxx.jpg) 
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date startDay;
+	private String startDayStr;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date endDay;
+	private String endDayStr;
+	private Date regDate;
 	private String writer;
-	private String category_id;
-	private int status_id;
-	private int genre_id;
+	private String categoryId;
+	private int statusId;
+	private int genreId;
 	
 	//TN_TK_TIMETABLE 테이블
-	private int timetable_id;
+	private int timetableId;
 	private int price;
-	private String start_time;
-	private String end_time;
-	private int user_id;
-//	private int item_id;
+	private String startTime;
+	private String endTime;
+	private int userId;
+//	private int itemId2;
+	
+	//TC_TK_CODE 테이블
+	private String codeName;
+	private String codeName1;
+	private String codeName2;
 	
 
 	//TN_TK_LIKE_GENRE 테이블
