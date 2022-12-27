@@ -71,7 +71,7 @@ height:100px;
 			<ul>
 				<li>${page.curPostNum + status.count-1}</li>
 				<li>${payVo.payDateStr}</li>
-				<li><img alt="" src="../${payVo.imagePath}"></li>
+				<li><img src="../${payVo.imagePath}" alt="이미지가 존재하지 않습니다"></li>
 				<li>${payVo.itemTitle==null?"현재는 판매가 중지된 상품입니다":payVo.itemTitle}</li>
 				<li>${payVo.startTimeStr}-${payVo.endTimeStr}</li>
 				<li>${payVo.seatName}</li>
