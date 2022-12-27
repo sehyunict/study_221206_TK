@@ -33,7 +33,7 @@ public class PayServiceImpl implements PayService {
 		return payDao.selectReservedSeat(map);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int save(PayVo payVo, int[] seatIds) throws Exception {
 		

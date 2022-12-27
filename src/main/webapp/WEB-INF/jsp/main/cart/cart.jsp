@@ -98,8 +98,6 @@ height:100px;
 		<button>장바구니 삭제</button>
 	</form>
  -->
- 
- <a href="/pay/list">나의 예매 정보</a>
 
 </body>
 

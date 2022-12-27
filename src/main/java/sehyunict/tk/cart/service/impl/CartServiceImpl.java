@@ -13,7 +13,7 @@ import sehyunict.tk.cart.service.CartDao;
 import sehyunict.tk.cart.service.CartService;
 import sehyunict.tk.util.PriceConverter;
 
-@Service
+@Service("cartService")
 public class CartServiceImpl implements CartService{
 	@Autowired
 	private CartDao cartDao;
