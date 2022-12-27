@@ -90,6 +90,9 @@ public class ItemServiceImpl implements ItemService{
 		List<ItemVo> list = itemdao.adminSelectList();
 
 		for(ItemVo itemVo : list) {
+			if(itemVo.getStartDay()==null||itemVo.getEndDay()==null) {
+				continue;
+			}
 			itemVo.setStartDayStr(a1.format(itemVo.getStartDay()));
 			itemVo.setEndDayStr(a1.format(itemVo.getEndDay()));
 		}
@@ -107,7 +110,9 @@ public class ItemServiceImpl implements ItemService{
 		ItemVo itemVo = itemdao.adminItemDetail(itemId);
 		
 		System.out.println(itemVo.getStartDay() + " " + itemVo.getEndDay());
-		
+		if(itemVo.getStartDay()==null||itemVo.getEndDay()==null) {
+			return itemVo;
+		}
 		itemVo.setStartDayStr(a1.format(itemVo.getStartDay()));
 		itemVo.setEndDayStr(a1.format(itemVo.getEndDay()));
 		

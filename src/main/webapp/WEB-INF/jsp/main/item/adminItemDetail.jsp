@@ -246,13 +246,18 @@
 			url: '/item/deleteAction?itemId=' + itemId+"",
  			type: 'GET',
  			dataType: "json",
-		success: function(itemId){
-			alert("전송 성공!");
-			location.href = "/item/adminItemList";
+		success: function(data){
+			if(data.flag==true){
+				alert("전송 성공!");
+				location.href = "/item/adminItemList";
+			}else{
+				alert("알 수 없는 오류로 삭제에 실패했습니다");
+			}
+			
 		},
 
 		error: function(request, status, errorThrown){
-			alert("전송 실패!");
+			alert(request,status);
 		}
 		
 		});

@@ -233,20 +233,19 @@ public class ItemController {
 	
 	//아이템 삭제
 	@GetMapping(value = "/deleteAction")
-	public Boolean delete(@RequestParam("itemId") Integer itemId) throws Exception {
+	@ResponseBody
+	public ModelAndView delete(@RequestParam("itemId") Integer itemId) throws Exception {
+		ModelAndView mav = new ModelAndView("jsonView");
 		System.out.println("아이템 삭제 메소드 진입");
 		System.out.println(itemId);
 		
-		ItemVo itemVo = itemService.adminItemDetail(itemId);
-		Boolean removeItem = itemService.remove(itemVo.getItemId());
-//		Map<String, Object> removeList = new HashMap<>();
 		
-		if (itemVo == null) {
-			return false;
-
-		} else {
-			return removeItem;
-		}
+		Boolean result = itemService.remove(itemId);
+//		Map<String, Object> removeList = new HashMap<>();
+		System.out.println(result);
+		mav.addObject("flag", result);
+		return mav;
 	}
+	
 	
 }
