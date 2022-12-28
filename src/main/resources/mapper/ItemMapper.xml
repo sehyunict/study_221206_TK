@@ -4,7 +4,7 @@
         
 <mapper namespace="sehyunict.tk.item.service.ItemDao">
 	
-	<!-- 목록페이지-영화  -->
+	<!-- 목록페이지-영화(item, timetable, code 테이블)  -->
 	<select id="movieSelectList" parameterType="Map" resultType="ItemVo">
 		SELECT 
 		    A.ITEM_ID
@@ -40,7 +40,7 @@
 		ORDER BY A.END_DAY
 	</select>
 	
-	<!-- 목록페이지-연극 -->
+	<!-- 목록페이지-연극(item, timetable, code 테이블) -->
 	<select id="theaterSelectList" parameterType="Map" resultType="ItemVo">
 		SELECT 
 		    A.ITEM_ID
@@ -76,7 +76,7 @@
 		ORDER BY A.END_DAY
 	</select>	
 	
-	<!-- 목록페이지-전시회 -->
+	<!-- 목록페이지-전시회(item, timetable, code 테이블) -->
 	<select id="exhibitionSelectList" parameterType="Map" resultType="ItemVo">
 		SELECT 
 		    A.ITEM_ID
@@ -112,7 +112,7 @@
 		ORDER BY A.END_DAY
 	</select>
 
- 	<!-- 관리자 item 목록조회  -->
+ 	<!-- 관리자 목록조회(item, code 테이블)  -->
 	<select id="adminSelectList" parameterType="Map" resultType="ItemVo">
 		SELECT  
 		    A.ITEM_ID
@@ -138,7 +138,7 @@
 		    A.CATEGORY_ID, A.END_DAY
 	</select>
 	
-	<!-- 상세조회 item + timetable  -->
+	<!-- 상세조회(item, timetable 테이블)  -->
 	<select id="itemDetailList" parameterType="Map" resultType="ItemVo">
 		SELECT * 
 		FROM 
@@ -150,7 +150,7 @@
 		    A.ITEM_ID = #{itemId}		    	
 	</select>
 	
-	<!-- 관리자 상세조회 item -->
+	<!-- 관리자 상세조회(item 테이블) -->
 	<select id="adminItemDetail" parameterType="Map" resultType="ItemVo">
 		SELECT * 
 		FROM 
@@ -160,11 +160,11 @@
 	</select> 
 	
 	<!-- 특정 item 검색(timetable 정보포함) -->
-	<select id="" parameterType="Map" resultType="ItemVo">
+<!-- 	<select id="" parameterType="Map" resultType="ItemVo">
 	
-	</select>
+	</select> -->
 	
-	<!-- 관리자 item 등록 -->
+	<!-- 관리자 item 등록(item 테이블) -->
 	<insert id="insert" parameterType="ItemVo">
 	INSERT INTO 
 	TN_TK_ITEM
@@ -193,15 +193,14 @@
 	</insert>
 	
 	<!-- 관리자 timetable 등록 -->
-	<insert id="insert2">
+<!-- 	<insert id="insert2">
 		INSERT INTO TN_TK_TIMETABLE VALUES(
 			 TN_TK_TIMETABLE_SEQ.NEXTVAL,#{price},#{startTime},#{endTime}
 			,#{userId},#{itemId})
-	</insert>
+	</insert> -->
 	
 	
-	<!-- 맨앞 맨뒤컬럼 쉼표 주의..  -->
-	<!-- 관리자 item 수정 -->
+	<!-- 관리자 아이템별 수정(item 테이블) -->
  	<update id="update" parameterType="ItemVo">
 		UPDATE 
 		    TN_TK_ITEM 
@@ -212,11 +211,8 @@
 		  , SUMMARY   	= #{summary, jdbcType=VARCHAR}
 		  , RUNNINGTIME = #{runningtime, jdbcType=VARCHAR}
 		  , CAUTION 	= #{caution, jdbcType=VARCHAR}
-
 		  , START_DAY 	= #{startDay, jdbcType=DATE}
 		  , END_DAY 	= #{endDay, jdbcType=DATE}
-
-
 		  , CATEGORY_ID = #{categoryId, jdbcType=VARCHAR}
 		  , STATUS_ID 	= #{statusId, jdbcType=INTEGER}
 		  , GENRE_ID 	= #{genreId, jdbcType=INTEGER}   
@@ -224,7 +220,7 @@
 		  ITEM_ID = #{itemId}
 	</update>
 	
-	<!-- 관리자 item 삭제 -->
+	<!-- 관리자 아이템별 삭제(item 테이블)  -->
 	<delete id="delete">
 		DELETE
 		FROM 

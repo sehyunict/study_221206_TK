@@ -5,7 +5,7 @@
 <jsp:include page="header.jsp"/>
 
 <section class="home">
-	<h2 align="center">뮤지컬/영화/연극 예매</h2>
+	<h2 align="center">전시회/영화/연극 예매</h2>
 	<p>환영합니다!</p>
 </section>
 

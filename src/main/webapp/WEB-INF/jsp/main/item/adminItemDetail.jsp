@@ -40,80 +40,69 @@
 						<input type="file" name="uploadImg" accept="image/*" onchange="previewImg();">
 						<button type="button" id="uploadBtn" onclick="uploadImg();">업로드</button>
 					</td>
-					<td ></td>
-					<td>제목</td>
+					<td colspan="2">제목</td>
 					<td>
 						<input type="hidden" id="itemId" value="${adminDetailVoList.adminDetailItem.itemId}">
 						<input type="text" id="title" value="${adminDetailVoList.adminDetailItem.title}">
 					</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td>감독</td>
+					<td colspan="2">감독</td>
 					<td>
 						<input type="text" id="director" value="${adminDetailVoList.adminDetailItem.director}">
 					</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td>배우</td>
+					<td colspan="2">배우</td>
 					<td>
 						<input type="text" id="actor" value="${adminDetailVoList.adminDetailItem.actor}">
 					</td>
 				</tr>				
 				<tr>
-					<td></td>
-					<td>줄거리</td>
+					<td colspan="2">줄거리</td>
 					<td>
 						<textarea id="summary" rows="20" cols="40"> "${adminDetailVoList.adminDetailItem.summary}"
 						</textarea>
 					</td>
 				</tr>	
 				<tr>
-					<td></td>
-					<td>러닝타임</td>
+					<td colspan="2">러닝타임</td>
 					<td>
 						<input type="text" id="runningtime" value="${adminDetailVoList.adminDetailItem.runningtime}">
 					</td>
 				</tr>												
-				<tr>
-					<td></td>
-					<td>주의사항</td>
+				<tr> 
+					<td colspan="2">주의사항</td>
 					<td>
 						<input type="text" id="caution" value="${adminDetailVoList.adminDetailItem.caution}">
 					</td>
 				</tr>	
 				<tr>
-					<td></td>
-					<td>상영시작일</td>
+					<td colspan="2">상영시작일</td>
 					<td>
 						<input type="date" id="startDay" value="${adminDetailVoList.adminDetailItem.startDayStr}">
 					</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td>상영종료일</td>
+					<td colspan="2">상영종료일</td>
 					<td>
 						<input type="date" id="endDay" value="${adminDetailVoList.adminDetailItem.endDayStr}">
 					</td>
 				</tr>	
 				<tr>
-					<td></td>
-					<td>카테고리</td>
+					<td colspan="2">카테고리</td>
 					<td>
 						<input type="text" id="categoryId" value="${adminDetailVoList.adminDetailItem.categoryId}">
 					</td>
 				</tr>												
 				<tr>
-					<td></td>
-					<td>상영상태</td>
+					<td colspan="2">상영상태</td>
 					<td>
 						<input type="text" id="statusId" value="${adminDetailVoList.adminDetailItem.statusId}">
 					</td>
 				</tr>	
 				<tr>
-					<td></td>
-					<td>장르</td>
+					<td colspan="2">장르</td>
 					<td>
 						<input type="text" id="genreId" value="${adminDetailVoList.adminDetailItem.genreId}">
 					</td>
@@ -128,16 +117,12 @@
 				</tr>				 -->
 									
 				<tr>
-					<td style= colspan: '4', text-align='center'>
+					<td colspan ="5">
 						<button type="button" class="ticketing_btn" onclick="itemModify();">수정하기</button>
 						&nbsp;&nbsp;&nbsp;
 						<button type="button" class="ticketing_btn" onclick="itemDelete();">삭제하기</button>
 					</td>
 				</tr>	
-				<tr>
-					<td colspan="3"></td>
-					<td></td>
-				</tr>
 			</table>
 		</div>	
 </section>
@@ -243,7 +228,7 @@
 		console.log("delete function 진입..");
 	
 		$.ajax({
-			url: '/item/deleteAction?itemId=' + itemId+"",
+			url: '/item/deleteAction?itemId=' + itemId,
  			type: 'GET',
  			dataType: "json",
 		success: function(data){

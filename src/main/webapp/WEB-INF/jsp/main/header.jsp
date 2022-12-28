@@ -13,10 +13,8 @@
 
 <nav>
 	<ul>
-
 		<li><a href="/mypage/MyUserInfo.do">마이페이지</a></li>
 		<li><a href="/item/exhibition">전시회</a></li>
-
 		<li><a href="/item/movie">영화</a></li>
 		<li><a href="/item/theater">연극</a></li>
 		<li><a href="/selectReview">리뷰</a></li>

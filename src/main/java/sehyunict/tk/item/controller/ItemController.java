@@ -37,8 +37,8 @@ public class ItemController {
 	@GetMapping(value = "/exhibition")
 	public String exhibition(Model model) throws Exception {
 		List<ItemVo> exhibitionList = itemService.exhibitionGetList();
-		System.out.println(exhibitionList);
-		System.out.println(exhibitionList.get(0).getImagePath());
+//		System.out.println(exhibitionList);
+//		System.out.println(exhibitionList.get(0).getImagePath());
 
 		model.addAttribute("exhibitionList", exhibitionList);
 		return "item/exhibition";
@@ -50,9 +50,9 @@ public class ItemController {
 	public String movie(Model model) throws Exception {
 		List<ItemVo> movieList = itemService.movieGetList();
 		
-		System.out.println(movieList);
-		System.out.println(movieList.get(0).getImagePath());
-		System.out.println(movieList.get(1).getImagePath());
+//		System.out.println(movieList);
+//		System.out.println(movieList.get(0).getImagePath());
+//		System.out.println(movieList.get(1).getImagePath());
 		
 		model.addAttribute("movieList", movieList);
 		
@@ -64,16 +64,16 @@ public class ItemController {
 	public String theater(Model model) throws Exception {
 		List<ItemVo> theaterList = itemService.theaterGetList();
 		
-		System.out.println(theaterList);
-		System.out.println(theaterList.get(0).getImagePath());
-		System.out.println(theaterList.get(1).getImagePath());
+//		System.out.println(theaterList);
+//		System.out.println(theaterList.get(0).getImagePath());
+//		System.out.println(theaterList.get(1).getImagePath());
 		
 		model.addAttribute("theaterList", theaterList);
 		
 		return "item/theater";
 	}
 	
-	//아이템별 상세 페이지
+	//상세 페이지(공통)
 	@GetMapping(value = "/itemDetail")
 	public String itemDetail(@RequestParam(value = "itemId", required=false) Integer itemId, Model model) throws Exception {
 		List<ItemVo> detailList = itemService.getDetailList(itemId);
@@ -85,7 +85,8 @@ public class ItemController {
 		return "item/itemDetail";
 	}
 	
-	//관리자 아이템 목록페이지
+	
+	//관리자 아이템 목록 페이지
 	@GetMapping(value = "/adminItemList")
 		public String adminItemList(Model model) throws Exception {
 			List<ItemVo> adminItemList = itemService.adminGetList();
@@ -119,6 +120,7 @@ public class ItemController {
 		return "item/adminItemDetail";
 	}
 	
+	
 	//관리자 아이템 수정 처리
 //	@RequestMapping(value = "/adminItemDetail", method = {RequestMethod.GET, RequestMethod.POST} )
 	@PostMapping(value = "/modifyAction")
@@ -140,7 +142,6 @@ public class ItemController {
 		}
 	}
 	
-	
 	//관리자 아이템 등록 페이지
 	@GetMapping(value = "/adminItemRegister")
 	public String adminItemRegister() {
@@ -148,8 +149,7 @@ public class ItemController {
 		return "item/adminItemRegister";
 	}
 	
-	
-	//아이템 등록
+	//관리자 아이템 등록 처리
 	@PostMapping(value = "/registerAction1")
 	public @ResponseBody Map<String, Object> register1(@RequestBody ItemVo itemvo) throws Exception {
 		System.out.println("아이템 등록 메소드 진입");
@@ -167,7 +167,7 @@ public class ItemController {
 		}
 	}
 	
-	//파일 업로드
+	//파일 업로드 처리
 	@PostMapping("/uploadFile")
 	public ModelAndView uploadFile(@RequestPart(value="inputFile") MultipartFile uploadFile, HttpServletRequest request) throws IOException {
 		System.out.println("업로드 메소드 진입..");
@@ -191,6 +191,7 @@ public class ItemController {
 		File saveFile = new File(uploadFolder, savedName);
 
 		System.out.println(saveFile);
+		
 //		//임시저장 업로드파일을 새로운 곳으로 복사
 //		// (바이트배열, 파일객체)
 //		FileCopyUtils.copy(uploadFile.getBytes(), saveFile);
@@ -210,25 +211,25 @@ public class ItemController {
 		}
 	
 	
-	@PostMapping(value = "/registerAction2")
-	public @ResponseBody Map<String, Object> register2(ItemVo itemvo) throws Exception {
-		System.out.println("아이템 등록 메소드 진입");
-		
-		HashMap<String, Object> registerVoMap = new HashMap<>();
-		ItemVo registerVo2 = itemService.register2(itemvo);
-		
-		registerVoMap.put("registerVo2", registerVo2);
-		
-		System.out.println(((ItemVo) registerVoMap.get("registerVo2")).getPrice());
-		
-		if (registerVo2 == null) {
-			return null;
-
-		} else {
-			return registerVoMap;
-			
-		}
-	}
+//	@PostMapping(value = "/registerAction2")
+//	public @ResponseBody Map<String, Object> register2(ItemVo itemvo) throws Exception {
+//		System.out.println("아이템 등록 메소드 진입");
+//		
+//		HashMap<String, Object> registerVoMap = new HashMap<>();
+//		ItemVo registerVo2 = itemService.register2(itemvo);
+//		
+//		registerVoMap.put("registerVo2", registerVo2);
+//		
+//		System.out.println(((ItemVo) registerVoMap.get("registerVo2")).getPrice());
+//		
+//		if (registerVo2 == null) {
+//			return null;
+//
+//		} else {
+//			return registerVoMap;
+//			
+//		}
+//	}
 	
 	
 	//아이템 삭제
@@ -238,7 +239,6 @@ public class ItemController {
 		ModelAndView mav = new ModelAndView("jsonView");
 		System.out.println("아이템 삭제 메소드 진입");
 		System.out.println(itemId);
-		
 		
 		Boolean result = itemService.remove(itemId);
 //		Map<String, Object> removeList = new HashMap<>();
