@@ -76,7 +76,7 @@ height:100px;
 				</ul>
 			</li>
 		</ul>
-		<button class="btnSt" id="payBtn" type="button">결제</button>
+		<button class="btnSt" id="payBtn" type="button">좌석선택</button>
 		<button class="btnSt" id="deleteBtn" type="button">삭제</button>
 	</div>
 

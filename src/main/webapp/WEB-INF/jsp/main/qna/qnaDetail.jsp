@@ -58,6 +58,7 @@ button {
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
+<input id="flag" type="hidden" value="${flag}">
 	<header>
 		<h2>QNA 조회</h2>
 	</header>
@@ -83,6 +84,9 @@ button {
 </body>
 
 <script>
-	
+onload= function(){
+	let flag = $('#flag').val();
+	if(flag=="false") alert("저장 실패")
+}
 </script>
 </html>

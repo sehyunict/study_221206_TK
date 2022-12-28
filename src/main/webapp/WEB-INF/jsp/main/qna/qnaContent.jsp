@@ -50,6 +50,7 @@ button {
 </style>
 </head>
 <body>
+<input id="flag" type="hidden" value="${flag}">
 	<jsp:include page="../header.jsp" />
 	<header>
 		<h2>QNA 작성</h2>
@@ -69,26 +70,10 @@ button {
 </body>
 
 <script>
-	//ajax 굳이 필요없을거같아서 삭제
-	/* $("#qnaSaveBtn").on("click", function() {
-
-		let formValues = $("#qnaSaveForm").serialize()
-
-		$.ajax({
-			url : "/qna",
-			type : "post",
-			data : formValues,
-			dataType : "json",
-			success : function(data) {
-				location.href = "/qna"
-				
-			},
-			error: function(e){
-				alert(e)
-			}
-		
-		})
-
-	}) */
+onload= function(){
+	let flag = $('#flag').val();
+	if(flag=="false") alert("저장 실패")
+}
+	
 </script>
 </html>

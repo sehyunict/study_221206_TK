@@ -166,7 +166,8 @@ $("#doPayBtn").on("click",function(){
 			}
 		},
 		error: function(e, t) {
-			alert(e+" / "+t)
+			console.log(e+" / "+t)
+			alert("요청을 다시 확인해주세요")
 		}
 		
 	})

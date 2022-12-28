@@ -40,18 +40,21 @@ public class QnaController {
 		//ModelAndView-> controller처리 결과 후 응답할 view나 view에 전달할 값을 저장 및 전달하는 클래스(데이터와 뷰를 동시에 설정가능)
 		//ModelAndView로 저장하고 나면 다시 리스트 목록을 보여주려고 qna/qna(리스트 목록 있는 jsp경로) 경로 지정	
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("qna/qna");	//데이터보낼 view 경로
 		//save메서드 실행시 성공실패 나타낼때 예외처리
 		try {
 			//int userId = (int)session.getAttribute("userId");
 			int userId = 55;
 			// 성공한 행의 개수를 1로 반환, save된거면 1로 반환,qnaService.save(userId, qnaVo) 1이 아니면 저장이 안된거고
 			// 요청한곳으로 에러를 던져준다 = throw (controller에서는 view가 될거고 service에서는 controller가 되는건가)
-			if (qnaService.save(userId, qnaVo) != 1) 
+			if (qnaService.save(userId, qnaVo) != 1) {
 				throw new Exception("qna save error");
-
+			}
+			mav.setViewName("qna/qna");	//데이터보낼 view 경로
+			mav.addObject("flag", true);
 		} catch (Exception e) { // 에러 캐치
 			e.printStackTrace();
+			mav.setViewName("qna/qnaContent");
+			mav.addObject("flag", false);
 		}
 
 		return mav;
@@ -64,8 +67,8 @@ public class QnaController {
 	@GetMapping("/qnaModify/{qnaId}")	//이미 작성된글을 수정하는거니까 SELECT 조회데이터가 들어있어야함 (qnaId를 넣어서 조회하려고)
 	public ModelAndView modifyQna(@PathVariable int qnaId) {	//@PathVariable 패스값 줄때 {} 이렇게된 매개변수가 필요 (세트)
 		ModelAndView mav = new ModelAndView();	
-		mav.setViewName("qna/qnaModify");	//경로는 qna/qnaModify 지정
 		QnaVo qnaVo = null;	//qnaVo 비어져있는상태
+		mav.setViewName("qna/qnaModify");	//경로는 qna/qnaModify 지정
 		
 		try {
 			qnaVo = qnaService.getQna(qnaId);	//넘겨준qnaId랑 일치하는 qnaId를 가지고 있는 qnaVo를 리턴
@@ -83,7 +86,6 @@ public class QnaController {
 	@PostMapping("/modify")
 	public ModelAndView modify(QnaVo qnaVo, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("qna/qna");
 		
 		try {
 			//int userId = (int)session.getAttribute("userId");
@@ -92,8 +94,12 @@ public class QnaController {
 			if(qnaService.modify(userId, qnaVo) !=1) 
 				throw new Exception ("qna modify error");
 			
+			mav.setViewName("qna/qna");
+			mav.addObject("flag", true);
 		} catch (Exception e) {
 			e.printStackTrace();
+			mav.setViewName("qna/qnaModify");
+			mav.addObject("flag", false);
 		}
 		
 		return mav;	 
@@ -104,7 +110,6 @@ public class QnaController {
 	@GetMapping("/remove/{qnaId}")
 	public ModelAndView remove(@PathVariable int qnaId, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("qna/qna");
 		
 
 		try {
@@ -112,8 +117,12 @@ public class QnaController {
 			int userId = 55;
 			if(qnaService.remove(userId,qnaId) !=1)
 				throw new Exception ("qna remove error");
+			mav.setViewName("qna/qna");
+			mav.addObject("flag", true);
 		} catch (Exception e) {
 			e.printStackTrace();
+			mav.setViewName("qna/qnaDetail");
+			mav.addObject("flag", false);
 		}
 		
 		return mav; 

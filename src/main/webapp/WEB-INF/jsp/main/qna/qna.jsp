@@ -19,19 +19,26 @@ ul {
 	padding: 5px;
 }
 
-.titleSt{
-	text-align:left;
+.titleSt {
+	text-align: left;
+}
+button{
+padding:10px;
+}
+input{
+padding:10px;
+font-size: 18px;
 }
 
 </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+	<jsp:include page="../header.jsp" />
 
 	<header>
 		<h2>QNA 게시판</h2>
 	</header>
-	<button id="getListBtn" type="button">리스트 목록</button>
+	<button id="getListBtn" type="button">목록</button>
 	<button>
 		<a href="/qna/qnaContent">글쓰기</a>
 	</button>
@@ -42,26 +49,27 @@ ul {
 		<li>USER</li>
 	</ul>
 
-			<div id="qnaListBox">
-	 <c:forEach var="qnaVo" items="${ list }">	<!-- jstl -> jsp에서 반복처리 할수있는 기능 --> 
-	 	<ul>
-	 	<li>${ qnaVo.qnaId }</li>
-	 	<li>${ qnaVo.title }</li>
-	 	<li>${ qnaVo.userName }</li>
-	 	</ul>
-	 
-	 	
-	  </c:forEach>
+	<div id="qnaListBox">
+		<c:forEach var="qnaVo" items="${ list }" varStatus="status">
+			<!-- jstl -> jsp에서 반복처리 할수있는 기능 -->
+			<ul>
+				<li>${ status.count }</li>
+				<li><a href="/qna/${ qnaVo.qnaId }">${ qnaVo.title } </a></li>
+				<li>${ qnaVo.userName }</li>
+			</ul>
+
+
+		</c:forEach>
 	</div>
-	
-	
+
+
 	<form action="/qna/" method="get">
 		<div class="search">
 			<input name="keyWord" type="text" placeHolder="검색어를 입력해주세요"
 				id="keyWord"></input>
-		<button type="button" id="searchBtn">검색하기</button>
+			<button type="button" id="searchBtn">검색하기</button>
 		</div>
-		</form>
+	</form>
 </body>
 
 
