@@ -12,17 +12,9 @@ header{
 	z-index: 0;
 	background: #ff8040;
 	color: white;
-	padding: 30px;
+	padding: 40px;
 }
 
-#profile{
-	z-index: 2;
-	width: 50px;
-	height: 50px;
-}
-
-#profileBtn{
-}
 
 nav{
 	z-index: 0;
@@ -55,7 +47,7 @@ section{
 	margin: 0 auto;
 	width: 100%;
 	background: #eaeaea;
-	height: 1200px;
+	height: 1500px;
 }
 section h2{
 	padding-top: 50px;
@@ -67,6 +59,10 @@ section form, table{
 	
 }
 
+table{
+	border-collapse:collapse; 
+}
+
 footer{
 	clear:both;
 	background: #800000;
@@ -74,11 +70,15 @@ footer{
 	padding: 20px;
 }
 
+h2{
+	padding: 10px;
+}
 
 --아이템별 목록페이지
 .itemTableStyle{
 	width: 1100px;
 }
+
 .itemCssList {
 	width: 200px;
 	height: 200px;
@@ -93,8 +93,8 @@ footer{
 	height: 130px;
 }
 
---아이템 상세페이지
 
+--아이템 상세페이지
 .itemDetailTableStyle{
 	width: 850px;
 	text-align: center;
@@ -105,12 +105,19 @@ footer{
 	
 }
 
+.itemDetailSection table{
+	text-align: center;
+}
+
+
+.itemDetailSection table th,td{
+	padding: 5px;	
+}
 
 --아이템 목록페이지(관리자)
 .adminItemTableStyle{
 	text-align: center;
 }
-
 
 
 --아이템 상세페이지(관리자)

@@ -14,13 +14,12 @@
 			<h2 align="center">작품 목록(관리자 페이지)</h2>
 			<table class="adminItemTableStyle" border="1">
 				<tr>
-					<th>작품id</th>
+					<th>ID</th>
 					<th>제목</th>
 					<th>카테고리</th>
 					<th>장르</th>
 					<th>상영기간</th>
 					<th>현재상영여부</th>
-					<th>삭제</th>
 				</tr>
 				
 				<c:forEach var="adminItem" items="${adminItemList}" varStatus="vs" >
@@ -43,13 +42,10 @@
 					<td>
 						<p class="codeName2">${adminItem.codeName2}</p>
 					</td>
-					<td>
-						<p><a href="">삭제</a></p>
-					</td>
 				</tr>
 				</c:forEach>
-				<tr>
-					<td>
+				<tr align="center">
+					<td colspan="7">
 						<a href="/item/adminItemRegister">상품등록 페이지</a>
 					</td>
 				</tr>			

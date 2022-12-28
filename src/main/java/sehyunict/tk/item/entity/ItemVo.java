@@ -25,7 +25,7 @@ public class ItemVo {
 	private String summary;
 	private String runningtime;
 	private String caution;
-	private String originImagePath;	//업로드 전 이미지 경로
+//	private String originImagePath;	//업로드 전 이미지 경로
 	private String imagePath;	//db에 저장될 이미지 경로(../resources/image/xxx.jpg) 
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

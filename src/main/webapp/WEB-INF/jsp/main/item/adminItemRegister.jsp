@@ -60,84 +60,72 @@
 						<input type="file" name="uploadImg" accept="image/*" onchange="previewImg();">
 						<button type="button" id="uploadBtn" onclick="uploadImg();">업로드</button>
 					</td>
-					<td></td>
-					<td>제목</td>
+					<td colspan="2">제목</td>
 					<td>
 						<p><input type="text" id="title" value=""></p>
 					</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td>감독</td>
+					<td colspan="2">감독</td>
 					<td>
 						<p><input type="text" id="director" value=""></p>
 					</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td>배우</td>
+					<td colspan="2">배우</td>
 					<td>
 						<p><input type="text" id="actor" value=""></p>
 					</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td>줄거리</td>
+					<td colspan="2">줄거리</td>
 					<td>
 						<textarea id="summary" rows="20" cols="40">
 						</textarea>
 					</td>
 				</tr>	
 				<tr>
-					<td></td>
-					<td>러닝타임</td>
+					<td colspan="2">러닝타임</td>
 					<td>
 						<p><input type="text" id="runningtime" value=""></p>
 					</td>
 				</tr>												
 				<tr>
-					<td></td>
-					<td>주의사항</td>
+					<td colspan="2">주의사항</td>
 					<td>
 						<p><input type="text" id="caution" value=""></p>
 					</td>
 				</tr>	
 				<tr>
-					<td></td>
-					<td>상영시작일</td>
+					<td colspan="2">상영시작일</td>
 					<td>
 						<p><input type="date" id="startDay" value=""></p>
 					</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td>상영종료일</td>
+					<td colspan="2">상영종료일</td>
 					<td>
 						<p><input type="date" id="endDay" value=""></p>
 					</td>
 				</tr>	
 				<tr>
-					<td></td>
-					<td>카테고리</td>
+					<td colspan="2">카테고리</td>
 					<td>
 						<p><input type="text" id="categoryId" value=""></p>
 					</td>
 				</tr>												
 				<tr>
-					<td></td>
-					<td>상영상태</td>
+					<td colspan="2">상영상태</td>
 					<td>
 						<p><input type="text" id="statusId" value=""></p>
 					</td>
 				</tr>	
 				<tr>
-					<td></td>
-					<td>장르</td>
+					<td colspan="2">장르</td>
 					<td>
 						<p><input type="text" id="genreId" value=""></p>
 					</td>
 				</tr>	
-															
 <!-- 				<tr>
 					<td></td>
 					<td>가격</td>
@@ -145,16 +133,11 @@
 						<p><input type="text" id="price" value=""></p>
 					</td>
 				</tr>				 -->
-									
 				<tr>
-					<td style= colspan: '4', text-align='center'>
+					<td colspan="5">
 						<button type="button" class="ticketing_btn" onclick="itemRegister(); return false;">등록하기</button>
 					</td>
 				</tr>	
-				<tr>
-					<td colspan="3"></td>
-					<td></td>
-				</tr>
 			</table>
 		</div>	
 </section>
